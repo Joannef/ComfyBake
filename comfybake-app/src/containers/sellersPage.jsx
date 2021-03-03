@@ -12,7 +12,7 @@ class SellersPage extends Component {
                 <h1>Sindy's Home Kitchen</h1>
                 <h5>Recommendations</h5>
 
-                <img src = {eggTart} alt = "Portugese Egg Tarts" class = "center"/>
+                <img className="sellersImg" src = {eggTart} alt = "Portugese Egg Tarts" class = "center"/>
                 <h3>Portugese Egg Tarts: $2 per tart</h3>
 
                 
