@@ -1,4 +1,7 @@
 // import logo from './logo.svg';
+import React from "react";
+import Routes from "./Routes";
+import { LinkContainer } from "react-router-bootstrap";
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
@@ -14,18 +17,26 @@ function App() {
   return (
     <Container>
       <Navbar fixed="top" bg="light" variant="light">
-        <Navbar.Brand href="#home">ComfyBake</Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand>ComfyBake</Navbar.Brand>
+        </LinkContainer>
         <Navbar.Collapse className="justify-content-center">
-          <Nav defaultActiveKey="/home">
-            <Nav.Item>
-              <Nav.Link href="#home">Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="#owners">Owners</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="#sellers">Sellers</Nav.Link>
-            </Nav.Item>
+          <Nav activeKey={window.location.pathname}>
+            <LinkContainer to="/">
+              <Nav.Link >Home</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/signup">
+              <Nav.Link>Signup</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/">
+              <Nav.Link>Owners</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/">
+              <Nav.Link>Sellers</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
         <Form inline>
@@ -33,6 +44,7 @@ function App() {
           <Button type="submit">Submit</Button>
         </Form>
       </Navbar>
+      <Routes />
       <br></br><br></br><br></br><br></br>
       <CardDeck>
         <Card>
