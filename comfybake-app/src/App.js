@@ -1,33 +1,49 @@
+// import logo from './logo.svg';
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import "./App.css";
 import Routes from "./Routes";
-import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 function App() {
   return (
-    <div className="App container py-3">
-      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+    <Container>
+      <Navbar fixed="top" bg="light" variant="light">
         <LinkContainer to="/">
-          <Navbar.Brand className="font-weight-bold text-muted">
-            ComfyBake
-          </Navbar.Brand>
+          <Navbar.Brand>ComfyBake</Navbar.Brand>
         </LinkContainer>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse className="justify-content-center">
           <Nav activeKey={window.location.pathname}>
+            <LinkContainer to="/">
+              <Nav.Link >Home</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/signup">
               <Nav.Link>Signup</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/owner">
+              <Nav.Link>Owners</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/seller">
+              <Nav.Link>Sellers</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
+        <Form inline>
+          <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
+          <Button type="submit">Submit</Button>
+        </Form>
       </Navbar>
       <Routes />
-    </div>
+    </Container>
   );
 }
 
