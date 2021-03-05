@@ -38,6 +38,14 @@ export default function Signup() {
                 PhoneNumber:PhoneNum,
                 Vegan:Vegan,
                 GlutenFree:GlutenFree,
+                DairyFree:DairyFree,
+                Kosher:Kosher,
+                LactoseIntolerant:LactoseIntolerant,
+                Peanut:Peanut,
+                Almonds:Almonds,
+                Milk:Milk,
+                Soy:Soy,
+                Egg:Egg,
             }).then(()=>{
                 alert("Account has been created")
             }).catch((err)=>{
@@ -116,7 +124,36 @@ export default function Signup() {
                    <input type="checkbox"  value={GlutenFree}
                     onClick={()=> setGlutenFree(!GlutenFree)}
                    /> Gluen Free<br/>
+                   <input type="checkbox"  value={DairyFree}
+                    onClick={()=> setDairyFree(!DairyFree)}
+                   /> Dairy Free<br/>
+                   <input type="checkbox"  value={Kosher}
+                    onClick={()=> setKosher(!Kosher)}
+                   /> Kosher<br/>
+                   <input type="checkbox"  value={LactoseIntolerant}
+                    onClick={()=> setLactoseIntolerant(!LactoseIntolerant)}
+                   /> Lactose Intolerant<br/>
                </div>
+
+               <div> 
+                   <label>Allergies</label><br/>
+                   <input type="checkbox"   value={Peanut}
+                    onClick={()=> setPeanut(!Peanut)}
+                   /> Peanut <br/>
+                   <input type="checkbox"  value={Almonds}
+                    onClick={()=> setAlmonds(!Almonds)}
+                   /> Almonds<br/>
+                   <input type="checkbox"  value={Milk}
+                    onClick={()=> setMilk(!Milk)}
+                   /> Milk<br/>
+                   <input type="checkbox"  value={Soy}
+                    onClick={()=> setSoy(!Soy)}
+                   /> Soy<br/>
+                   <input type="checkbox"  value={Egg}
+                    onClick={()=> setEgg(!Egg)}
+                   /> Egg<br/>
+               </div>
+
 
                <button type="sumbit">Sign Up</button>
         </form>
