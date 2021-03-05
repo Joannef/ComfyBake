@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import "./Signup.css"
 import database from '../firebase';
 
 const db = database.firestore();
