@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import 'firebase/firestore';
 
 //This is my firebase authentication
 //you can change it to your firebase authentication
