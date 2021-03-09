@@ -3,7 +3,7 @@ import database from '../firebase';
 
 const db = database.firestore();
 const userCollection = db.collection("users");
-const senderEmail = "sender@example.com"
+const senderEmail = "cbakeTeam@gmail.com"
 const templateId = "template_j303hv9"
 const user = "user_y3r1u0JY8muNaWc5wZVZk"
 
@@ -27,17 +27,17 @@ export default function Signup() {
     const [Soy, setSoy] = useState(false);
     const [Egg, setEgg] = useState(false);
     const [feedback, setFeedback] = useState("");
+    const [receiverEmail, setReceiverEmail] = useState("");
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [formSubmitSuccessful, setFormSubmitSuccessful] = useState(false);
 
     const handleSumbit = (e) =>{
-        setFeedback("")
         sendFeedback({
             templateId,
             senderEmail,
-            Email,
-            feedback,
-            user,
+            receiverEmail:Email,
+            FirstName,
+            LastName,
           })
         setFormSubmitted(true)
         e.preventDefault();
@@ -54,7 +54,7 @@ export default function Signup() {
                 Vegan:Vegan,
                 GlutenFree:GlutenFree,
             }).then(()=>{
-                alert("Account has been created")
+                alert("Look out for an email confirming your account!")
             }).catch((err)=>{
                 alert(err.message);
             });
@@ -77,8 +77,8 @@ export default function Signup() {
         templateId,
         senderEmail,
         receiverEmail,
-        feedback,
-        user,
+        FirstName,
+        LastName,
       }) => {
         window.emailjs
           .send(
@@ -87,9 +87,9 @@ export default function Signup() {
             {
               senderEmail,
               receiverEmail,
-              feedback,
+              FirstName,
+              LastName,
             },
-            user
           )
           .then(res => {
             if (res.status === 200) {
