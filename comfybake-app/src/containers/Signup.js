@@ -2,6 +2,12 @@ import React, {useState} from "react";
 import database from '../firebase';
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+//import React from "react";
+import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
+import CardDeck from 'react-bootstrap/CardDeck'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./Signup.css";
 
 const db = database.firestore();
 const userCollection = db.collection("users");
