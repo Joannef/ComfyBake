@@ -3,6 +3,9 @@ import database from '../firebase';
 
 const db = database.firestore();
 const userCollection = db.collection("users");
+const senderEmail = "sender@example.com"
+const templateId = "template_j303hv9"
+const user = "user_y3r1u0JY8muNaWc5wZVZk"
 
 export default function Signup() {
     const [FirstName, setFirstName] = useState('');
@@ -23,8 +26,20 @@ export default function Signup() {
     const [Milk, setMilk] = useState(false);
     const [Soy, setSoy] = useState(false);
     const [Egg, setEgg] = useState(false);
+    const [feedback, setFeedback] = useState("");
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formSubmitSuccessful, setFormSubmitSuccessful] = useState(false);
 
     const handleSumbit = (e) =>{
+        setFeedback("")
+        sendFeedback({
+            templateId,
+            senderEmail,
+            Email,
+            feedback,
+            user,
+          })
+        setFormSubmitted(true)
         e.preventDefault();
 
         database.auth().createUserWithEmailAndPassword(Email,Password)
@@ -58,7 +73,32 @@ export default function Signup() {
         });
         
     }
-
+    const sendFeedback = ({
+        templateId,
+        senderEmail,
+        receiverEmail,
+        feedback,
+        user,
+      }) => {
+        window.emailjs
+          .send(
+            "default_service",
+            templateId,
+            {
+              senderEmail,
+              receiverEmail,
+              feedback,
+            },
+            user
+          )
+          .then(res => {
+            if (res.status === 200) {
+              setFormSubmitSuccessful(true)
+            }
+          })
+          // Handle errors here however you like
+          .catch(err => console.error("Failed to send feedback. Error: ", err))
+      }
 
     return (
         <form className="Signup-form" onSubmit={handleSumbit}>
