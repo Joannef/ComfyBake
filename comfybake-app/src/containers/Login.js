@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import database from '../firebase';
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import Home from "./Home";
+
 
 const Login = () =>{
     const [email, setEmail] = useState('');
@@ -26,19 +28,10 @@ const Login = () =>{
             <div className="loginContainer">
                 {account?(
                     <>
-                    <br/>
-                    <br/>
-                    <p>press Cintinue to the home page</p>
-                    <LinkContainer to="/">   
-                        <Nav.Link>
-                            <button> Continue </button><br/>
-                        </Nav.Link>
-                    </LinkContainer>
+                    <Home/>
                     </>
                 ):(
                     <>
-                    <br/>
-                    <br/>
                     <h1>Welcom </h1>
                     <input type="text" required value={email}
                         placeholder = "Email"
@@ -57,7 +50,7 @@ const Login = () =>{
                         <Nav.Link>
                             <button>Sign-up </button><br/>
                         </Nav.Link>
-                    </LinkContainer>
+                        </LinkContainer>
                     </>
                 )}
             </div>
