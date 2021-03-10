@@ -13,6 +13,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class SellersPage extends Component {
     render() {
         
+        function addCard() {
+            document.createElement("Card");
+            console.log("Created new card!")
+        }
+
+
         return ( 
             <div class = "center">
                 <h1>Sindy's Home Kitchen</h1>
@@ -139,11 +145,16 @@ class SellersPage extends Component {
                     <br></br>
                     <br></br>
                     <h6>Add new item</h6>
+                    <button onClick= {addCard} > Add New Item</button>
                     <br></br>
 
                     <CardDeck>
+
+                        <button onClick= {addCard} > Add New Item</button>
+
+
                         <Card>
-                        {/* <Card.Img variant="top" src = "https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg" /> */}
+                        <Card.Img variant="top" src = "" />
                             <Card.Body>
                             <Card.Title>Enter Baked Good title and image</Card.Title>
                             <Card.Text>
@@ -157,9 +168,6 @@ class SellersPage extends Component {
                         </Card>
                     </CardDeck>
                 </Container>
-
-                {/* <img className="sellersImg" src = {eggTart} alt = "Portugese Egg Tarts" class = "center"/>
-                <h3>Portugese Egg Tarts: $2 per tart</h3> */}
                 
             </div>
         );
