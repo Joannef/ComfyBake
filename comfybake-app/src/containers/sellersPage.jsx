@@ -150,9 +150,6 @@ class SellersPage extends Component {
 
                     <CardDeck>
 
-                        <button onClick= {addCard} > Add New Item</button>
-
-
                         <Card>
                         <Card.Img variant="top" src = "" />
                             <Card.Body>
