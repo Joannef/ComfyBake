@@ -2,9 +2,18 @@ import React, {useState} from "react";
 import database from '../firebase';
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+//import React from "react";
+import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
+import CardDeck from 'react-bootstrap/CardDeck'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./Signup.css";
 
 const db = database.firestore();
 const userCollection = db.collection("users");
+const senderEmail = "cbakeTeam@gmail.com"
+const templateId = "template_j303hv9"
+const user = "user_y3r1u0JY8muNaWc5wZVZk"
 
 export default function Signup() {
     const [FirstName, setFirstName] = useState('');
@@ -25,10 +34,22 @@ export default function Signup() {
     const [Milk, setMilk] = useState(false);
     const [Soy, setSoy] = useState(false);
     const [Egg, setEgg] = useState(false);
+    const [feedback, setFeedback] = useState("");
+    const [receiverEmail, setReceiverEmail] = useState("");
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formSubmitSuccessful, setFormSubmitSuccessful] = useState(false);
 
     const [signup, setsignup] = useState(false);
 
     const handleSumbit = (e) =>{
+        sendFeedback({
+            templateId,
+            senderEmail,
+            receiverEmail:Email,
+            FirstName,
+            LastName,
+          })
+        setFormSubmitted(true)
         e.preventDefault();
 
         database.auth().createUserWithEmailAndPassword(Email,Password)
@@ -59,7 +80,7 @@ export default function Signup() {
                     Egg:Egg
                 },
             }).then(()=>{
-                alert("Account has been created")
+                alert("Look out for an email confirming your account!")
             }).catch((err)=>{
                 alert(err.message);
             });
@@ -79,7 +100,32 @@ export default function Signup() {
         });
         
     }
-
+    const sendFeedback = ({
+        templateId,
+        senderEmail,
+        receiverEmail,
+        FirstName,
+        LastName,
+      }) => {
+        window.emailjs
+          .send(
+            "default_service",
+            templateId,
+            {
+              senderEmail,
+              receiverEmail,
+              FirstName,
+              LastName,
+            },
+          )
+          .then(res => {
+            if (res.status === 200) {
+              setFormSubmitSuccessful(true)
+            }
+          })
+          // Handle errors here however you like
+          .catch(err => console.error("Failed to send feedback. Error: ", err))
+      }
 
     return (
         <section className="login">
