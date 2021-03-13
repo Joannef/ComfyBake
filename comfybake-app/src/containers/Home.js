@@ -3,7 +3,25 @@ import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import eggTart from './portuguese-egg-custard-tarts.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import firebase from './firebase.js'
 import "./Home.css";
+
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {sellersContent : []}
+  }
+  componentDidMount() {
+    firebase.database().ref("sellers-Content").on("value", snapshot => {
+      let sellerContent = [];
+      snapshot.forEach(snap => {
+        sellerContent.push(snap.val());
+      });
+      this.setState({sellersContent: sellerContent});
+    });
+  }
+}
 
 export default function Home() {
   return (
@@ -53,6 +71,9 @@ export default function Home() {
               <p>$3.00</p>
               <small className="text-muted">Eggs | Almond | Milk</small>
             </Card.Footer>
+          </Card>
+          <Card>
+            {this}
           </Card>
         </CardDeck>
       </div>
