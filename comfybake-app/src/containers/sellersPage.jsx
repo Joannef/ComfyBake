@@ -3,19 +3,64 @@ import React, {Component} from 'react';
 import eggTart from './portuguese-egg-custard-tarts.jpg';
 import "./sellerPage.css"
 
+//import CustomCard from './CustomCard'
+import CustomCards from './CustomCards'
+
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 //cc snippet
 class SellersPage extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            cards: [
+                {
+                    title: "",
+                    imageURL: "",
+                    body: "",
+                    price: "",
+                    ingredients: ""
+                }
+            ]
+        };
+
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    clickEvent = () => {
+        const cards = [
+            ...this.state.cards, 
+            {
+                title: 'Cookies',
+                price: "$3"
+            }
+        ];
+        this.setState({ cards })
+    }
+
+    // handleChange(event) {
+    //     this.setState({value: event.target.value});
+    //     this.setState({title: event.target.value})
+    // }
+    
+    // handleSubmit(event) {
+    //     alert('A name was submitted: ' + this.state.value);
+    //     event.preventDefault();
+    // }
+
+
     render() {
+
+        const { cards } = this.state;
         
         function addCard() {
-            document.createElement("Card");
-            console.log("Created new card!")
+            
+            alert("Created new card!")
         }
 
 
@@ -25,6 +70,7 @@ class SellersPage extends Component {
                 <h5>Recommendations</h5>
 
                 <Container>
+
                     <CardDeck>
                         
                         <Card>
@@ -128,7 +174,7 @@ class SellersPage extends Component {
                         <Card>
                             <Card.Img variant="top" src = "https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg" />
                             <Card.Body>
-                            <Card.Title>Homemade Brownies</Card.Title>
+                            <Card.Title>Crème brûlée</Card.Title>
                             <Card.Text>
                             Crème brûlée, a dessert consisting of a rich custard base topped with a layer of hardened caramelized sugar.
                             </Card.Text>
@@ -144,28 +190,63 @@ class SellersPage extends Component {
                     <br></br>
                     <br></br>
                     <br></br>
-                    <h6>Add new item</h6>
-                    <button onClick= {addCard} > Add New Item</button>
+                    <button onClick= {addCard} >Add New Item</button>
                     <br></br>
 
                     <CardDeck>
 
-                        <Card>
-                        <Card.Img variant="top" src = "" />
-                            <Card.Body>
-                            <Card.Title>Enter Baked Good title and image</Card.Title>
-                            <Card.Text>
-                                Type Baked Good Description here to add a new item
-                            </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                            <p>Price</p>
-                            <small className="text-muted"> Contains: </small>
-                            </Card.Footer> 
-                        </Card>
+                        {cards.map((card, index) =>
+                        
+                            <CustomCards 
+                            
+                                title= 'Sample Title'
+                                imageURL='https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg'
+                                body='Test Body'
+                                price="$99"
+                                ingredients= "Milk"
+
+                            />
+                        
+                        )}
+
+                        <button onClick={this.clickEvent}>Add Card</button>
+
                     </CardDeck>
+
                 </Container>
-                
+
+                <br></br>
+                <h6>Add new item</h6>
+
+                {/* <form onSubmit={this.handleSubmit}>
+                        <label>Item Title:</label>
+                        <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                        
+
+                        <label>
+                        ImageURL:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+
+                        <label>
+                        Body:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+
+                        <label>
+                        Price:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+
+                        <label>
+                        Value:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+
+                        <input type="submit" value="Submit" />
+                        <button>Submit</button>
+                </form> */}  
+
             </div>
         );
     
