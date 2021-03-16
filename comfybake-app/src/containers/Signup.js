@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import database from '../firebase';
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-//import React from "react";
+import BorderWrapper from 'react-border-wrapper'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
@@ -144,8 +144,16 @@ export default function Signup() {
                     </>
                 ):(
                     <>
+                    <BorderWrapper 
+                        borderColour="#00bcf1"
+                        borderWidth="5px"
+                        borderRadius="40px"
+                        borderType="solid"
+                        innerPadding="50px"
+                        //topElement={form}
+                        >
                     <form className="Signup-form" onSubmit={handleSumbit}>
-                    <h2 class="center"> Let's get to Know one another!</h2>
+                    <h2 className="center"> Let's get to Know one another!</h2>
 
                     <div>
                         <label>Introductions </label><br/>
@@ -231,6 +239,7 @@ export default function Signup() {
                     <button type="sumbit">Sign Up</button>
                     
                     </form>
+                    </BorderWrapper>
                     </>
                 )}
             </div>
