@@ -135,114 +135,107 @@ export default function Signup() {
                     <br/>
                     <br/>
                     <br/>
-                    <p>press Cintinue to the Login page</p>
+                    <p>press Continue to the Login page</p>
                     <LinkContainer to="/login">   
                         <Nav.Link>
                             <button> Continue </button><br/>
                         </Nav.Link>
                     </LinkContainer>
                     </>
-                ):(
+                    ):(
                     <>
-                    <BorderWrapper 
-                        borderColour="#00bcf1"
-                        borderWidth="5px"
-                        borderRadius="40px"
-                        borderType="solid"
-                        innerPadding="50px"
-                        //topElement={form}
-                        >
-                    <form className="Signup-form" onSubmit={handleSumbit}>
-                    <h2 className="center"> Let's get to Know one another!</h2>
+                    <div class="form">
+                        <form className="Signup-form" onSubmit={handleSumbit}>
+                        <p className="center"> Let's Get To Know One Another!</p>
+                        <BorderWrapper>
+                        <div>
+                            <label>Introductions </label><br/>
+                            <input type="text" required value={FirstName}
+                                placeholder = "FirstName"
+                                onChange={(e) => setFirstName(e.target.value)}
+                            /><b/> <b/>
+                            <input type="text" required value={LastName}
+                                placeholder = "LastName"
+                                onChange={(e) => setLastName(e.target.value)}
+                            /><br/>
+                        </div>
+                
+                        <div> 
+                            <label> Address</label><br/>
+                            <input type="text" required value={Address}
+                                placeholder = "Address"
+                                onChange = {(e) => setAddress(e.target.value)}
+                            /><br/>
+                            <input type="text" required value={City}
+                                placeholder = "City"
+                                onChange = {(e) => setCity(e.target.value)}
+                            /><b/> <b/>
+                            <input type="text" required value={State}
+                                placeholder = "State"
+                                onChange = {(e) => setState(e.target.value)}
+                            /><br/>
+                        </div>
 
-                    <div>
-                        <label>Introductions </label><br/>
-                        <input type="text" required value={FirstName}
-                            placeholder = "FirstName"
-                            onChange={(e) => setFirstName(e.target.value)}
-                        /><b/> <b/>
-                        <input type="text" required value={LastName}
-                            placeholder = "LastName"
-                            onChange={(e) => setLastName(e.target.value)}
-                        /><br/>
-                    </div>
-               
-                    <div> 
-                        <label> Address</label><br/>
-                        <input type="text" required value={Address}
-                            placeholder = "Address"
-                            onChange = {(e) => setAddress(e.target.value)}
-                        /><br/>
-                        <input type="text" required value={City}
-                            placeholder = "City"
-                            onChange = {(e) => setCity(e.target.value)}
-                        /><b/> <b/>
-                        <input type="text" required value={State}
-                            placeholder = "State"
-                            onChange = {(e) => setState(e.target.value)}
-                        /><br/>
-                    </div>
+                        <div> 
+                            <label>Contact</label><br/>
+                            <input type="text" required value={PhoneNum}
+                                placeholder = "Phone Number"
+                                onChange = {(e) => setPhoneNum(e.target.value)}
+                            /><br/>
+                            <input type="text" required value={Email}
+                                placeholder = "Email"
+                                onChange = {(e) => setEmail(e.target.value)}
+                            /><br/>
+                            <input type="password" required value={Password}
+                                placeholder = "Password"
+                                onChange = {(e) => setPassword(e.target.value)}
+                            /><br/>
+                        </div>
 
-                    <div> 
-                        <label>Contact</label><br/>
-                        <input type="text" required value={PhoneNum}
-                            placeholder = "Phone Number"
-                            onChange = {(e) => setPhoneNum(e.target.value)}
-                        /><br/>
-                        <input type="text" required value={Email}
-                            placeholder = "Email"
-                            onChange = {(e) => setEmail(e.target.value)}
-                        /><br/>
-                        <input type="password" required value={Password}
-                            placeholder = "Password"
-                            onChange = {(e) => setPassword(e.target.value)}
-                        /><br/>
-                    </div>
+                        <div> 
+                            <label>Dietary Preferences</label><br/>
+                            <input type="checkbox"   value={Vegan}
+                                onClick={()=> setVegan(!Vegan)}
+                            /> Vegan <br/>
+                            <input type="checkbox"  value={GlutenFree}
+                                onClick={()=> setGlutenFree(!GlutenFree)}
+                            /> Gluen Free<br/>
+                            <input type="checkbox"  value={DairyFree}
+                                onClick={()=> setDairyFree(!DairyFree)}
+                            /> Dairy Free<br/>
+                            <input type="checkbox"  value={Kosher}
+                                onClick={()=> setKosher(!Kosher)}
+                            /> Kosher<br/>
+                            <input type="checkbox"  value={LactoseIntolerant}
+                                onClick={()=> setLactoseIntolerant(!LactoseIntolerant)}
+                            /> Lactose Intolerant<br/>
+                        </div>
 
-                    <div> 
-                        <label>Dietary Preferences</label><br/>
-                        <input type="checkbox"   value={Vegan}
-                            onClick={()=> setVegan(!Vegan)}
-                        /> Vegan <br/>
-                        <input type="checkbox"  value={GlutenFree}
-                            onClick={()=> setGlutenFree(!GlutenFree)}
-                        /> Gluen Free<br/>
-                        <input type="checkbox"  value={DairyFree}
-                            onClick={()=> setDairyFree(!DairyFree)}
-                        /> Dairy Free<br/>
-                        <input type="checkbox"  value={Kosher}
-                            onClick={()=> setKosher(!Kosher)}
-                        /> Kosher<br/>
-                        <input type="checkbox"  value={LactoseIntolerant}
-                            onClick={()=> setLactoseIntolerant(!LactoseIntolerant)}
-                        /> Lactose Intolerant<br/>
-                    </div>
-
-                    <div> 
-                        <label>Allergies</label><br/>
-                        <input type="checkbox"   value={Peanut}
-                            onClick={()=> setPeanut(!Peanut)}
-                        /> Peanut <br/>
-                        <input type="checkbox"  value={Almonds}
-                            onClick={()=> setAlmonds(!Almonds)}
-                        /> Almonds<br/>
-                        <input type="checkbox"  value={Milk}
-                            onClick={()=> setMilk(!Milk)}
-                        /> Milk<br/>
-                        <input type="checkbox"  value={Soy}
-                            onClick={()=> setSoy(!Soy)}
-                        /> Soy<br/>
-                        <input type="checkbox"  value={Egg}
-                            onClick={()=> setEgg(!Egg)}
-                        /> Egg<br/>
-                    </div>
-                    <button type="sumbit">Sign Up</button>
-                    
-                    </form>
-                    </BorderWrapper>
-                    </>
+                        <div> 
+                            <label>Allergies</label><br/>
+                            <input type="checkbox"   value={Peanut}
+                                onClick={()=> setPeanut(!Peanut)}
+                            /> Peanut <br/>
+                            <input type="checkbox"  value={Almonds}
+                                onClick={()=> setAlmonds(!Almonds)}
+                            /> Almonds<br/>
+                            <input type="checkbox"  value={Milk}
+                                onClick={()=> setMilk(!Milk)}
+                            /> Milk<br/>
+                            <input type="checkbox"  value={Soy}
+                                onClick={()=> setSoy(!Soy)}
+                            /> Soy<br/>
+                            <input type="checkbox"  value={Egg}
+                                onClick={()=> setEgg(!Egg)}
+                            /> Egg<br/>
+                        </div>
+                        <button classname="center" type="sumbit">Sign Up</button>
+                        </BorderWrapper>
+                        </form>
+                        </div>
+                        </>
                 )}
-            </div>
+                    </div>
         </section>   
     );
 }

@@ -2,12 +2,9 @@ import React, {useState, useEffect} from "react";
 import database from '../firebase';
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-//import React from "react";
-import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Login.css";
+import BorderWrapper from 'react-border-wrapper'
 
 const Login = () =>{
     const [email, setEmail] = useState('');
@@ -34,7 +31,7 @@ const Login = () =>{
                     <>
                     <br/>
                     <br/>
-                    <p>press Cintinue to the home page</p>
+                    <p>Press Continue To The Home Page</p>
                     <LinkContainer to="/">   
                         <Nav.Link>
                             <button> Continue </button><br/>
@@ -45,7 +42,9 @@ const Login = () =>{
                     <>
                     <br/>
                     <br/>
-                    <h1>Welcome </h1>
+                    <div class="form">
+                    <p>Welcome </p>
+                    <BorderWrapper>
                     <input type="text" required value={email}
                         placeholder = "Email"
                         onChange={(e) => setEmail(e.target.value)}
@@ -56,14 +55,16 @@ const Login = () =>{
                         onChange={(e) => setPassword(e.target.value)}
                     /><br/>
 
-                    <button onClick={handleLogin}> Login </button><br/> 
+                    <button1 onClick={handleLogin}> Login </button1><br/> 
 
-                    <p>Don't have an account?</p>
+                    <p2>Don't have an account?</p2>
                     <LinkContainer to="/signup">   
                         <Nav.Link>
-                            <button>Sign-up </button><br/>
+                            <button2>Sign-up </button2><br/>
                         </Nav.Link>
                     </LinkContainer>
+                    </BorderWrapper>
+                    </div>
                     </>
                 )}
             </div>
