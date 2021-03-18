@@ -12,6 +12,7 @@ import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //cc snippet
+
 class SellersPage extends Component {
     
     constructor(props) {
@@ -28,8 +29,6 @@ class SellersPage extends Component {
             ]
         };
 
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     clickEvent = () => {
@@ -43,26 +42,10 @@ class SellersPage extends Component {
         this.setState({ cards })
     }
 
-    // handleChange(event) {
-    //     this.setState({value: event.target.value});
-    //     this.setState({title: event.target.value})
-    // }
-    
-    // handleSubmit(event) {
-    //     alert('A name was submitted: ' + this.state.value);
-    //     event.preventDefault();
-    // }
-
 
     render() {
 
         const { cards } = this.state;
-        
-        function addCard() {
-            
-            alert("Created new card!")
-        }
-
 
         return ( 
             <div class = "center">
@@ -190,7 +173,6 @@ class SellersPage extends Component {
                     <br></br>
                     <br></br>
                     <br></br>
-                    <button onClick= {addCard} >Add New Item</button>
                     <br></br>
 
                     <CardDeck>
@@ -199,9 +181,9 @@ class SellersPage extends Component {
                         
                             <CustomCards 
                             
-                                title= 'Sample Title'
+                                title= 'Title Passed'
                                 imageURL='https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg'
-                                body='Test Body'
+                                body='Test Body passed'
                                 price="$99"
                                 ingredients= "Milk"
 
@@ -217,35 +199,6 @@ class SellersPage extends Component {
 
                 <br></br>
                 <h6>Add new item</h6>
-
-                {/* <form onSubmit={this.handleSubmit}>
-                        <label>Item Title:</label>
-                        <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                        
-
-                        <label>
-                        ImageURL:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-
-                        <label>
-                        Body:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-
-                        <label>
-                        Price:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-
-                        <label>
-                        Value:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-
-                        <input type="submit" value="Submit" />
-                        <button>Submit</button>
-                </form> */}  
 
             </div>
         );
