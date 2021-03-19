@@ -1,3 +1,13 @@
-.OrderCon {
-    padding-top: 100px;
+.right_button {
+    position:absolute;
+    top: 10%;
+    left: 94%;
+    text-decoration:underline;
+  }
+h1 {
+    color: black;
+    position: absolute;
+    top: 20%;
+    margin-left: 30%;
+    font-size: xx-large;
   }
