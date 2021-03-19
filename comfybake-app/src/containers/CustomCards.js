@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import database from '../firebase';
 
 function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
@@ -23,8 +24,25 @@ function CustomCards(props) {
 
     const [showInput, setInputState] = useState(true)
 
+    const db = database.firestore();
+    const storage = database.storage();
+    const id = "user3@gmail.com";
+    const FoodCollection = db.collection("FoodCollection");
 
     function save () {
+
+        //save data to firebase
+        FoodCollection.doc(id).collection("food").doc(titleValue).set({
+            Foodname: titleValue,
+            Body: bodyValue,
+            Price: priceValue,
+            Ingredients: ingredientsValue,
+        }).then(()=>{
+            console.log("Information have been sent")
+        }).catch((err)=>{
+            alert(err.message);
+        });
+
         setTitles(titleValue)
         setImage(imageURLValue)
         setBody(bodyValue)
