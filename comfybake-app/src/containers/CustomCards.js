@@ -7,25 +7,30 @@ function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
 
     const [titles, setTitles] = useState(props.title)
-    const [titleValue, setTitleValue] = useState("")
+    const [titleValue, setTitleValue] = useState("Sample Title")
     
     const [imageURL, setImage] = useState(props.imageURL)
-    const [imageURLValue] = useState("")
+    const [imageURLValue, setimageURLValue] = useState("http://localhost:3000/static/media/portuguese-egg-custard-tarts.1c7f0846.jpg")
     
     const [body, setBody] = useState(props.body)
-    const [bodyValue] = useState("")
+    const [bodyValue, setBodyValue] = useState("Sample Body")
     
     const [price, setPrice] = useState(props.price)
-    const [priceValue] = useState("")
+    const [priceValue, setPriceValue] = useState("Sample Price")
     
     const [ingredients, setIngredients] = useState(props.ingredients)
-    const [ingredientsValue] = useState("")
+    const [ingredientsValue, setIngredientsValue] = useState("Sample Ingredients")
 
     const [showInput, setInputState] = useState(true)
 
 
     function save () {
         setTitles(titleValue)
+        setImage(imageURLValue)
+        setBody(bodyValue)
+        setPrice(priceValue)
+        setIngredients(ingredientsValue)
+
         setInputState(false)
     }
 
@@ -42,12 +47,41 @@ function CustomCards(props) {
         console.log(titleValue)
     }
 
+    function updateImageURLValue (event) {
+        setimageURLValue(event.target.value)
+        console.log(imageURLValue)
+    }
+
+    function updateBodyValue (event) {
+        setBodyValue(event.target.value)
+    }
+
+    function updatePriceValue (event) {
+        setPriceValue(event.target.value)
+    }
+
+    function updateIngredientsValue (event) {
+        setIngredientsValue(event.target.value)
+    }
+
+    function deleteCard () {
+        //create a function that can delete card chosen card from {cards}
+        return
+    }
+
+
+
     if(showInput) {
         return (
             <Card>
                 <input onChange={updateTitleValue} placeholder="Edit Title"></input>
+                <input onChange={updateImageURLValue} placeholder="Edit Image"></input>
+                <input onChange={updateBodyValue} placeholder="Edit Body"></input>
+                <input onChange={updatePriceValue} placeholder="Edit Price"></input>
+                <input onChange={updateIngredientsValue} placeholder="Edit Ingredients"></input>
                 <button onClick={save}>Save</button>
                 <button onClick={cancel}>Cancel</button>
+                <button onClick={deleteCard}>Delete</button>
             </Card>
         );
     } else {

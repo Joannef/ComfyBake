@@ -31,14 +31,11 @@ class SellersPage extends Component {
 
     }
 
-    clickEvent = () => {
+    addCardClickEvent = () => {
         const cards = [
             ...this.state.cards, 
-            {
-                title: 'Cookies',
-                price: "$3"
-            }
-        ];
+            {} // This is required to add card into cards as it is where the new card goes i.e. 2x {} results in 2 cards created
+        ]; // This will create a new array from the old one with a new additional value
         this.setState({ cards })
     }
 
@@ -177,7 +174,7 @@ class SellersPage extends Component {
 
                     <CardDeck>
 
-                        {cards.map((card, index) =>
+                        {cards.map((card, index) => //need to figure out what these parameters means
                         
                             <CustomCards 
                             
@@ -191,7 +188,7 @@ class SellersPage extends Component {
                         
                         )}
 
-                        <button onClick={this.clickEvent}>Add Card</button>
+                        <button onClick={this.addCardClickEvent}>Add Card</button>
 
                     </CardDeck>
 
