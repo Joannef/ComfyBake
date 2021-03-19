@@ -3,22 +3,54 @@ import React, {Component} from 'react';
 import eggTart from './portuguese-egg-custard-tarts.jpg';
 import "./sellerPage.css"
 
+//import CustomCard from './CustomCard'
+import CustomCards from './CustomCards'
+
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 //cc snippet
+
 class SellersPage extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            cards: [
+                {
+                    title: "",
+                    imageURL: "",
+                    body: "",
+                    price: "",
+                    ingredients: ""
+                }
+            ]
+        };
+
+    }
+
+    addCardClickEvent = () => {
+        const cards = [
+            ...this.state.cards, 
+            {} // This is required to add card into cards as it is where the new card goes i.e. 2x {} results in 2 cards created
+        ]; // This will create a new array from the old one with a new additional value
+        this.setState({ cards })
+    }
+
+
     render() {
-        
+
+        const { cards } = this.state;
+
         return ( 
             <div class = "center">
                 <h1>Sindy's Home Kitchen</h1>
                 <h5>Recommendations</h5>
 
                 <Container>
+
                     <CardDeck>
                         
                         <Card>
@@ -122,7 +154,7 @@ class SellersPage extends Component {
                         <Card>
                             <Card.Img variant="top" src = "https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg" />
                             <Card.Body>
-                            <Card.Title>Homemade Brownies</Card.Title>
+                            <Card.Title>Crème brûlée</Card.Title>
                             <Card.Text>
                             Crème brûlée, a dessert consisting of a rich custard base topped with a layer of hardened caramelized sugar.
                             </Card.Text>
@@ -138,29 +170,33 @@ class SellersPage extends Component {
                     <br></br>
                     <br></br>
                     <br></br>
-                    <h6>Add new item</h6>
                     <br></br>
 
                     <CardDeck>
-                        <Card>
-                        {/* <Card.Img variant="top" src = "https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg" /> */}
-                            <Card.Body>
-                            <Card.Title>Enter Baked Good title and image</Card.Title>
-                            <Card.Text>
-                                Type Baked Good Description here to add a new item
-                            </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                            <p>Price</p>
-                            <small className="text-muted"> Contains: </small>
-                            </Card.Footer> 
-                        </Card>
+
+                        {cards.map((card, index) => //need to figure out what these parameters means
+                        
+                            <CustomCards 
+                            
+                                title= 'Title Passed'
+                                imageURL='https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg'
+                                body='Test Body passed'
+                                price="$99"
+                                ingredients= "Milk"
+
+                            />
+                        
+                        )}
+
+                        <button onClick={this.addCardClickEvent}>Add Card</button>
+
                     </CardDeck>
+
                 </Container>
 
-                {/* <img className="sellersImg" src = {eggTart} alt = "Portugese Egg Tarts" class = "center"/>
-                <h3>Portugese Egg Tarts: $2 per tart</h3> */}
-                
+                <br></br>
+                <h6>Add new item</h6>
+
             </div>
         );
     
