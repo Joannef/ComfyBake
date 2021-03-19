@@ -4,7 +4,6 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import Home from "./Home";
 
-
 const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
