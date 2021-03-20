@@ -10,7 +10,7 @@ function CustomCards(props) {
     const [titles, setTitles] = useState(props.title)
     const [titleValue, setTitleValue] = useState("Sample Title")
     
-    const [imageURL, setImage] = useState(props.imageURL)
+    const [imageURL, setImageURL] = useState(props.imageURL)
     const [imageURLValue, setimageURLValue] = useState("http://localhost:3000/static/media/portuguese-egg-custard-tarts.1c7f0846.jpg")
     
     const [body, setBody] = useState(props.body)
@@ -24,16 +24,35 @@ function CustomCards(props) {
 
     const [showInput, setInputState] = useState(true)
 
-    const db = database.firestore();
+    const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user3@gmail.com";
-    const FoodCollection = db.collection("FoodCollection");
+    const id = "user1@gmail.com";
+    const FoodCollection = database.firestore().collection("FoodCollection");
 
-    function save () {
+    function save (event) {
+        event.preventDefault();
+        //uplad image to firebase
+        const uploadTask = storage.ref(id+"/"+ image.name).put(image);
+
+        //read image_url from firebase
+        uploadTask.on(
+            "state_changed",
+            snapshot =>{},
+            error=>{
+                alert(error);
+            },
+            ()=>{
+                storage.ref(id).child(image.name).getDownloadURL()
+                .then(url=>{
+                    setImageURL(url);
+                })
+            }
+        )
 
         //save data to firebase
         FoodCollection.doc(id).collection("food").doc(titleValue).set({
             Foodname: titleValue,
+            ImageUrl: imageURL,
             Body: bodyValue,
             Price: priceValue,
             Ingredients: ingredientsValue,
@@ -44,9 +63,10 @@ function CustomCards(props) {
         });
 
         setTitles(titleValue)
-        setImage(imageURLValue)
+        //setImage(imageURLValue)
+        setImage(imageURL)
         setBody(bodyValue)
-        setPrice(priceValue)
+        setPrice("$ "+priceValue)
         setIngredients(ingredientsValue)
 
         setInputState(false)
@@ -64,10 +84,15 @@ function CustomCards(props) {
         setTitleValue(event.target.value)
         console.log(titleValue)
     }
-
+    /*
     function updateImageURLValue (event) {
         setimageURLValue(event.target.value)
         console.log(imageURLValue)
+    }*/
+    function updateImageURLValue (event){
+        if (event.target.files[0]){
+            setImage(event.target.files[0]);
+        }
     }
 
     function updateBodyValue (event) {
@@ -88,12 +113,11 @@ function CustomCards(props) {
     }
 
 
-
     if(showInput) {
         return (
             <Card>
                 <input onChange={updateTitleValue} placeholder="Edit Title"></input>
-                <input onChange={updateImageURLValue} placeholder="Edit Image"></input>
+                <input type="file" onChange={updateImageURLValue} placeholder="Edit Image"></input>
                 <input onChange={updateBodyValue} placeholder="Edit Body"></input>
                 <input onChange={updatePriceValue} placeholder="Edit Price"></input>
                 <input onChange={updateIngredientsValue} placeholder="Edit Ingredients"></input>
