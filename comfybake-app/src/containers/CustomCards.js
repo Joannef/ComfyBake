@@ -6,7 +6,7 @@ import database from '../firebase';
 
 function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
-
+    //change
     const [titles, setTitles] = useState(props.title)
     const [titleValue, setTitleValue] = useState("Sample Title")
     
