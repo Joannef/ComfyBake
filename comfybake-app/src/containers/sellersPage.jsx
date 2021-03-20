@@ -195,7 +195,6 @@ class SellersPage extends Component {
                 </Container>
 
                 <br></br>
-                <h6>Add new item</h6>
 
             </div>
         );
