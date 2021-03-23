@@ -135,7 +135,7 @@ export default function Signup() {
                     <br/>
                     <br/>
                     <br/>
-                    <p>press Cintinue to the Login page</p>
+                    <p>press Continue to the Login page</p>
                     <LinkContainer to="/login">   
                         <Nav.Link>
                             <button> Continue </button><br/>
