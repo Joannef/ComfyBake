@@ -4,10 +4,25 @@
     left: 94%;
     text-decoration:underline;
   }
-h1 {
+.checkout {
     color: black;
     position: absolute;
     top: 20%;
     margin-left: 30%;
     font-size: xx-large;
+  }
+  .top-left {
+    position: absolute;
+    top: 30%;
+    margin-left: -5%;
+  }
+  .none {
+    position: absolute;
+    top: 60%;
+    right: 35%
+  }
+  .bottom-left {
+    position: absolute;
+    top: 60%;
+    margin-left: -5%;
   }
