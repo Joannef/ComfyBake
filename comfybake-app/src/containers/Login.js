@@ -31,19 +31,21 @@ const Login = () =>{
                     <>
                     <br/>
                     <br/>
-                    <p>Press Continue To The Home Page</p>
-                    <LinkContainer to="/">   
-                        <Nav.Link>
-                            <button> Continue </button><br/>
-                        </Nav.Link>
-                    </LinkContainer>
+                    <div className="transition">
+                        <p className="customP">Press Continue to go to the Home Page</p>
+                        <LinkContainer to="/">   
+                            <Nav.Link>
+                                <button className="customButton">Continue</button><br/>
+                            </Nav.Link>
+                        </LinkContainer>
+                    </div>
                     </>
                 ):(
                     <>
                     <br/>
                     <br/>
                     <div class="form">
-                    <p>Welcome </p>
+                    <p className="customP">Welcome</p>
                     <BorderWrapper>
                     <input type="text" required value={email}
                         placeholder = "Email"
@@ -55,12 +57,12 @@ const Login = () =>{
                         onChange={(e) => setPassword(e.target.value)}
                     /><br/>
 
-                    <button1 onClick={handleLogin}> Login </button1><br/> 
+                    <button1 onClick={handleLogin}>Login</button1><br/> 
 
                     <p2>Don't have an account?</p2>
                     <LinkContainer to="/signup">   
                         <Nav.Link>
-                            <button2>Sign-up </button2><br/>
+                            <button2>Sign-up</button2><br/>
                         </Nav.Link>
                     </LinkContainer>
                     </BorderWrapper>

@@ -135,21 +135,23 @@ export default function Signup() {
                     <br/>
                     <br/>
                     <br/>
-                    <p>press Continue to the Login page</p>
-                    <LinkContainer to="/login">   
-                        <Nav.Link>
-                            <button> Continue </button><br/>
-                        </Nav.Link>
-                    </LinkContainer>
+                    <div className="transition">
+                        <p className="customP">Press continue to go to the login page</p>
+                        <LinkContainer to="/login">   
+                            <Nav.Link>
+                                <button className="customButton"> Continue</button><br/>
+                            </Nav.Link>
+                        </LinkContainer>
+                    </div>
                     </>
                     ):(
                     <>
                     <div class="form">
                         <form className="Signup-form" onSubmit={handleSumbit}>
-                        <p className="center"> Let's Get To Know One Another!</p>
+                        <p className="center customP">Let's Get to Know one Another!</p>
                         <BorderWrapper>
                         <div>
-                            <label>Introductions </label><br/>
+                            <label>Introductions</label><br/>
                             <input type="text" required value={FirstName}
                                 placeholder = "FirstName"
                                 onChange={(e) => setFirstName(e.target.value)}
@@ -161,7 +163,7 @@ export default function Signup() {
                         </div>
                 
                         <div> 
-                            <label> Address</label><br/>
+                            <label>Address</label><br/>
                             <input type="text" required value={Address}
                                 placeholder = "Address"
                                 onChange = {(e) => setAddress(e.target.value)}
@@ -229,7 +231,7 @@ export default function Signup() {
                                 onClick={()=> setEgg(!Egg)}
                             /> Egg<br/>
                         </div>
-                        <button classname="center" type="sumbit">Sign Up</button>
+                        <button classname="center customButton" type="sumbit">Sign Up</button>
                         </BorderWrapper>
                         </form>
                         </div>

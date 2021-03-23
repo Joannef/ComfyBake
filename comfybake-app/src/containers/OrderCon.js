@@ -17,7 +17,7 @@ export default function OrderCon() {
     var orderArray = [fakeURL1, fakeURL2, fakeURL3]; //somehow creates an array of the picture url data for a users cart
     return(
         <section>
-            <h1 classname="checkout">Ready To Checkout?</h1>
+            <h1 className="checkout">Ready To Checkout?</h1>
             <div className="right_button">
                 <Link to="/orders/cart">View Cart</Link>
             </div>

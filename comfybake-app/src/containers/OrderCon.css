@@ -4,10 +4,10 @@
     left: 94%;
     text-decoration:underline;
   }
-h1 {
+.checkout {
     color: black;
     position: absolute;
     top: 20%;
-    margin-left: 30%;
+    margin-left: 20%;
     font-size: xx-large;
   }
