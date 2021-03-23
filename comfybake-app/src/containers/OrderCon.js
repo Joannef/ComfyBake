@@ -1,27 +1,43 @@
-import React, {useState} from "react";
-import database from '../firebase';
-import BorderWrapper from 'react-border-wrapper'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./OrderCon.css";
+import { getDefaultNormalizer } from "@testing-library/dom";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "./ViewCart";
+import database from '../firebase';
+import "./OrderCon.css";
+//import BorderWrapper from 'react-border-wrapper'
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
-//const db = database.firestore();
-//const userCollection = db.collection("users");
-//const [orderArray, setOrderArray] = useState(false);
-const fakeURL1 = "";
-const fakeURL2 = "";
-const fakeURL3 = "";
+const db = database.firestore();
+const Email = "1231231asdad@gmail.com" //should be authenticated by logged-in user dummy user fir now
 
 export default function OrderCon() {
-    var orderArray = [fakeURL1, fakeURL2, fakeURL3]; //somehow creates an array of the picture url data for a users cart
+    const [items,setItems]=useState([])
+    const fetchItems = async()=>{
+        const response = db.collection(Email).doc('Orders');
+        const data = await response.get();
+        setItems(data.docs);
+    }
+    useEffect(() => {
+        fetchItems();
+    }, [])
     return(
         <section>
-            <h1 className="checkout">Ready To Checkout?</h1>
-            <div className="right_button">
+            <h class="checkout">Ready To Checkout?</h>
+            <div class="right_button">
                 <Link to="/orders/cart">View Cart</Link>
             </div>
-            
+            <div>
+                {items ? (
+                    <div>
+                        <h class="top-left">Order Items:</h>
+                        <h class="bottom-left">{items}</h>
+                    </div>
+                    ):(
+                    <div>
+                        <h class="top-left">Order Items: </h>
+                        <h class="none">Your cart is empty. Please make a selection first!</h>
+                    </div>
+                )} 
+            </div>
         </section>
     )
 };
