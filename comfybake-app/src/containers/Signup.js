@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import database from '../firebase';
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-//import React from "react";
+import BorderWrapper from 'react-border-wrapper'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
@@ -135,105 +135,109 @@ export default function Signup() {
                     <br/>
                     <br/>
                     <br/>
-                    <p>press Continue to the Login page</p>
-                    <LinkContainer to="/login">   
-                        <Nav.Link>
-                            <button> Continue </button><br/>
-                        </Nav.Link>
-                    </LinkContainer>
+                    <div className="transition">
+                        <p className="customP">Press continue to go to the login page</p>
+                        <LinkContainer to="/login">   
+                            <Nav.Link>
+                                <button className="customButton"> Continue</button><br/>
+                            </Nav.Link>
+                        </LinkContainer>
+                    </div>
                     </>
-                ):(
+                    ):(
                     <>
-                    <form className="Signup-form" onSubmit={handleSumbit}>
-                    <h2 class="center"> Let's get to Know one another!</h2>
+                    <div class="form">
+                        <form className="Signup-form" onSubmit={handleSumbit}>
+                        <p className="center customP">Let's Get to Know one Another!</p>
+                        <BorderWrapper>
+                        <div>
+                            <label>Introductions</label><br/>
+                            <input type="text" required value={FirstName}
+                                placeholder = "FirstName"
+                                onChange={(e) => setFirstName(e.target.value)}
+                            /><b/> <b/>
+                            <input type="text" required value={LastName}
+                                placeholder = "LastName"
+                                onChange={(e) => setLastName(e.target.value)}
+                            /><br/>
+                        </div>
+                
+                        <div> 
+                            <label>Address</label><br/>
+                            <input type="text" required value={Address}
+                                placeholder = "Address"
+                                onChange = {(e) => setAddress(e.target.value)}
+                            /><br/>
+                            <input type="text" required value={City}
+                                placeholder = "City"
+                                onChange = {(e) => setCity(e.target.value)}
+                            /><b/> <b/>
+                            <input type="text" required value={State}
+                                placeholder = "State"
+                                onChange = {(e) => setState(e.target.value)}
+                            /><br/>
+                        </div>
 
-                    <div>
-                        <label>Introductions </label><br/>
-                        <input type="text" required value={FirstName}
-                            placeholder = "FirstName"
-                            onChange={(e) => setFirstName(e.target.value)}
-                        /><b/> <b/>
-                        <input type="text" required value={LastName}
-                            placeholder = "LastName"
-                            onChange={(e) => setLastName(e.target.value)}
-                        /><br/>
-                    </div>
-               
-                    <div> 
-                        <label> Address</label><br/>
-                        <input type="text" required value={Address}
-                            placeholder = "Address"
-                            onChange = {(e) => setAddress(e.target.value)}
-                        /><br/>
-                        <input type="text" required value={City}
-                            placeholder = "City"
-                            onChange = {(e) => setCity(e.target.value)}
-                        /><b/> <b/>
-                        <input type="text" required value={State}
-                            placeholder = "State"
-                            onChange = {(e) => setState(e.target.value)}
-                        /><br/>
-                    </div>
+                        <div> 
+                            <label>Contact</label><br/>
+                            <input type="text" required value={PhoneNum}
+                                placeholder = "Phone Number"
+                                onChange = {(e) => setPhoneNum(e.target.value)}
+                            /><br/>
+                            <input type="text" required value={Email}
+                                placeholder = "Email"
+                                onChange = {(e) => setEmail(e.target.value)}
+                            /><br/>
+                            <input type="password" required value={Password}
+                                placeholder = "Password"
+                                onChange = {(e) => setPassword(e.target.value)}
+                            /><br/>
+                        </div>
 
-                    <div> 
-                        <label>Contact</label><br/>
-                        <input type="text" required value={PhoneNum}
-                            placeholder = "Phone Number"
-                            onChange = {(e) => setPhoneNum(e.target.value)}
-                        /><br/>
-                        <input type="text" required value={Email}
-                            placeholder = "Email"
-                            onChange = {(e) => setEmail(e.target.value)}
-                        /><br/>
-                        <input type="password" required value={Password}
-                            placeholder = "Password"
-                            onChange = {(e) => setPassword(e.target.value)}
-                        /><br/>
-                    </div>
+                        <div> 
+                            <label>Dietary Preferences</label><br/>
+                            <input type="checkbox"   value={Vegan}
+                                onClick={()=> setVegan(!Vegan)}
+                            /> Vegan <br/>
+                            <input type="checkbox"  value={GlutenFree}
+                                onClick={()=> setGlutenFree(!GlutenFree)}
+                            /> Gluen Free<br/>
+                            <input type="checkbox"  value={DairyFree}
+                                onClick={()=> setDairyFree(!DairyFree)}
+                            /> Dairy Free<br/>
+                            <input type="checkbox"  value={Kosher}
+                                onClick={()=> setKosher(!Kosher)}
+                            /> Kosher<br/>
+                            <input type="checkbox"  value={LactoseIntolerant}
+                                onClick={()=> setLactoseIntolerant(!LactoseIntolerant)}
+                            /> Lactose Intolerant<br/>
+                        </div>
 
-                    <div> 
-                        <label>Dietary Preferences</label><br/>
-                        <input type="checkbox"   value={Vegan}
-                            onClick={()=> setVegan(!Vegan)}
-                        /> Vegan <br/>
-                        <input type="checkbox"  value={GlutenFree}
-                            onClick={()=> setGlutenFree(!GlutenFree)}
-                        /> Gluen Free<br/>
-                        <input type="checkbox"  value={DairyFree}
-                            onClick={()=> setDairyFree(!DairyFree)}
-                        /> Dairy Free<br/>
-                        <input type="checkbox"  value={Kosher}
-                            onClick={()=> setKosher(!Kosher)}
-                        /> Kosher<br/>
-                        <input type="checkbox"  value={LactoseIntolerant}
-                            onClick={()=> setLactoseIntolerant(!LactoseIntolerant)}
-                        /> Lactose Intolerant<br/>
-                    </div>
-
-                    <div> 
-                        <label>Allergies</label><br/>
-                        <input type="checkbox"   value={Peanut}
-                            onClick={()=> setPeanut(!Peanut)}
-                        /> Peanut <br/>
-                        <input type="checkbox"  value={Almonds}
-                            onClick={()=> setAlmonds(!Almonds)}
-                        /> Almonds<br/>
-                        <input type="checkbox"  value={Milk}
-                            onClick={()=> setMilk(!Milk)}
-                        /> Milk<br/>
-                        <input type="checkbox"  value={Soy}
-                            onClick={()=> setSoy(!Soy)}
-                        /> Soy<br/>
-                        <input type="checkbox"  value={Egg}
-                            onClick={()=> setEgg(!Egg)}
-                        /> Egg<br/>
-                    </div>
-                    <button type="sumbit">Sign Up</button>
-                    
-                    </form>
-                    </>
+                        <div> 
+                            <label>Allergies</label><br/>
+                            <input type="checkbox"   value={Peanut}
+                                onClick={()=> setPeanut(!Peanut)}
+                            /> Peanut <br/>
+                            <input type="checkbox"  value={Almonds}
+                                onClick={()=> setAlmonds(!Almonds)}
+                            /> Almonds<br/>
+                            <input type="checkbox"  value={Milk}
+                                onClick={()=> setMilk(!Milk)}
+                            /> Milk<br/>
+                            <input type="checkbox"  value={Soy}
+                                onClick={()=> setSoy(!Soy)}
+                            /> Soy<br/>
+                            <input type="checkbox"  value={Egg}
+                                onClick={()=> setEgg(!Egg)}
+                            /> Egg<br/>
+                        </div>
+                        <button classname="center customButton" type="sumbit">Sign Up</button>
+                        </BorderWrapper>
+                        </form>
+                        </div>
+                        </>
                 )}
-            </div>
+                    </div>
         </section>   
     );
 }

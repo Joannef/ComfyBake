@@ -1,0 +1,36 @@
+div.form
+{
+    display: block;
+    text-align: center;
+    background-color: white;
+}
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+.customP
+{
+  color: black;
+  font-family: Helvetica;
+  font-style: oblique;
+  font-size: 25px;
+
+}
+.customButton
+{
+  margin: 0;
+  position: absolute;
+  left: 40%;
+  background-color: rgb(214, 214, 214);
+  color: black;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-weight: bold;
+}
+button:hover {
+  background-color: #6f4caf;
+  color: black;
+}

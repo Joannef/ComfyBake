@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import React from "react";
 import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap";
@@ -29,8 +28,8 @@ function App() {
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/owner">
-              <Nav.Link>Owners</Nav.Link>
+            <LinkContainer to="/orders">
+              <Nav.Link>Orders</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/seller">
               <Nav.Link>Sellers</Nav.Link>
