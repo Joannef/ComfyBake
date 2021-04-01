@@ -7,6 +7,9 @@ import Signup from "./containers/Signup";
 import SellersPage from "./containers/sellersPage";
 import OrderCon from "./containers/OrderCon";
 import ViewCart from "./containers/ViewCart";
+import Display from "./containers/Display"
+
+// import Sellers from "./containers/Sellers";
 
 export default function Routes() {
   return (
@@ -32,6 +35,14 @@ export default function Routes() {
       </Route>
       
       <Route path="/seller" exact component={() => <SellersPage />} />
+
+      {/* <Route exact path="/seller">
+        <Sellers />
+      </Route> */}
+
+      <Route exact path="/display">
+        <Display />
+      </Route>
 
       <Route>
         <NotFound />

@@ -6,12 +6,11 @@ import database from '../firebase';
 
 function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
-    //change
+    
     const [titles, setTitles] = useState(props.title)
     const [titleValue, setTitleValue] = useState("Sample Title")
     
     const [imageURL, setImageURL] = useState(props.imageURL)
-    const [imageURLValue, setimageURLValue] = useState("http://localhost:3000/static/media/portuguese-egg-custard-tarts.1c7f0846.jpg")
     
     const [body, setBody] = useState(props.body)
     const [bodyValue, setBodyValue] = useState("Sample Body")
@@ -22,7 +21,7 @@ function CustomCards(props) {
     const [ingredients, setIngredients] = useState(props.ingredients)
     const [ingredientsValue, setIngredientsValue] = useState("Sample Ingredients")
 
-    const [showInput, setInputState] = useState(true)
+    const [showInput, setInputState] = useState(false)
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
@@ -32,10 +31,12 @@ function CustomCards(props) {
 
     function save(event) {
         event.preventDefault();
-        //uplad image to firebase
+
+        //upload image to firebase
         const uploadTask = storage.ref(id+"/"+ image.name).put(image);
         var imageURL_ = "";
-        //read image_url from firebase
+
+        //read image_url from firebase then set as imageURL_
         uploadTask.on(
             "state_changed",
             snapshot =>{},
@@ -45,35 +46,32 @@ function CustomCards(props) {
             ()=>{
                 storage.ref(id).child(image.name).getDownloadURL()
                 .then(url=>{
-                    //setImageURL(url);
                     imageURL_ = url;
-                    //alert(url);
-                    //alert(imageURL);
-                    //alert(imageURL_);
                 })
             }
         )
         
         
         setTimeout(() => {
-            //alert(imageURL_); 
+
+            // store information in firestore collection
             FoodCollection.doc(id).collection("food").doc(titleValue).set({
+
                 Foodname: titleValue,
                 ImageUrl: imageURL_,
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
+
             }).then(()=>{
                 console.log("Information have been sent");
-                //alert("Information have been sent");
             }).catch((err)=>{
                 alert(err.message);
             });   
 
+            //update views of Card
             setTitles(titleValue)
-            //setImage(imageURLValue)
-            //alert(imageURL_);
-            setImageURL(imageURL_)
+            setImageURL(imageURL_) // the returned url for the image
             setBody(bodyValue)
             setPrice("$ "+priceValue)
             setIngredients(ingredientsValue)
@@ -95,11 +93,13 @@ function CustomCards(props) {
         setTitleValue(event.target.value)
         console.log(titleValue)
     }
+
     /*
     function updateImageURLValue (event) {
         setimageURLValue(event.target.value)
         console.log(imageURLValue)
     }*/
+
     function updateImageURLValue (event){
         event.preventDefault();
         if (event.target.files[0]){
@@ -121,7 +121,6 @@ function CustomCards(props) {
 
     function deleteCard () {
         //create a function that can delete card chosen card from {cards}
-        return
     }
 
 

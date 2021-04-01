@@ -34,6 +34,9 @@ function App() {
             <LinkContainer to="/seller">
               <Nav.Link>Sellers</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/display">
+              <Nav.Link>Display</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
         <Form inline>
