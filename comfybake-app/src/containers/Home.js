@@ -4,10 +4,12 @@ import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Home.css";
+import Cart from "./Cart"
 
 export default function Home() {
   return (
     <div className="Home">
+      <Cart />
       <div className="lander">
         <h1>ComfyBake</h1>
       </div>
