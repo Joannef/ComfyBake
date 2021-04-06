@@ -6,6 +6,12 @@ import Products from './product';
 
 const PAGE_PRODUCTS = 'products';
 const PAGE_CART = 'cart'
+const senderEmail = "cbakeTeam@gmail.com"
+const templateId = "template_j303hv9"
+const Email = "franciscor343@gmail.com"
+const FirstName = "franciscor343@gmail.com"
+const LastName = "franciscor343@gmail.com"
+
 
 function Cart(){
     const [cart, setCart] = useState([]);
@@ -25,6 +31,46 @@ function Cart(){
         setCart(cart.filter((product) => product !== productToRemove))
     }
 
+    const handleSumbit = (e) =>{
+        sendFeedback({
+            templateId,
+            senderEmail,
+            receiverEmail:Email,
+            FirstName,
+            LastName,
+          })
+        e.preventDefault();
+        //here we should probably change the status of the order so that the cart empties
+        // and all of the information goes from the cart to the order history page
+    }
+    const sendFeedback = ({
+        templateId,
+        senderEmail,
+        receiverEmail,
+        FirstName,
+        LastName,
+      }) => {
+        window.emailjs
+          .send(
+            "default_service",
+            templateId,
+            {
+              senderEmail,
+              receiverEmail,
+              FirstName,
+              LastName,
+            },
+          )
+          .then(res => {
+            if (res.status === 200) {
+              //setFormSubmitSuccessful(true)
+            }
+          })
+          // Handle errors here however you like
+          .catch(err => console.error("Failed to send feedback. Error: ", err))
+      }
+
+
 
 
     const renderCart = () => (
@@ -41,6 +87,7 @@ function Cart(){
                 </div>
             ))}
             </div>
+            <button className="checkoutBtn" onclick={handleSumbit}>Checkout</button>
         </div>
     );
 

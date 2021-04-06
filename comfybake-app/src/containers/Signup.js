@@ -11,9 +11,9 @@ import "./Signup.css";
 
 const db = database.firestore();
 const userCollection = db.collection("users");
-const senderEmail = "cbakeTeam@gmail.com"
-const templateId = "template_j303hv9"
-const user = "user_y3r1u0JY8muNaWc5wZVZk"
+const senderEmail = "cbakeTeam@gmail.com";
+const templateId = "template_j303hv9";
+
 
 export default function Signup() {
     const [FirstName, setFirstName] = useState('');

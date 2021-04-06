@@ -1,17 +1,14 @@
 import database from '../firebase';
 import "./OrderDetails.css";
 
-const id = this.props.location.state.id;
-const addy = this.props.location.state.addy;
-const status = this.props.location.state.status;
-const plan = this.props.location.state.plan;
-const price = this.props.location.state.price;
-var subtotal = price*0.85;
-var tax = price - subtotal;
-
-
-
-export default function OrderDetails() {
+export default function OrderDetails(props) {
+    const id = props.location.state.id;
+    const addy = props.location.state.addy;
+    const status = props.location.state.status;
+    const plan = props.location.state.plan;
+    const price = props.location.state.price;
+    var subtotal = price*0.85;
+    var tax = price - subtotal;
     return (
         <div class="big-rect">
             <k class="top-p"> Order Details</k>

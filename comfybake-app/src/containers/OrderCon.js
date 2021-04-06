@@ -5,19 +5,18 @@ import database from '../firebase';
 import "./OrderCon.css";
 
 const Email = "1231231asdad@gmail.com"; //should be authenticated by logged-in user dummy user fir now
-const [orderList, setList] = React.useState([]);
 
 function OrderBlock(props) {
-    const img = props.img;
-    const description = props.description;
-    const qty = props.qty;
-    const avail = props.avail;
-    const price = props.price;
-    const date = props.date;
-    const id = props.id;
-    const addy = props.addy;
-    const pay_plan = props.pay_plan;
-    const status = props.status;
+    const img = props.val().img;
+    const description = props.val().description;
+    const qty = props.val().qty;
+    const avail = props.val().avail;
+    const price = props.val().price;
+    const date = props.val().date;
+    const id = props.val().id;
+    const addy = props.val().addy;
+    const pay_plan = props.val().pay_plan;
+    const status = props.val().status;
 
     return (
     <div>
@@ -51,7 +50,9 @@ function OrderBlock(props) {
   }
 
 export default function OrderCon() {
-    var orders = database.ref(`/Users:${Email}/Orders`);
+    const [orderList, setList] = React.useState([]);
+    /////ahhh why wont this work
+    const orders = firebase.database().ref(`/Users:${Email}/Orders`);
     orders.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
     var childData = childSnapshot.val();
@@ -61,26 +62,23 @@ export default function OrderCon() {
 });
     return(
         <section>
-            <h class="checkout">Ready To Checkout?</h>
-            <div class="ordertower">
-                {orderList.map(orderList => 
-                    <div key={orderList.key}> 
-                        <OrderBlock orderList={orderList}/> 
-                    </div>)} 
-            </div>
             <div class="right_button">
                 <Link to="/orders/cart">View Cart</Link>
             </div>
+            <h class="top-left">Order Ready To Checkout?</h>
             <div>
-                {items ? (
+                {orderList != 0 ? (
                     <div>
-                        <h class="top-left">Order Items:</h>
-                        <h class="bottom-left">{items}</h>
+                        <div class="O-block">
+                            {orderList.map(orderList => 
+                                <div key={orderList.key}> 
+                                    <OrderBlock orderList={orderList}/> 
+                                </div>)} 
+                        </div>
                     </div>
                     ):(
                     <div>
-                        <h class="top-left">Order Items: </h>
-                        <h class="none">Your cart is empty. Please make a selection first!</h>
+                        <h class="none">Unfourtunately, your cart is empty. Please make a selection first!</h>
                     </div>
                 )} 
             </div>

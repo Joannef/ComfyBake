@@ -6,7 +6,8 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import SellersPage from "./containers/sellersPage";
 import OrderCon from "./containers/OrderCon";
-import ViewCart from "./containers/ViewCart";
+import Cart from "./containers/Cart";
+import OrderDetail from "./containers/OrderDetails";
 
 export default function Routes() {
   return (
@@ -28,7 +29,7 @@ export default function Routes() {
       </Route>
 
       <Route exact path="/orders/cart">
-        <ViewCart />
+        <Cart />
       </Route>
 
       <Route exact path="/orders/order-details">
