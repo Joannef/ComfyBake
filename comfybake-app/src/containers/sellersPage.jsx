@@ -10,35 +10,9 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import database from '../firebase';
-
-const db = database.firestore();
-const id = "user2@gmail.com";
-
-class Item {
-    constructor(titleName, imageName, bodyText, priceText, ingredientsName) {
-        this.titleLoad = titleName;
-        this.imageLoad = imageName;
-        this.bodyLoad = bodyText;
-        this.priceLoad = priceText;
-        this.ingredientsLoad = ingredientsName;
-
-        // this.setState({titleLoad: titleName});
-        // this.setState({imageLoad: imageName});
-        // this.setState({bodyLoad: bodyText});
-        // this.setState({priceLoad: priceText});
-        // this.setState({ingredientsLoad: ingredientsName});
-    }
-}
-
-var menuConverter = {
-    fromFirestore: function(snapshot, options){
-        const data = snapshot.data(options);
-        return new Item(data.Body, data.Foodname, data.imageUrl, data.Ingredients, data.Price);
-    }
-}
 
 //cc snippet
+
 class SellersPage extends Component {
     
     constructor(props) {
@@ -52,17 +26,10 @@ class SellersPage extends Component {
                     price: "",
                     ingredients: ""
                 }
-            ],
-
-            titleLoad: "Sun's out, Gun's out",
-            imageLoad: "https://cdnb.artstation.com/p/assets/images/images/012/597/409/large/sean-raiko-tay-summertessz.jpg?1535570420",
-            bodyLoad: "Summer-themed illustration of my OC Tess Turner",
-            priceLoad: "Priceless",
-            ingredientsLoad: "Hardwork"
+            ]
         };
 
     }
-    
 
     addCardClickEvent = () => {
         const cards = [
@@ -72,25 +39,10 @@ class SellersPage extends Component {
         this.setState({ cards })
     }
 
-    testSetState = () =>  {
-        this.setState( {titleLoad: "NOPE"} );
-    }
 
     render() {
 
         const { cards } = this.state;
-
-        db.collection("FoodCollection").doc(id).collection("food").doc("Blood Orange Canneles")
-        .withConverter(menuConverter).get().then((doc) => {
-            
-            var item = doc.data();
-
-            this.setState({titleLoad: item.titleLoad});
-            this.setState({imageLoad: item.imageLoad});
-            this.setState({bodyLoad: item.bodyLoad});
-            this.setState({priceLoad: item.priceLoad});
-            this.setState({ingredientsLoad: item.ingredientsLoad});
-        });
 
         return ( 
             <div class = "center">
@@ -101,15 +53,20 @@ class SellersPage extends Component {
 
                     <CardDeck>
                         
-                        <CustomCards 
-                            
-                            title = {this.state.titleLoad}
-                            imageURL = {this.state.imageLoad}
-                            body = {this.state.bodyLoad}
-                            price = {this.state.priceLoad}
-                            ingredients = {this.state.ingredientsLoad}
-
-                        />
+                        <Card>
+                            <Card.Img variant="top" src = {eggTart} alt = "Portugese Egg Tarts" />
+                            <Card.Body>
+                            <Card.Title>Portugese Egg Tarts</Card.Title>
+                            <Card.Text>
+                                Portuguese egg tart: its crisp, flaky crust holding a creamy custard 
+                                center, blistered on top from the high heat of an oven.
+                            </Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                            <p>$2.00</p>
+                            <small className="text-muted">Eggs | Milk</small>
+                            </Card.Footer>
+                        </Card>
 
                         <Card>
                             <Card.Img variant="top" src = "https://images.kitchenstories.io/recipeImages/RP10_30_08_MoltenChocoladeCupcakeWithRaspberryFilling_TitlePictureNEW/RP10_30_08_MoltenChocoladeCupcakeWithRaspberryFilling_TitlePictureNEW-medium-landscape-150.jpg" />
@@ -221,9 +178,9 @@ class SellersPage extends Component {
                         
                             <CustomCards 
                             
-                                title= 'Edit Card'
+                                title= 'Title Passed'
                                 imageURL='https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg'
-                                body='Edit this card by pressing on the Edit button below'
+                                body='Test Body passed'
                                 price="$99"
                                 ingredients= "Milk"
 
