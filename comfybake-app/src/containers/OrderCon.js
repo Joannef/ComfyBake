@@ -62,7 +62,7 @@ export default function OrderCon() {
     return(
         <section>
             <h class="checkout">Ready To Checkout?</h>
-            <div class="orderTower">
+            <div class="ordertower">
                 {orderList.map(orderList => 
                     <div key={orderList.key}> 
                         <OrderBlock orderList={orderList}/> 
