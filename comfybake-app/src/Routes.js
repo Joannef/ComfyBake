@@ -30,6 +30,10 @@ export default function Routes() {
       <Route exact path="/orders/cart">
         <ViewCart />
       </Route>
+
+      <Route exact path="/orders/order-details">
+        <OrderDetail />
+      </Route>
       
       <Route path="/seller" exact component={() => <SellersPage />} />
 
