@@ -7,7 +7,7 @@ import "./OrderCon.css";
 const Email = "1231231asdad@gmail.com"; //should be authenticated by logged-in user dummy user fir now
 
 function OrderBlock(props) {
-    const img = props.val().img;
+    /*const img = props.val().img;
     const description = props.val().description;
     const qty = props.val().qty;
     const avail = props.val().avail;
@@ -16,7 +16,18 @@ function OrderBlock(props) {
     const id = props.val().id;
     const addy = props.val().addy;
     const pay_plan = props.val().pay_plan;
-    const status = props.val().status;
+    const status = props.val().status;*/
+    //dummy values for the time being
+    const img = "evr"
+    const description = "eqr"
+    const qty = "eqr"
+    const avail = "eqr"
+    const price = "eqr"
+    const date = "eqr"
+    const id = "eqr"
+    const addy = "eqr"
+    const pay_plan = "eqr"
+    const status = "eqr"
 
     return (
     <div>
@@ -48,26 +59,22 @@ function OrderBlock(props) {
     </div>
     );
   }
-
+//
 export default function OrderCon() {
-    const [orderList, setList] = React.useState([]);
-    /////ahhh why wont this work
-    const orders = firebase.database().ref(`/Users:${Email}/Orders`);
-    orders.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-    var childData = childSnapshot.val();
-    orderList.concat({childData});
-    setList(orderList);
-    });
-});
+    const [orderList, setOrderList] = useState([]);
+    const orders = database.firestore().collection("users").get().then(//.doc(`${Email}`).collection("Orders").where('status', '==', 'complete');
+    (querySnapshot => (
+        setOrderList(querySnapshot.docs.map(doc=> doc.data()))
+    )));
+
     return(
         <section>
             <div class="right_button">
                 <Link to="/orders/cart">View Cart</Link>
             </div>
-            <h class="top-left">Order Ready To Checkout?</h>
+            <h class="top-left">Ready To Checkout?</h>
             <div>
-                {orderList != 0 ? (
+                {orderList.length > 0 ? (
                     <div>
                         <div class="O-block">
                             {orderList.map(orderList => 
