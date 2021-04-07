@@ -33,13 +33,20 @@ class SellersPage extends Component {
             ],
             
             titleLoad: "Sun's out, Gun's out",
-            imageLoad: "https://cdnb.artstation.com/p/assets/images/images/012/597/409/large/sean-raiko-tay-summertessz.jpg?1535570420",
+            imageLoad: "https://cdna.artstation.com/p/assets/images/images/012/809/136/original/damon-iannuzzelli-cloud.gif?1536635831",
             bodyLoad: "Summer-themed illustration of my OC Tess Turner",
             priceLoad: "Priceless",
             ingredientsLoad: "Hardwork",
             menuSize: 0
 
         };
+
+        db.collection("FoodCollection").doc(id).collection("food").get().then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+            console.log(data);
+            this.setState( {menuSize: data.length} );
+            this.setRetrieveHelperFunction(data[2]);
+        })
 
     }
 
@@ -61,13 +68,7 @@ class SellersPage extends Component {
     render() {
 
         const { cards } = this.state;
-
-        db.collection("FoodCollection").doc(id).collection("food").get().then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-            this.setState( {menuSize: data.length} );
-            this.setRetrieveHelperFunction(data[2]);
-        })
-
+        
         return ( 
             <div class = "center">
                 <h1>Sindy's Home Kitchen</h1>
