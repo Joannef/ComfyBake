@@ -10,8 +10,12 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import database from '../firebase';
 
 //cc snippet
+
+const db = database.firestore();
+const id = "user2@gmail.com";
 
 class SellersPage extends Component {
     
@@ -26,7 +30,15 @@ class SellersPage extends Component {
                     price: "",
                     ingredients: ""
                 }
-            ]
+            ],
+            
+            titleLoad: "Sun's out, Gun's out",
+            imageLoad: "https://cdnb.artstation.com/p/assets/images/images/012/597/409/large/sean-raiko-tay-summertessz.jpg?1535570420",
+            bodyLoad: "Summer-themed illustration of my OC Tess Turner",
+            priceLoad: "Priceless",
+            ingredientsLoad: "Hardwork",
+            menuSize: 0
+
         };
 
     }
@@ -39,10 +51,22 @@ class SellersPage extends Component {
         this.setState({ cards })
     }
 
+    setRetrieveHelperFunction(data){
+        this.setState( {titleLoad: data.Foodname} );
+        this.setState( {imageLoad: data.ImageUrl} );
+        this.setState( {bodyLoad: data.Body} );
+    }
+
 
     render() {
 
         const { cards } = this.state;
+
+        db.collection("FoodCollection").doc(id).collection("food").get().then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+            this.setState( {menuSize: data.length} );
+            this.setRetrieveHelperFunction(data[2]);
+        })
 
         return ( 
             <div class = "center">
@@ -53,33 +77,27 @@ class SellersPage extends Component {
 
                     <CardDeck>
                         
-                        <Card>
-                            <Card.Img variant="top" src = {eggTart} alt = "Portugese Egg Tarts" />
-                            <Card.Body>
-                            <Card.Title>Portugese Egg Tarts</Card.Title>
-                            <Card.Text>
-                                Portuguese egg tart: its crisp, flaky crust holding a creamy custard 
-                                center, blistered on top from the high heat of an oven.
-                            </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                            <p>$2.00</p>
-                            <small className="text-muted">Eggs | Milk</small>
-                            </Card.Footer>
-                        </Card>
+                        <CustomCards 
+                                
+                                title = {this.state.titleLoad}
+                                imageURL = {this.state.imageLoad}
+                                body = {this.state.bodyLoad}
+                                price = {this.state.priceLoad}
+                                ingredients = {this.state.ingredientsLoad}
+
+                            />
 
                         <Card>
-                            <Card.Img variant="top" src = "https://images.kitchenstories.io/recipeImages/RP10_30_08_MoltenChocoladeCupcakeWithRaspberryFilling_TitlePictureNEW/RP10_30_08_MoltenChocoladeCupcakeWithRaspberryFilling_TitlePictureNEW-medium-landscape-150.jpg" />
+                            <Card.Img variant="top" src = {this.state.imageLoad} />
                             <Card.Body>
-                            <Card.Title>Raspberry Molten Chocolate Lava Cakes</Card.Title>
+                            <Card.Title>{this.state.titleLoad}</Card.Title>
                             <Card.Text>
-                                Its crisp, flaky crust holding a creamy custard 
-                                center, blistered on top from the high heat of an oven.
+                                {this.state.bodyLoad}
                             </Card.Text>
                             </Card.Body>
                             <Card.Footer>
                             <p>$3.00</p>
-                            <small className="text-muted">Coco | Milk | Rasberry </small>
+                            <small className="text-muted">Peanut | Milk | Cocoa </small>
                             </Card.Footer>
                         </Card>
 
