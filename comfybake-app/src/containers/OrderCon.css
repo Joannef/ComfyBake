@@ -1,0 +1,28 @@
+.right_button {
+    position:absolute;
+    top: 10%;
+    left: 94%;
+    text-decoration:underline;
+  }
+.checkout {
+    color: black;
+    position: absolute;
+    top: 20%;
+    margin-left: 20%;
+    font-size: xx-large;
+  }
+  .top-left {
+    position: absolute;
+    top: 30%;
+    margin-left: -5%;
+  }
+  .none {
+    position: absolute;
+    top: 60%;
+    right: 35%
+  }
+  .bottom-left {
+    position: absolute;
+    top: 60%;
+    margin-left: -5%;
+  }

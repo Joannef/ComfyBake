@@ -1,0 +1,21 @@
+.products {
+    font-size: small;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.cart,button {
+    width: 50%;
+}
+
+.products img {
+    width: 50%;
+    height: 50%;
+}
+
+.cart-title {
+    color: rgba(0, 162, 255, 0.877);
+}
+.checkoutBtn:hover {
+        background-color: rgba(0, 162, 255, 0.877);
+        color: black;
+}
