@@ -7,7 +7,6 @@ import "./OrderCon.css";
 const Email = "joannefung120@gmail.com"; //should be authenticated by logged-in user dummy user fir now
 
 function OrderBlock(order) {
-    //dummy values for the time being
     const img = order.image;
     const description = order.description;
     const qty = order.qty;
