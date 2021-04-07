@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import database from '../firebase';
 import "./OrderCon.css";
 
-const Email = "1231231asdad@gmail.com"; //should be authenticated by logged-in user dummy user fir now
+const Email = "joannefung120@gmail.com"; //should be authenticated by logged-in user dummy user fir now
+const docID = "x4MpFhL5cQWF12gSlcWS"; //^^^
 
 function OrderBlock(props) {
     /*const img = props.val().img;
@@ -27,7 +28,7 @@ function OrderBlock(props) {
     const id = "eqr"
     const addy = "eqr"
     const pay_plan = "eqr"
-    const status = "eqr"
+    const complete = "eqr"
 
     return (
     <div>
@@ -48,7 +49,7 @@ function OrderBlock(props) {
                     <Link to={{ pathname: "/orders/order-details", state: {
                                                                         id: id,
                                                                         addy: addy,
-                                                                        status: status,
+                                                                        complete: complete,
                                                                         plan: pay_plan,
                                                                         price: price}
                             }}> 
@@ -62,9 +63,10 @@ function OrderBlock(props) {
 //
 export default function OrderCon() {
     const [orderList, setOrderList] = useState([]);
-    const orders = database.firestore().collection("users").get().then(//.doc(`${Email}`).collection("Orders").where('status', '==', 'complete');
+    const orders = database.firestore().collection(`/users/${Email}/orders`).where('complete', '==', true).get().then(
     (querySnapshot => (
-        setOrderList(querySnapshot.docs.map(doc=> doc.data()))
+        //setOrderList(querySnapshot.docs.map(doc=> doc.data()))
+        console.log(querySnapshot.docs[0].data()) //only returns fields of collection
     )));
 
     return(
