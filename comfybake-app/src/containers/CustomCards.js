@@ -22,7 +22,7 @@ function CustomCards(props) {
     const [ingredients, setIngredients] = useState(props.ingredients)
     const [ingredientsValue, setIngredientsValue] = useState("Sample Ingredients")
 
-    const [showInput, setInputState] = useState(true)
+    const [showInput, setInputState] = useState(false)
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
