@@ -1,14 +1,17 @@
 import database from '../firebase';
 import "./OrderDetails.css";
+import {useLocation} from 'react-router-dom';
 
-export default function OrderDetails(props) {
-    const id = props.location.state.id;
-    const addy = props.location.state.addy;
-    const status = props.location.state.status;
-    const plan = props.location.state.plan;
-    const price = props.location.state.price;
+export default function OrderDetails() {
+    let location = useLocation();
+    const id = location.state.id
+    const addy = location.state.addy;
+    const status = location.state.complete;
+    const plan = location.state.plan;
+    const price = location.state.price;
     var subtotal = price*0.85;
     var tax = price - subtotal;
+    
     return (
         <div class="big-rect">
             <k class="top-p"> Order Details</k>
