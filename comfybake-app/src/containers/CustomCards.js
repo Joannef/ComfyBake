@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,7 +32,7 @@ function CustomCards(props) {
 
     function save(event) {
         event.preventDefault();
-        //uplad image to firebase
+        //upload image to firebase
         const uploadTask = storage.ref(id+"/"+ image.name).put(image);
         var imageURL_ = "";
         //read image_url from firebase
@@ -123,6 +123,10 @@ function CustomCards(props) {
         //create a function that can delete card chosen card from {cards}
         return
     }
+
+    useEffect(() => {
+        
+    })
 
 
     if(showInput) {
