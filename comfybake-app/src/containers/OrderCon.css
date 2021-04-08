@@ -28,7 +28,7 @@
     top: 60%;
     margin-left: -5%;
   }
-  p.purchase-date {
-      position:absolute;
-      top: 40%;
+  .order-tower {
+      position: absolute;
+      margin-left: 10%;
   }
