@@ -15,7 +15,6 @@ function OrderBlock(xqty,ximg,xdes,xavail,xprice,xdate,xID,xaddy) {
     let addy = xaddy
     let img = ximg
     let des = xdes;
-    console.log(addy);
     return (
     <div>
       <p class="purchase-date"> Purchased on {date} </p>
@@ -71,7 +70,6 @@ export default function OrderCon() {
         //setDList(querySnapshot.docs.map(doc=>doc.get("description"))).map(doc=>orderD.concat(doc))
         setOrderAddy(querySnapshot.docs.map(doc=> doc.get("addy")))
         setOrderList(querySnapshot.docs.map(doc=> doc.data()))
-        //you have to set all the variables in side this loop bc it wont work otherwise
         //do css for the page
         //FINITIO
     }));
@@ -79,23 +77,23 @@ export default function OrderCon() {
         <section>
             <div class="right_button">
                 <Link to="/orders/cart">View Cart</Link>
-            </div>
-            <p class="top-left">Ready To Checkout?</p>
-            <div>
-                {orderList.length != 0 ? (
-                    <div class="order-tower"> qelp
-                        {orderList.forEach((o) => (
+                <p className="top-left">Ready To Checkout?</p>
+                <div>
+                {orderList.length > 0 ? (
+                    <div class="order-tower">
+                        {orderList.forEach((o) => 
                             <OrderBlock o={{xqty:`${orderQty}`, ximg:`${orderImg}`, xdes:`${orderD}`, 
                                             xavail:`${orderAvail}`, xprice:`${orderPrice}`, 
                                             xdate:`${orderDate}`, xID:`${orderID}`, xaddy:`${orderAddy}`}}
                             />
-                        ))}
+                        )}
                     </div>
                     ):(
                     <div>
                         <p class="none">Unfourtunately, your cart is empty. Please make a selection on the homepage first!</p>
                     </div>
-                )} 
+                )}
+                </div>
             </div>
         </section>
     )
