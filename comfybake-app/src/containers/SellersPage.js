@@ -13,8 +13,7 @@ import database from '../firebase';
 
 function Sellers() {
 
-    const [cards, setCards] = useState([]);
-    const [myArray, setMyArray] = useState([]);
+    const [firestoreArray, setFirestoreArray] = useState([]);
 
     const db = database.firestore();
     const id = "user2@gmail.com";
@@ -24,7 +23,7 @@ function Sellers() {
         db.collection("FoodCollection").doc(id).collection("food").get().then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
             console.log(data);
-            setMyArray(data);
+            setFirestoreArray(data);
         })
 
     }, [])
@@ -40,7 +39,7 @@ function Sellers() {
 
                 <CardDeck>
 
-                    {myArray.map(each => 
+                    {firestoreArray.map(each => 
                         // console.log(each.Foodname, each.Ingredients, each.Price)
                         //<div key={each.Foodname}>
                             /* <h1 style={{top: "100px"}}>{each.Foodname}</h1>
@@ -50,11 +49,11 @@ function Sellers() {
 
                             <CustomCards key={each.Foodname}
                                                                 
-                            title= {each.Foodname}
-                            imageURL= {each.ImageUrl}
-                            body= {each.Body}
-                            price= {each.Price}
-                            ingredients= {each.Ingredients}
+                                title= {each.Foodname}
+                                imageURL= {each.ImageUrl}
+                                body= {each.Body}
+                                price= {each.Price}
+                                ingredients= {each.Ingredients}
 
                             />
 
@@ -62,6 +61,8 @@ function Sellers() {
                     )}
 
                 </CardDeck>
+
+                <br></br>
 
                 <CardDeck>
 
@@ -110,13 +111,17 @@ function Sellers() {
 
                 </CardDeck>
 
+                <br></br>
+                <h5>Add Menu Item</h5>
+
                 <CardDeck>
+                    
 
                     <CustomCards 
                     
                         title= 'Add New Item'
                         imageURL='https://static01.nyt.com/images/2017/12/13/dining/15COOKING-CREME-BRULEE1/15COOKING-CREME-BRULEE1-articleLarge.jpg'
-                        body='Type new body'
+                        body='Enter new menu item description here. After press save and refresh the page to see it appear on your menu.'
                         price="Enter new item price"
                         ingredients= "Enter new item ingredients"
 

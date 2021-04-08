@@ -4,7 +4,6 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import SellersPage from "./containers/sellersPage.jsx";
 import Sellers from "./containers/SellersPage.js"
 import OrderCon from "./containers/OrderCon";
 import ViewCart from "./containers/ViewCart";
@@ -31,10 +30,8 @@ export default function Routes() {
       <Route exact path="/orders/cart">
         <ViewCart />
       </Route>
-      
-      <Route path="/seller" exact component={() => <SellersPage/>} />
 
-      <Route exact path="/sellerFunctional">
+      <Route exact path="/seller">
         <Sellers />
       </Route>
 
