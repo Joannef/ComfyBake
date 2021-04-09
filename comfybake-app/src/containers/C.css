@@ -16,6 +16,7 @@
     color: rgba(0, 162, 255, 0.877);
 }
 
+
 .item {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -28,4 +29,8 @@
     min-width: 100%;
     min-height: 60%;
     max-width: 100%;
+}
+.checkoutBtn:hover {
+        background-color: rgba(0, 162, 255, 0.877);
+        color: black;
 }

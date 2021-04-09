@@ -18,3 +18,4 @@ const projectFirestore = firebase.firestore();
 
 export default database;
 export {db, projectFirestore};
+
