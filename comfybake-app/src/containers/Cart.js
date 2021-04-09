@@ -8,8 +8,6 @@ import Products from './product';
 
 const PAGE_PRODUCTS = 'products';
 
-const PAGE_CART = 'cart';
-
 const db = database.firestore();
 const storage = database.storage();
 
