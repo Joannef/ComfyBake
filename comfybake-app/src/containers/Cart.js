@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import db from '../firebase'
+import React, { useState, useEffect } from 'react';
+import database from '../firebase';
 import './C.css';
+
+
 import Products from './product';
 
 
 const PAGE_PRODUCTS = 'products';
-const PAGE_CART = 'cart'
+const PAGE_CART = 'cart';
+
+const db = database.firestore();
+const storage = database.storage();
 
 function Cart(){
     const [cart, setCart] = useState([]);
@@ -24,7 +29,6 @@ function Cart(){
     const removeFromCart = (productToRemove) => {
         setCart(cart.filter((product) => product !== productToRemove))
     }
-
 
 
     const renderCart = () => (
@@ -48,10 +52,11 @@ function Cart(){
         <div className="cart">
         <header>
             <button onClick={() => navigateTo(PAGE_CART)}> Go to Cart ({cart.length})</button>
+            <br/><br/><br/><br/>
         </header>
-        
         {page === PAGE_PRODUCTS && <Products addToCart={addToCart}/>}
         {page === PAGE_CART && renderCart()}
+        
         </div>
     )
 };

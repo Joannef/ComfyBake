@@ -5,11 +5,13 @@ import CardDeck from 'react-bootstrap/CardDeck'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Home.css";
 import Cart from "./Cart"
+import Display from "./displayGrid";
 
 export default function Home() {
   return (
     <div className="Home">
       <Cart />
+      <Display />
       <div className="lander">
         <h1>ComfyBake</h1>
       </div>

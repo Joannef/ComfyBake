@@ -1,10 +1,10 @@
 .products {
     font-size: small;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns:  200px 200px 200px;
 }
 .cart,button {
-    width: 50%;
+    width: 100%;
 }
 
 .products img {
@@ -14,4 +14,18 @@
 
 .cart-title {
     color: rgba(0, 162, 255, 0.877);
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px;
+}
+.item-button{
+    width: 50%;
+}
+.item img {
+    min-width: 100%;
+    min-height: 60%;
+    max-width: 100%;
 }
