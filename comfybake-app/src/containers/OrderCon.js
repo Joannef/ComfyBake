@@ -6,55 +6,10 @@ import "./OrderCon.css";
 
 const Email = "joannefung120@gmail.com"; //should be authenticated by logged-in user dummy user fir now
 
-function OrderBlock(xqty,ximg,xdes,xavail,xprice,xdate,xID,xaddy) {
-    let qty = xqty
-    let avail = xavail
-    let price = xprice
-    let date = xdate
-    let ID = xID
-    let addy = xaddy
-    let img = ximg
-    let des = xdes;
-    return (
-    <div>
-      <p class="purchase-date"> Purchased on {date} </p>
-      {/*<div class="rectangle"/>*/}
-      <div class="qty"> {qty}</div>
-      <div class="status"> Complete</div>
-      {/* I have to make a function to display the images correctly
-      <div class="img">{img}</div>
-      */}
-      {/* I have to make a function to display the images correctly
-      <div class="description">{description}</div>*/}
-      <div class="qty">{qty}</div>
-      <div class="avail">{avail}</div>
-      <div class="price">{price}</div>
-      <div class="order-details">
-                <p class="ID"> {ID} </p>
-                <p class="total"> Total</p>
-                <p class="price">{price}</p>
-                <div class="detail-btn">
-                    <Link to={{ pathname: "/orders/order-details", state: {
-                                                                        id: ID,
-                                                                        addy: addy,
-                                                                        complete: "True",
-                                                                        plan: "how do you intend to pay",
-                                                                        price: price}
-                            }}> 
-                            See Order Details
-                    </Link>
-                </div>
-            </div>
-    </div>
-    );
-  }
-
 export default function OrderCon() {
-    const [orderList, setOrderList] = useState([]);
     const [orderQty, setOrderQty] = useState([]);
     const [orderImg, setImgList] = useState([]);
     const [orderD, setDList] = useState([]);
-    const [orderAvail, setAvailList] = useState([]);
     const [orderPrice, setOrderPrice] = useState([]);
     const [orderDate, setOrderDate] = useState([]);
     const [orderID, setOrderID] = useState([]);
@@ -62,37 +17,73 @@ export default function OrderCon() {
     const orders = database.firestore().collection(`/users/${Email}/orders`).where('complete', '==', true).get().then(
     (querySnapshot => {
         setOrderQty(querySnapshot.docs.map(doc=> doc.get("qty")))
-        setAvailList(querySnapshot.docs.map(doc=> doc.get("avail")))
-        setOrderPrice(querySnapshot.docs.map(doc=> doc.get("qty")))
+        setOrderPrice(querySnapshot.docs.map(doc=> doc.get("price")))
         setOrderID(querySnapshot.docs.map(doc=> doc.id))
         setOrderDate(querySnapshot.docs.map(doc=> doc.get("date")))
         //setImgList(querySnapshot.docs.map(doc=>doc.get("img"))).map(doc=>orderImg.concat(doc))
         //setDList(querySnapshot.docs.map(doc=>doc.get("description"))).map(doc=>orderD.concat(doc))
         setOrderAddy(querySnapshot.docs.map(doc=> doc.get("addy")))
-        setOrderList(querySnapshot.docs.map(doc=> doc.data()))
         //do css for the page
         //FINITIO
     }));
+
+    function OrderBlock(props) {
+        let qty = props.xqty;
+        let price = props.xprice;
+        let date = props.xdate;
+        let ID = props.xID;
+        let addy = props.xaddy;
+        let img = props.ximg;
+        let des = props.xdes;
+        return (
+        <div class="order">
+            <p class="text"> Purchased on {date} </p>
+            <p class="text"> Quantity: {qty}</p>
+            <p class="text"> Order Status: Completed</p>
+            {/* I have to make a function to display the images correctly
+            <div class="img">{img}</div>
+            */}
+            {/* I have to make a function to display the images correctly
+            <div class="description">{description}</div>*/}
+            <p class="text">Price: {price}</p>
+            <div class="order-details">
+                        <p class="text"> Order #: {ID} </p>
+                        <p class="bold">Total: {price}</p>
+                        <div class="detail-btn">
+                           {/*} <Link to={{ pathname: "/orders/order-details", state: {
+                                                                                id: ID,
+                                                                                addy: addy,
+                                                                                complete: "True",
+                                                                                plan: "how do you intend to pay",
+                                                                                price: price}
+                                    }}> 
+                                    See Order Details
+                                </Link>*/}
+                        </div>
+                    </div>
+        </div>
+        );
+      }
+    
     return(
         <section>
-            <div class="right_button">
-                <Link to="/orders/cart">View Cart</Link>
-                <p className="top-left">Ready To Checkout?</p>
-                <div>
-                {orderList.length > 0 ? (
+            <div class="order-page">
+                <Link class="cart-link" to="/orders/cart">View Cart</Link>
+                <p class="check-out">Ready To Checkout?</p>
+                <div class="feedback">
+                    {orderQty.length != 0 ? (
                     <div class="order-tower">
-                        {orderList.forEach((o) => 
-                            <OrderBlock o={{xqty:`${orderQty}`, ximg:`${orderImg}`, xdes:`${orderD}`, 
-                                            xavail:`${orderAvail}`, xprice:`${orderPrice}`, 
-                                            xdate:`${orderDate}`, xID:`${orderID}`, xaddy:`${orderAddy}`}}
-                            />
-                        )}
+                        {orderQty.map(o => {
+                            return <OrderBlock  xqty={orderQty}   xID={orderID} xaddy={orderAddy} 
+                                                xdate={orderDate} xprice={orderPrice} 
+                                                xdes={orderD}     ximg={orderImg}/>
+                        })}
                     </div>
                     ):(
                     <div>
                         <p class="none">Unfourtunately, your cart is empty. Please make a selection on the homepage first!</p>
                     </div>
-                )}
+                    )}
                 </div>
             </div>
         </section>
