@@ -16,7 +16,7 @@ function CustomCards(props) {
     const [body, setBody] = useState(props.body)
     const [bodyValue, setBodyValue] = useState("Sample Body")
     
-    const [price, setPrice] = useState(props.price)
+    const [price, setPrice] = useState('$' + props.price)
     const [priceValue, setPriceValue] = useState("Sample Price")
     
     const [ingredients, setIngredients] = useState(props.ingredients)
@@ -79,7 +79,7 @@ function CustomCards(props) {
             setIngredients(ingredientsValue)
 
             setInputState(false)
-        }, 1000);
+        }, 2000);
 
     }
  
