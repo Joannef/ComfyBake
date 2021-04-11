@@ -3,11 +3,11 @@ import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import eggTart from './portuguese-egg-custard-tarts.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css'
-// import firebase from './firebase.js';
+import database from '../firebase';
 import "./Home.css";
 //import Cart from "./Cart"
 
-export default function Home() {
+function Home() {
   return (
     <div className="Home">
       {/*<Cart />*/}
@@ -58,8 +58,9 @@ export default function Home() {
             </Card.Footer>
           </Card>
         </CardDeck>
-        {/* <CardComponent /> */}
       </div>
     </div>
   );
 }
+
+export default Home

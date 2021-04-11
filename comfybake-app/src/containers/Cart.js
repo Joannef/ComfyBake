@@ -94,7 +94,7 @@ function Cart(){
     return(
         <div className="cart">
         <header>
-            <button onClick={() => navigateTo(PAGE_CART)}> Go to Cart ({cart.length})</button>
+            <button className="cart-button" onClick={() => navigateTo(PAGE_CART)}> Go to Cart ({cart.length})</button>
         </header>
         
         {page === PAGE_PRODUCTS && <Products addToCart={addToCart}/>}

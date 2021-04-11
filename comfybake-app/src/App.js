@@ -3,7 +3,6 @@ import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap";
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
@@ -12,13 +11,14 @@ import './App.css';
 
 function App() {
   return (
-    <Container>
-      <Navbar fixed="top" bg="light" variant="light">
+    <>
+      <Navbar collapseOnSelect fixed="top" bg="light" variant="light" expand="md">
         <LinkContainer to="/">
           <Navbar.Brand>ComfyBake</Navbar.Brand>
         </LinkContainer>
-        <Navbar.Collapse className="justify-content-center">
-          <Nav activeKey={window.location.pathname}>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto" activeKey={window.location.pathname}>
             <LinkContainer to="/">
               <Nav.Link >Home</Nav.Link>
             </LinkContainer>
@@ -42,7 +42,7 @@ function App() {
         </Form>
       </Navbar>
       <Routes />
-    </Container>
+    </>
   );
 }
 
