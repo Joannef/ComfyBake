@@ -58,7 +58,7 @@ export default function Home() {
             </Card.Footer>
           </Card>
         </CardDeck>
-        <CardComponent />
+        {/* <CardComponent /> */}
       </div>
     </div>
   );
