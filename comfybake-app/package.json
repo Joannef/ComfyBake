@@ -6,15 +6,24 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
+<<<<<<< HEAD
     "bootstrap": "^4.6.0",
     "firebase": "^8.3.0",
     "react": "^17.0.1",
+=======
+    "bootstrap": "^3.4.1",
+    "border": "0.0.13",
+    "firebase": "^8.2.10",
+    "react": "^17.0.2",
+>>>>>>> 5758bc9f705fe49ecc73a6fdf8c27c8813414a80
     "react-bootstrap": "^1.5.0",
+    "react-border-wrapper": "^1.0.3",
     "react-dom": "^17.0.1",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.0"
+    "web-vitals": "^1.1.0",
+    "wrapper": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -5,11 +5,12 @@ import eggTart from './portuguese-egg-custard-tarts.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import firebase from './firebase.js';
 import "./Home.css";
-import CardComponent from "./CardComponent"
+//import Cart from "./Cart"
 
 export default function Home() {
   return (
     <div className="Home">
+      {/*<Cart />*/}
       <div className="lander">
         <h1>ComfyBake</h1>
       </div>

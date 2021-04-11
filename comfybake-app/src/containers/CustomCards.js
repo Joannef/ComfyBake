@@ -26,14 +26,15 @@ function CustomCards(props) {
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user1@gmail.com";
+    const id = "user2@gmail.com";
     const FoodCollection = database.firestore().collection("FoodCollection");
 
-    function save (event) {
+
+    function save(event) {
         event.preventDefault();
         //uplad image to firebase
         const uploadTask = storage.ref(id+"/"+ image.name).put(image);
-
+        var imageURL_ = "";
         //read image_url from firebase
         uploadTask.on(
             "state_changed",
@@ -44,34 +45,44 @@ function CustomCards(props) {
             ()=>{
                 storage.ref(id).child(image.name).getDownloadURL()
                 .then(url=>{
-                    setImageURL(url);
+                    //setImageURL(url);
+                    imageURL_ = url;
+                    //alert(url);
+                    //alert(imageURL);
+                    //alert(imageURL_);
                 })
             }
         )
+        
+        
+        setTimeout(() => {
+            //alert(imageURL_); 
+            FoodCollection.doc(id).collection("food").doc(titleValue).set({
+                Foodname: titleValue,
+                ImageUrl: imageURL_,
+                Body: bodyValue,
+                Price: priceValue,
+                Ingredients: ingredientsValue,
+            }).then(()=>{
+                console.log("Information have been sent");
+                //alert("Information have been sent");
+            }).catch((err)=>{
+                alert(err.message);
+            });   
 
-        //save data to firebase
-        FoodCollection.doc(id).collection("food").doc(titleValue).set({
-            Foodname: titleValue,
-            ImageUrl: imageURL,
-            Body: bodyValue,
-            Price: priceValue,
-            Ingredients: ingredientsValue,
-        }).then(()=>{
-            console.log("Information have been sent")
-        }).catch((err)=>{
-            alert(err.message);
-        });
+            setTitles(titleValue)
+            //setImage(imageURLValue)
+            //alert(imageURL_);
+            setImageURL(imageURL_)
+            setBody(bodyValue)
+            setPrice("$ "+priceValue)
+            setIngredients(ingredientsValue)
 
-        setTitles(titleValue)
-        //setImage(imageURLValue)
-        setImage(imageURL)
-        setBody(bodyValue)
-        setPrice("$ "+priceValue)
-        setIngredients(ingredientsValue)
+            setInputState(false)
+        }, 1000);
 
-        setInputState(false)
     }
-
+ 
     function edit () {
         setInputState(true)
     }
@@ -90,6 +101,7 @@ function CustomCards(props) {
         console.log(imageURLValue)
     }*/
     function updateImageURLValue (event){
+        event.preventDefault();
         if (event.target.files[0]){
             setImage(event.target.files[0]);
         }

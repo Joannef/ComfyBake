@@ -4,7 +4,10 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import SellersPage from "./containers/sellersPage.jsx";
+import SellersPage from "./containers/sellersPage";
+import OrderCon from "./containers/OrderCon";
+import Cart from "./containers/Cart";
+import OrderDetail from "./containers/OrderDetails";
 
 export default function Routes() {
   return (
@@ -19,6 +22,18 @@ export default function Routes() {
 
       <Route exact path="/signup">
         <Signup />
+      </Route>
+
+      <Route exact path="/orders">
+        <OrderCon />
+      </Route>
+
+      <Route exact path="/orders/cart">
+        <Cart />
+      </Route>
+
+      <Route exact path="/orders/order-details">
+        <OrderDetail />
       </Route>
       
       <Route path="/seller" exact component={() => <SellersPage />} />

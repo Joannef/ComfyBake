@@ -1,0 +1,46 @@
+/* page set up */
+.order-page {
+  padding-top: 10%;
+  width: 1100px;
+  height: 500px;
+}
+.cart-link {
+  position:relative;
+  margin-left: 90%;
+}
+.check-out {
+  position:relative;
+  font-weight: bold;
+  font-size: x-large;
+  text-align: center;
+}
+
+/* order block set up */
+.order-tower {
+  background-color: lightgray;
+  border-radius: 25px;
+  width: 1100px;
+  height: 1000px;
+  padding-top: 600px;
+}
+.order {
+  position:absolute;
+  top: 30%;
+  margin-left: 50px;
+  width: 1100px
+}
+
+/*individual order set up*/
+.text {
+  position: relative;
+}
+.bold {
+  font-weight: bold;
+}
+
+/* empty cart style */
+.none {
+  position: absolute;
+  top: 60%;
+  right: 30%
+}
