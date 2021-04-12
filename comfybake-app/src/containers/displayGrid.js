@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import database from '../firebase';
 import './C.css';
+import { addToCart } from './Cart'
 
 const db = database.firestore();
 const storage = database.storage();
 
 
-class Display extends React.Component {
+class Display extends React.Component{
     //state array
     state = {
         arr: null
@@ -32,8 +33,13 @@ class Display extends React.Component {
     }
     //-------------------------collecting data from firestore ----------------------------//
     
+    handleClick =(arr) =>{
+        this.props.addToCart(arr);
+    }
+
 
     render(){
+    
         return(
             <div className='item'>
                 {
@@ -42,17 +48,16 @@ class Display extends React.Component {
                     this.state.arr.map( arr => {
                         return(
                             <div className="img-wrap">
-                                <img src={arr.ImageUrl } alt="uploaded pic"/>
+                                <img src={arr.ImageUrl } alt={arr.Foodname}/>
                                 <p>{arr.Foodname}</p>
                                 
                                 <p>${arr.Price}</p>
-                                
-                                <button  >Add to cart</button>
+                                <button onClick={()=>{ this.handleClick(arr)} }>Add to cart</button>
                             </div>
                         )
                     })
                 }
-                <br/><br/>
+                <br/><br/> 
             </div>
         )
     }

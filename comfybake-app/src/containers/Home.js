@@ -6,15 +6,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Home.css";
 import Cart from "./Cart"
 import Display from "./displayGrid";
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 export default function Home() {
   return (
     <div className="Home">
-
+      
       <Cart />
-      <Display />
+      <br/><br/>
+      
 
       <div className="lander">
         <h1>ComfyBake</h1>

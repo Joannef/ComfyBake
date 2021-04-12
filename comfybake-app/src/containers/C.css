@@ -1,15 +1,18 @@
 .products {
     font-size: small;
     display: grid;
-    grid-template-columns:  200px 200px 200px;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr;
+    
+
 }
-.cart,button {
+.cart {
     width: 100%;
 }
 
 .products img {
     width: 50%;
     height: 50%;
+
 }
 
 .cart-title {

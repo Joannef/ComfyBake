@@ -29,14 +29,14 @@ const Product = ({ addToCart }) => {
     return (
         <div>
             {/* <h1>Product</h1> */}
-            {/* <Display/> */}
+            {/* <Display /> */}
             <div className="products">
                 {products.map((product, index) => (
                 <div className="product" key={index}>
                     <img src={product.image}/>
                     <h3>{product.name}</h3>
                     <h4>{product.cost}</h4>
-                    <button onClick={() => addToCart(product)}> Add to cart</button>
+                    <button onClick={() => addToCart(product)}> Add </button>
                     <br/>
                 </div>
             ))}
