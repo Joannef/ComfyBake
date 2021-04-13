@@ -1,3 +1,17 @@
+# ComfyBake
+
+Capstone Project
+
+Commit Name: Steven
+
+Commit Name: Cisco
+
+Commit Name: Zhenying
+
+Commit Name: Joanne
+
+Commit Name: Mohammad
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
