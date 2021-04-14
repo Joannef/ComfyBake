@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import db from '../firebase'
-import './C.css';
-import Products from './product';
+import React, { useState, useEffect } from 'react';
+import database from '../firebase';
+import './Cart.css';
+import Products from './Product';
 
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Display from './DisplayGrid';
 
 const PAGE_PRODUCTS = 'products';
+
+const db = database.firestore();
+const storage = database.storage();
+
 const PAGE_CART = 'cart'
 const senderEmail = "cbakeTeam@gmail.com"
 const templateId = "template_j303hv9"
 const Email = "franciscor343@gmail.com"
 const FirstName = "franciscor343@gmail.com"
 const LastName = "franciscor343@gmail.com"
+
 
 
 function Cart(){
@@ -71,34 +78,44 @@ function Cart(){
       }
 
 
-
-
+// render everything that has been added to the cart
     const renderCart = () => (
-        <div>
-            <button className="cartButton" onClick={() => navigateTo(PAGE_PRODUCTS)}> Back to home </button>
+        <div className='back_home_btn'>
+            <button onClick={() => navigateTo(PAGE_PRODUCTS)}> Back to home </button>
+            
             <h2 className="cart-title">This is your cart</h2>
             <div className="products">
-                {cart.map((product, index) => (
-                <div className="product" key={index}>
-                <img src={product.image}/>
-                    <h3>{product.name}</h3>
-                    <h4>{product.cost}</h4>
+                {cart.map((product) => (
+                <div className="product" >
+                    
+                    <img src={product.ImageUrl}/>
+                    <h3>{product.Foodname}</h3>
+                    <h4>${product.Price}</h4>
+                    
                     <button onClick={() => removeFromCart(product)}> Remove </button>
+                
                 </div>
             ))}
             </div>
+            <br/> <br/> <br/>
             <button className="checkoutBtn" onclick={handleSumbit}>Checkout</button>
         </div>
     );
 
     return(
         <div className="cart">
+        {/* <Link onClick={() => navigateTo(PAGE_CART)} className="cart-link" to="/orders/cart">View Cart 🛒 ({cart.length})</Link> */}
+        <br/><br/><br/><br/>
         <header>
-            <button className="cartButton" onClick={() => navigateTo(PAGE_CART)}> Go to Cart ({cart.length})</button>
+            {/* <button onClick={() => navigateTo(PAGE_CART)}>Cart holder ({cart.length})</button> */}
+            <Link onClick={() => navigateTo(PAGE_CART)} className="cart-link" to="/orders/cart">View Cart 🛒 ({cart.length})</Link>
+            {/* <button onClick={() => navigateTo(PAGE_CART)}> Go to Cart ({cart.length})</button> */}
+            <br/><br/><br/><br/>
         </header>
-        
-        {page === PAGE_PRODUCTS && <Products addToCart={addToCart}/>}
+        {/* {page === PAGE_PRODUCTS && <Products addToCart={addToCart}/>} */}
+        {page === PAGE_PRODUCTS && <Display addToCart={addToCart}/>}
         {page === PAGE_CART && renderCart()}
+        
         </div>
     )
 };

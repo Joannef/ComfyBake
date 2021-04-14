@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import database from '../firebase';
 import "./Home.css";
 import LoadCards from './LoadCards'
-//import Cart from "./Cart"
+// import Cart from "./Cart"
 
 function Home() {
   const [firestoreArray, setFirestoreArray] = useState([]);
@@ -24,7 +24,7 @@ function Home() {
 
   return (
     <div className="Home">
-      {/*<Cart />*/}
+      {/* <Cart /> */}
       <div className="lander">
         <h1>ComfyBake</h1>
       </div>

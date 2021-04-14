@@ -1,5 +1,11 @@
-import React, { useState } from 'react'
-import './C.css';
+import React, { useState, useEffect } from 'react'
+import './Cart.css';
+import db from "../firebase"
+import Display from "./DisplayGrid";
+//import App from './consume';
+
+
+
 
 const Product = ({ addToCart }) => {
     const [products] = useState([
@@ -14,22 +20,24 @@ const Product = ({ addToCart }) => {
             cost: '$12.99',
             image: "https://dominosugar.com/emshare/views/modules/asset/downloads/originals/2020/09/74014/MuffinsTipsShippingBakedGoods.jpg/MuffinsTipsShippingBakedGoods.jpg"
         },
+        
 
     ]);
-
 
 
 
     return (
         <div>
             {/* <h1>Product</h1> */}
+            {/* <Display /> */}
             <div className="products">
                 {products.map((product, index) => (
                 <div className="product" key={index}>
                     <img src={product.image}/>
                     <h3>{product.name}</h3>
                     <h4>{product.cost}</h4>
-                    <button onClick={() => addToCart(product)}> Add to cart</button>
+                    <button onClick={() => addToCart(product)}> Add </button>
+                    <br/>
                 </div>
             ))}
             </div>

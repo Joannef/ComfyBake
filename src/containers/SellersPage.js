@@ -1,6 +1,6 @@
 //imrc snippet
 import React, {useEffect, useState} from 'react';
-import "./sellerPage.css"
+import "./SellerPage.css"
 import CustomCards from './CustomCards'
 
 import Container from 'react-bootstrap/Container'
