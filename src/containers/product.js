@@ -4,7 +4,7 @@ import db from "../firebase"
 import Display from "./DisplayGrid";
 //import App from './consume';
 
-
+// testing
 
 
 const Product = ({ addToCart }) => {
