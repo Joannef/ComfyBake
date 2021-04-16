@@ -14,7 +14,7 @@ function Home() {
 
   useEffect(() => {
         
-    db.collection("FoodCollection").doc(id).collection("food").get().then(querySnapshot => {
+    db.collectionGroup("food").get().then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
         console.log(data);
         setFirestoreArray(data);
