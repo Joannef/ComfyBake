@@ -10,11 +10,10 @@ function Home() {
   const [firestoreArray, setFirestoreArray] = useState([]);
   
   const db = database.firestore();
-  const id = "user2@gmail.com";
 
   useEffect(() => {
         
-    db.collection("FoodCollection").doc(id).collection("food").get().then(querySnapshot => {
+    db.collectionGroup("food").get().then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
         console.log(data);
         setFirestoreArray(data);
