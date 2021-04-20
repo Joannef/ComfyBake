@@ -1,20 +1,21 @@
-.products {
+/* .products {
     font-size: small;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-}
+} */
 .cart {
     padding-top: 70px;
     width: 100%;
 }
 
-.products img {
+/* .products img {
     width: 50%;
     height: 50%;
-}
+} */
 
 .cart-title {
-    color: rgba(0, 162, 255, 0.877);
+    color: rgba(32, 35, 36, 0.877);
+    text-align: left;
 }
 
 .item {
