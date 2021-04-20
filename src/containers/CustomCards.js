@@ -11,7 +11,6 @@ function CustomCards(props) {
     const [titleValue, setTitleValue] = useState("Sample Title")
     
     const [imageURL, setImageURL] = useState(props.imageURL)
-    const [imageURLValue, setimageURLValue] = useState("http://localhost:3000/static/media/portuguese-egg-custard-tarts.1c7f0846.jpg")
     
     const [body, setBody] = useState(props.body)
     const [bodyValue, setBodyValue] = useState("Sample Body")
@@ -26,7 +25,7 @@ function CustomCards(props) {
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user2@gmail.com";
+    const id = "user2@gmail.com"; //later: id = props.id
     const FoodCollection = database.firestore().collection("FoodCollection");
     const db = database.firestore();
 
@@ -96,11 +95,7 @@ function CustomCards(props) {
         setTitleValue(event.target.value)
         console.log(titleValue)
     }
-    /*
-    function updateImageURLValue (event) {
-        setimageURLValue(event.target.value)
-        console.log(imageURLValue)
-    }*/
+
     function updateImageURLValue (event){
         event.preventDefault();
         if (event.target.files[0]){
@@ -121,15 +116,9 @@ function CustomCards(props) {
     }
 
     function deleteCard () {
-        //create a function that can delete card chosen card from {cards}
         db.collection("FoodCollection").doc(id).collection("food").doc(titles).delete();
         alert("Refresh to complete Delete")
     }
-
-    useEffect(() => {
-        
-    })
-
 
     if(showInput) {
         return (

@@ -53,6 +53,7 @@ function Sellers() {
                                 body= {each.Body}
                                 price= {each.Price}
                                 ingredients= {each.Ingredients}
+                                //id = {id} pass this to CustomCards
 
                             />
 
