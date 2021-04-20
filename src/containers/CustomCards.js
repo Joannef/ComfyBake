@@ -28,6 +28,7 @@ function CustomCards(props) {
     const storage = database.storage();
     const id = "user2@gmail.com";
     const FoodCollection = database.firestore().collection("FoodCollection");
+    const db = database.firestore();
 
 
     function save(event) {
@@ -121,7 +122,8 @@ function CustomCards(props) {
 
     function deleteCard () {
         //create a function that can delete card chosen card from {cards}
-        return
+        db.collection("FoodCollection").doc(id).collection("food").doc(titles).delete();
+        alert("Refresh to complete Delete")
     }
 
     useEffect(() => {
