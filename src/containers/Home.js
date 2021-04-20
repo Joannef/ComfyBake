@@ -10,7 +10,7 @@ function Home() {
   const [firestoreArray, setFirestoreArray] = useState([]);
   
   const db = database.firestore();
-  const id = "user2@gmail.com";
+  // const id = "user2@gmail.com";
 
   useEffect(() => {
         
@@ -47,6 +47,7 @@ function Home() {
             body= {each.Body}
             price= {each.Price}
             ingredients= {each.Ingredients}
+            sellerID = {each.sellerID}
             />
           )}
         </CardColumns>

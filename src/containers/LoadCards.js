@@ -8,6 +8,7 @@ function LoadCards(props) {
     const [body] = useState(props.body)
     const [price] = useState('$' + props.price)
     const [ingredients] = useState(props.ingredients)
+    const [sellerID] = useState(props.SellerID)
     
     return (
         <Card>
@@ -26,6 +27,7 @@ function LoadCards(props) {
 
                 <p>{price}</p>
                 <button>Add to Cart</button>
+                <button>{sellerID}</button>
                 <br></br>
                 <small className="text-muted"> Contains: {ingredients}</small>
                 
