@@ -4,25 +4,54 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Login.css";
+import Display from "./Display";
+import Home from "./Home";
 // import BorderWrapper from 'react-border-wrapper'
 
 const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [account, setaccount] = useState(false);
+    const [AccountID, setAccountID] = useState('');
+    //const [SellerID, setSellerID] = useState('');
 
     const handleLogin =() =>{
         database.auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
+            setAccountID(email);
             setEmail("");
             setPassword("");
             //if email and password is currect, then jump to home page
             setaccount(true);
+
+            /*
+            setTimeout(() => {
+                //alert("AccountID: " + AccountID);
+                setSellerID(AccountID);
+                setEmail("");
+                setPassword("");
+                //if email and password is currect, then jump to home page
+                setaccount(true);
+            }, 1000);  */
         }).catch((err)=>{
             alert(err);
             setaccount(false);
         });
     }
+
+    const authListener = () =>{
+        database.auth().onAuthStateChanged(account => {
+            if (account) {
+                setaccount(account);
+            }else{
+                setaccount(false);
+            }
+        });
+    };
+
+    useEffect(() => {
+        authListener();
+    }, []);
 
     return (
         <section className="login">
@@ -31,14 +60,9 @@ const Login = () =>{
                     <>
                     <br/>
                     <br/>
-                    <div className="transition">
-                        <p className="customP">Press Continue to go to the Home Page</p>
-                        <LinkContainer to="/">   
-                            <Nav.Link>
-                                <button className="customButton">Continue</button><br/>
-                            </Nav.Link>
-                        </LinkContainer>
-                    </div>
+                    <Home 
+                        AccountID = {AccountID}
+                    />
                     </>
                 ):(
                     <>

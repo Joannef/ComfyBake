@@ -24,9 +24,10 @@ function CustomCards(props) {
 
     const [showInput, setInputState] = useState(false)
 
+    const [ID, setID] = useState(props.ID)
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user2@gmail.com";
+    const id =ID; 
     const FoodCollection = database.firestore().collection("FoodCollection");
 
 
@@ -63,6 +64,7 @@ function CustomCards(props) {
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
+                SellerID: id,
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
