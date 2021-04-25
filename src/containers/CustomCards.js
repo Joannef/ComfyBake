@@ -97,11 +97,7 @@ function CustomCards(props) {
         setTitleValue(event.target.value)
         console.log(titleValue)
     }
-    /*
-    function updateImageURLValue (event) {
-        setimageURLValue(event.target.value)
-        console.log(imageURLValue)
-    }*/
+    
     function updateImageURLValue (event){
         event.preventDefault();
         if (event.target.files[0]){
@@ -122,13 +118,8 @@ function CustomCards(props) {
     }
 
     function deleteCard () {
-        //create a function that can delete card chosen card from {cards}
-        return
+        FoodCollection.doc(id).collection("food").doc(titles).delete();
     }
-
-    useEffect(() => {
-        
-    })
 
 
     if(showInput) {
