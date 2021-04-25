@@ -95,7 +95,7 @@ function Sellers(props) {
                         <p>SellerID:{SellerID}</p>
                         <button onClick={handleJumpback}> Home</button>
                         <button onClick={handleReflash}> Reflash</button>
-                        <LinkContainer to="/login">  
+                        <LinkContainer to="/">  
                             <Nav.Link>
                                 <button onClick={handleLogout}>Logout</button><br/>
                             </Nav.Link>
@@ -152,7 +152,7 @@ function Sellers(props) {
                             <p>SellerID:{SellerID}</p>
                             <button onClick={handleJumpback}> Home</button>
                             <button onClick={handleReflash}> Reflash</button>
-                            <LinkContainer to="/login">  
+                            <LinkContainer to="/">  
                                 <Nav.Link>
                                     <button onClick={handleLogout}>Logout</button><br/>
                                 </Nav.Link>

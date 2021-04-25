@@ -39,7 +39,7 @@ function LoadCards(props) {
                 <p>accountID:{accountID}</p>
                 <p>sellerID:{sellerID}</p>
                 <button>Add to Cart</button>
-                <button onClick={jump}>Store1</button>
+                <button onClick={jump}>Store</button>
                 <br></br>
                 <small className="text-muted"> Contains: {ingredients}</small>
                 

@@ -126,7 +126,7 @@ function Home(props) {
           <div className="button">
             <button onClick={handleJump}> MySeller Page</button>
             <button onClick={handleReflash}> Reflash</button>
-            <LinkContainer to="/login">  
+            <LinkContainer to="/">  
               <Nav.Link>
                 <button onClick={handleLogout}>Logout</button><br/>
               </Nav.Link>
