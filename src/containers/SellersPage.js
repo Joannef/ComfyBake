@@ -25,11 +25,19 @@ function Sellers(props) {
 
     const [firestoreArray, setFirestoreArray] = useState([]);
     const db = database.firestore();
-    const id = "user2@gmail.com";
+    //const id = "user2@gmail.com";
+    const id ="";
+    
+    /*
+    if (AccountMatch == true){
+        id = AccountID;
+    }else{
+        id = SellerID;
+    }*/
 
     useEffect(() => {
         
-        db.collection("FoodCollection").doc(AccountID).collection("food").get().then(querySnapshot => {
+        db.collection("FoodCollection").doc(SellerID).collection("food").get().then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
             console.log(data);
             setFirestoreArray(data);
@@ -81,7 +89,7 @@ function Sellers(props) {
                     {AccountMatch?(
                         <>
                         <div class = "center">
-                        <h1>Sindy's Home Kitchen</h1>
+                        <h1>Welcome to your Home Kitchen</h1>
                         <h5>Full Menu</h5>
                         <p>AccountID:{AccountID}</p>
                         <p>SellerID:{SellerID}</p>
@@ -138,20 +146,39 @@ function Sellers(props) {
                     ):(
                         <>
                         <div class = "center">
-                            <br/>
-                            <br/>
+                            <h1>Sindy's Home Kitchen</h1>
+                            <h5>Full Menu</h5>
                             <p>AccountID:{AccountID}</p>
                             <p>SellerID:{SellerID}</p>
-                            <p>AccountID is not match to seller id</p>
-                            <button onClick={handleJumpback}> Display</button>
-                            <br></br>
-                            <br/>
-                                <LinkContainer to="/login">  
-                                    <Nav.Link>
-                                        <button onClick={handleLogout}>Logout</button><br/>
-                                    </Nav.Link>
-                                </LinkContainer>
-                            <br/>
+                            <button onClick={handleJumpback}> Home</button>
+                            <button onClick={handleReflash}> Reflash</button>
+                            <LinkContainer to="/login">  
+                                <Nav.Link>
+                                    <button onClick={handleLogout}>Logout</button><br/>
+                                </Nav.Link>
+                            </LinkContainer>
+                        <br></br>
+
+                        <Container>
+
+                        <CardColumns>
+
+                            {firestoreArray.map(each => 
+                                <CustomCards key={each.Foodname}
+                                                                    
+                                    title= {each.Foodname}
+                                    imageURL= {each.ImageUrl}
+                                    body= {each.Body}
+                                    price= {each.Price}
+                                    ingredients= {each.Ingredients}
+
+                                />
+
+                            //</div>
+                            )}
+
+                        </CardColumns>
+                        </Container>
                         </div>
                         </>
                     )}

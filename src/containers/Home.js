@@ -14,13 +14,38 @@ function Home(props) {
   const [firestoreArray, setFirestoreArray] = useState([]);
   
   const db = database.firestore();
-  ///const id = "user2@gmail.com";
+  const id = "user2@gmail.com";
 
   const {AccountID} = props
   const [SellerID, setSellerID] = useState('');
-  const [AccountMatch, setAccountMatch] = useState('');
   const [jump, setjump] = useState(false);
   const [jumpreflash, setjumpreflash] = useState (false);
+  const [test, setTest] = useState('')
+  const [run, setRun] = useState(true)
+  
+
+  if (AccountID != ""){
+      if (run == true){
+        const time_ = db.collection("users").doc(AccountID).update({
+        jump: false
+      });
+      setRun(false)
+    }
+
+    db.collection("users").doc(AccountID).onSnapshot((doc) =>{
+      if (doc.data().jump == true){
+        setTest("data: true");
+        setSellerID(doc.data().sellerID);
+        setTimeout(() => {
+          setjump(true);
+        }, 500);
+      }else 
+        setTest("data: false")
+    })
+  }
+  
+
+
   useEffect(() => {
         
     db.collectionGroup("food").get().then(querySnapshot => {
@@ -46,7 +71,6 @@ function Home(props) {
   const handleJump =() =>{
       setSellerID(AccountID);
       setTimeout(() => {
-          setAccountMatch(AccountID==SellerID);
           setjump(true);
       }, 500);
   }
@@ -94,6 +118,9 @@ function Home(props) {
           {/* <Cart />*/ }
           <div className="lander">
             <h1>ComfyBake</h1>
+            <p>Test: {test}</p>
+            <p>accountID:{AccountID}</p>
+            <p>sellerID:{SellerID}</p>
           </div>
           
           <div className="button">
@@ -116,7 +143,8 @@ function Home(props) {
                 body= {each.Body}
                 price= {each.Price}
                 ingredients= {each.Ingredients}
-                SellerID = {each.SellerId}
+                sellerID = {each.SellerID}
+                accountID = {AccountID}
                 />
               )}
             </CardColumns>
