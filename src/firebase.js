@@ -4,14 +4,14 @@ import 'firebase/firestore';
 //This is my firebase authentication
 //you can change it to your firebase authentication
 var firebaseApp = {
-    apiKey: "AIzaSyCMcSkWeH_W_m6qlhkys56XWon6Ftm7bQM",
-    authDomain: "teak-passage-234323.firebaseapp.com",
-    databaseURL: "https://teak-passage-234323-default-rtdb.firebaseio.com",
-    projectId: "teak-passage-234323",
-    storageBucket: "teak-passage-234323.appspot.com",
-    messagingSenderId: "884080763321",
-    appId: "1:884080763321:web:cbf06ae9dda251e901d668",
-    measurementId: "G-JEV2S809PV"
+    apiKey: "AIzaSyCUU8fZTwRDsheZKGUwNDKlbMChILuW6Uc",
+    authDomain: "comfybake-d5d50.firebaseapp.com",
+    databaseURL: "https://comfybake-d5d50-default-rtdb.firebaseio.com",
+    projectId: "comfybake-d5d50",
+    storageBucket: "comfybake-d5d50.appspot.com",
+    messagingSenderId: "800786672334",
+    appId: "1:800786672334:web:b801c84acda8ed04ae7e9f",
+    measurementId: "G-RSYPKYWVRE"
 };
 
 const database = firebase.initializeApp(firebaseApp);
