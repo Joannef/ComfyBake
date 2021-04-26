@@ -1,17 +1,13 @@
-/* .products {
+.cartProduct {
     font-size: small;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-} */
+    grid-template-columns: 1fr;
+}
 .cart {
     padding-top: 70px;
     width: 100%;
 }
 
-/* .products img {
-    width: 50%;
-    height: 50%;
-} */
 
 .cart-title {
     color: rgba(32, 35, 36, 0.877);
@@ -35,4 +31,14 @@
 .checkoutBtn:hover {
         background-color: rgba(0, 162, 255, 0.877);
         color: black;
+}
+
+.displayCart {
+    display: grid;
+    grid-template-columns:  1fr;
+    grid-gap: 40px;
+}
+.displayCart img {
+    height: 400px;
+    width: 400px;
 }

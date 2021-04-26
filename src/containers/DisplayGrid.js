@@ -4,10 +4,12 @@ import firebase from '../firebase';
 import './Cart.css';
 import { addToCart } from './Cart'
 import {account} from './Login'
+import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
+import Show_cart from "./displayCart";
 
 const db = database.firestore();
 const storage = database.storage();
-const user = "user1";
+const user = "mohammad@gmail";
 const realtimeDB = firebase.database();
 
 
@@ -39,37 +41,31 @@ class Display extends React.Component{
     
 
     handleClick =(arr) =>{
-        
-        const total = 999;
         this.props.addToCart(arr);
-        const cartRef = realtimeDB.ref('user').child(user).child( 'Product' + arr.Foodname );
-        //const CART = arr.Foodname
-        cartRef.push([arr.Foodname]);
-        
-        const newRef =realtimeDB.ref('user/' + user + '/Total');
-
-        const newPostRef = cartRef.push();
-
-        // cartRef.transaction((current) => {
-        //     return (current || 0) + 1;
-        // });
-        
-        
-        //referance for cart
-        newPostRef.set({
+        // const ref = db.collection("users").doc(user).collection('Cart').doc();
+        const ref = db.collection("users").doc(user).collection('Cart').doc()
+        var myID = ref.id;
+        ref.set({
             name: arr.Foodname,
             price: arr.Price,
-            qty: arr.Quantity = 10,
-            url: arr.ImageUrl,
-            
-        });
-        // console.log(cartRef.transaction.length)
-        //reference of total
-        newRef.set({
-            Total: total,
+            image: arr.ImageUrl,
+            quantity: 1,
+            checkout: false,
+            seller: arr.SellerID,
+            body: arr.Body,
+            id: myID,
+            total: arr.Price,
         })
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
         
+
     }
+    
  
 
     render(){
@@ -77,14 +73,14 @@ class Display extends React.Component{
         return(
             <div className='item'>
                 {
-                    //it data exists then print each data from the array
+                    //if data exists then print each data from the array
                     this.state.arr &&
                     this.state.arr.map( arr => {
                         return(
                             <div className="img-wrap">
                                 <img src={arr.ImageUrl } alt={arr.Foodname}/>
                                 <p>{arr.Foodname}</p>
-                                
+                                <p>{arr.Qty}</p>
                                 <p>${arr.Price}</p>
                                 <button onClick={()=>{ this.handleClick(arr)} }>Add to cart</button>
                             </div>
@@ -98,55 +94,3 @@ class Display extends React.Component{
 }
 export default Display;
 
-
-
-
-
-
-
-
-// const Display = (props) => {
-//     const [name, setName] = useState("");
-//     const [url, setUrl] = useState("");
-//     const [price, setPrice] = useState("");
-//     const [test, setTest] = useState([]);
-//     const [size, setSize] = useState();
-
-
-//     const {ID} = props
-//     const id = "user2@gmail.com";
-    
-   
-    
-
-//     db.collectionGroup("food").get().then(querySnapshot => {
-//         const data = querySnapshot.docs.map(doc=>doc.data())
-//         setHelper(data[4])
-//         setSize(data.length);
-        
-        
-        
-//     })
-//     function setHelper(data_){
-//         setName(data_.Foodname);
-//         setPrice(data_.Price);
-//         setUrl(data_.ImageUrl)
-//     }
-
-//     return( 
-//         <div>
-//             <br/>
-//             <h1>Testing here</h1>
-//             <p>{test}</p>
-//             <p> {size}</p>
-//             <p>Name: {name}</p>
-//             <p>Price: {price} </p>
-//             <img src={url}/>
-//             <br/> <br/>
-//             <p>-------------------------------------------------------------------------</p>
-//         </div>
-//     )
-    
-// }
-
-// export default Display;
