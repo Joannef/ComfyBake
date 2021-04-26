@@ -93,21 +93,6 @@ function Cart(){
             <button onClick={() => navigateTo(PAGE_PRODUCTS)}> Back to home </button>
             
             <h2 className="cart-title">Shopping cart</h2>
-            
-            <div className="products">
-                    <tbody id="tableProducts">
-                    <Show_cart/>
-                      {cart.map((product)=> (
-                        <table className="table">
-                          {/* <th><img src={product.ImageUrl} /></th> */}
-                          {/* <th>{product.Foodname}</th> */}
-                          {/* <th>$ {product.Price}</th> */}
-                          {/* <th><button onClick={() => removeFromCart(product)}> Revome </button></th> */}
-                        </table>))} 
-                    </tbody>
-
-            </div>
-            <br/> <br/> <br/>
         </div>
     );
 
