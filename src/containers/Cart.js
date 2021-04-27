@@ -93,6 +93,7 @@ function Cart(){
             <button onClick={() => navigateTo(PAGE_PRODUCTS)}> Back to home </button>
             
             <h2 className="cart-title">Shopping cart</h2>
+            <Show_cart/>
         </div>
     );
 

@@ -74,6 +74,12 @@ class Show_cart extends React.Component{
             qty: arr.quantity,
             total: arr.total,
         })
+        db.collection("users").doc(user).collection('Cart').doc(arr.id).delete().then(() => {
+
+            console.log("Document successfully checked out!");
+        }).catch((error) => {
+            console.error("Error checking out ", error);
+        });
     }
  
 
@@ -98,7 +104,7 @@ class Show_cart extends React.Component{
                                         </p>
                                         
                                         <p>Seller: {arr.seller}</p>
-                                        <p>Total: {arr.total}</p>
+                                        <p>Total: ${arr.total}</p>
                                         <button onClick={()=>{ this.handleRemove(arr)}}>Remove</button> 
                                         <br/><br/>
 
