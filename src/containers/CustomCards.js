@@ -28,9 +28,8 @@ function CustomCards(props) {
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = ID; //later: id = props.id
-    const FoodCollection = database.firestore().collection("FoodCollection");
-    const db = database.firestore();
+    const id = ID;
+    const FoodCollection = database.firestore().collection("FoodCollection")
 
 
     function save(event) {
@@ -48,11 +47,7 @@ function CustomCards(props) {
             ()=>{
                 storage.ref(id).child(image.name).getDownloadURL()
                 .then(url=>{
-                    //setImageURL(url);
                     imageURL_ = url;
-                    //alert(url);
-                    //alert(imageURL);
-                    //alert(imageURL_);
                 })
             }
         )
@@ -67,6 +62,7 @@ function CustomCards(props) {
                 Price: priceValue,
                 Ingredients: ingredientsValue,
                 SellerID: id
+
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
@@ -75,8 +71,6 @@ function CustomCards(props) {
             });   
 
             setTitles(titleValue)
-            //setImage(imageURLValue)
-            //alert(imageURL_);
             setImageURL(imageURL_)
             setBody(bodyValue)
             setPrice("$ "+priceValue)
@@ -120,7 +114,7 @@ function CustomCards(props) {
     }
 
     function deleteCard () {
-        db.collection("FoodCollection").doc(id).collection("food").doc(titles).delete();
+        FoodCollection.doc(id).collection("food").doc(titles).delete();
         alert("Refresh to complete Delete")
     }
 
