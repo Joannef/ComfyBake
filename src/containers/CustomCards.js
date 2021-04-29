@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import database from '../firebase';
+import { getDefaultNormalizer } from '@testing-library/dom';
 
 function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
@@ -23,9 +24,11 @@ function CustomCards(props) {
 
     const [showInput, setInputState] = useState(false)
 
+    const [ID, setID] = useState(props.ID)
+
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user2@gmail.com"; //later: id = props.id
+    const id = ID; //later: id = props.id
     const FoodCollection = database.firestore().collection("FoodCollection");
     const db = database.firestore();
 
@@ -63,6 +66,7 @@ function CustomCards(props) {
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
+                SellerID: id
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
@@ -152,7 +156,7 @@ function CustomCards(props) {
                             <p>{price}</p>
                             <button>Add to Cart</button>
                             <br></br>
-                            <small className="text-muted"> Contains: {ingredients}</small>
+                            <small className="text-muted"> Contains: {ingredients} </small>
 
                             <br></br>
                             <button onClick = {edit}>Edit</button>

@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import "./SellerPage.css"
 import CustomCards from './CustomCards'
+import BrowsingCards from './BrowsingCards'
 
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
@@ -19,7 +20,7 @@ import Transfer from './Transfer';
 function Sellers(props) {
     const {AccountID, SellerID} = props;
     const [jumpback, setjumpback] = useState(false);
-    const [AccountMatch, setAccountMatch] = useState(AccountID==SellerID);
+    const [AccountMatch, setAccountMatch] = useState(AccountID == SellerID);
     const [jumpreflash, setjumpreflash] = useState (false);
 
 
@@ -86,10 +87,10 @@ function Sellers(props) {
             ):(
                 <>
                 <div>
-                    {AccountMatch?(
+                    {AccountMatch?( //If Account Holder visits their own Sellers Page
                         <>
                         <div class = "center">
-                        <h1>Welcome to your Home Kitchen</h1>
+                        <h1>Welcome To Your Home Kitchen</h1>
                         <h5>Full Menu</h5>
                         <p>AccountID:{AccountID}</p>
                         <p>SellerID:{SellerID}</p>
@@ -127,7 +128,6 @@ function Sellers(props) {
 
                     <CardDeck>
                     
-
                         <CustomCards 
                             ID = {AccountID}
                             title= 'Add New Item'
@@ -143,10 +143,10 @@ function Sellers(props) {
                     </Container>
                     </div>
                     </>
-                    ):(
+                    ):( //If Account Holder visits another Sellers Page
                         <>
                         <div class = "center">
-                            <h1>Sindy's Home Kitchen</h1>
+                            <h1>Seller's Home Kitchen</h1>
                             <h5>Full Menu</h5>
                             <p>AccountID:{AccountID}</p>
                             <p>SellerID:{SellerID}</p>
@@ -164,7 +164,7 @@ function Sellers(props) {
                         <CardColumns>
 
                             {firestoreArray.map(each => 
-                                <CustomCards key={each.Foodname}
+                                <BrowsingCards key={each.Foodname}
                                                                     
                                     title= {each.Foodname}
                                     imageURL= {each.ImageUrl}
