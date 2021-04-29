@@ -12,13 +12,13 @@ function App() {
   return (
     <div className="App">
       <Navbar collapseOnSelect fixed="top" bg="light" expand="lg">
-        <LinkContainer to="/">
+        <LinkContainer to="/home">
           <Navbar.Brand>ComfyBake</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <LinkContainer to="/login">
+            <LinkContainer to="/">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/orders">
