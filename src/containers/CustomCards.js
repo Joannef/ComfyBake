@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import database from '../firebase';
+import { getDefaultNormalizer } from '@testing-library/dom';
 
 function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
@@ -21,13 +22,17 @@ function CustomCards(props) {
     const [ingredients, setIngredients] = useState(props.ingredients)
     const [ingredientsValue, setIngredientsValue] = useState("Sample Ingredients")
 
+    const [quantity, setQuantity] = useState(props.quantity)
+    const [quantityValue, setQuantityValue] = useState("Sample Quantity")
+
     const [showInput, setInputState] = useState(false)
+
+    const [ID, setID] = useState(props.ID)
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user2@gmail.com"; //later: id = props.id
-    const FoodCollection = database.firestore().collection("FoodCollection");
-    const db = database.firestore();
+    const id = ID;
+    const FoodCollection = database.firestore().collection("FoodCollection")
 
 
     function save(event) {
@@ -45,11 +50,7 @@ function CustomCards(props) {
             ()=>{
                 storage.ref(id).child(image.name).getDownloadURL()
                 .then(url=>{
-                    //setImageURL(url);
                     imageURL_ = url;
-                    //alert(url);
-                    //alert(imageURL);
-                    //alert(imageURL_);
                 })
             }
         )
@@ -63,6 +64,9 @@ function CustomCards(props) {
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
+                SellerID: id,
+                Quantity: quantityValue
+
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
@@ -71,12 +75,11 @@ function CustomCards(props) {
             });   
 
             setTitles(titleValue)
-            //setImage(imageURLValue)
-            //alert(imageURL_);
             setImageURL(imageURL_)
             setBody(bodyValue)
             setPrice("$ "+priceValue)
             setIngredients(ingredientsValue)
+            setQuantity(quantityValue)
 
             setInputState(false)
         }, 2000);
@@ -115,8 +118,12 @@ function CustomCards(props) {
         setIngredientsValue(event.target.value)
     }
 
+    function updateQuantityValue (event) {
+        setQuantityValue(event.target.value)
+    }
+
     function deleteCard () {
-        db.collection("FoodCollection").doc(id).collection("food").doc(titles).delete();
+        FoodCollection.doc(id).collection("food").doc(titles).delete();
         alert("Refresh to complete Delete")
     }
 
@@ -128,6 +135,7 @@ function CustomCards(props) {
                 <input onChange={updateBodyValue} placeholder="Edit Body"></input>
                 <input onChange={updatePriceValue} placeholder="Edit Price"></input>
                 <input onChange={updateIngredientsValue} placeholder="Edit Ingredients"></input>
+                <input onChange={updateQuantityValue} placeholder="Edit Quantity"></input>
                 <button onClick={save}>Save</button>
                 <button onClick={cancel}>Cancel</button>
                 <button onClick={deleteCard}>Delete</button>
@@ -152,10 +160,13 @@ function CustomCards(props) {
                             <p>{price}</p>
                             <button>Add to Cart</button>
                             <br></br>
-                            <small className="text-muted"> Contains: {ingredients}</small>
+                            <small className="text-muted"> Contains: {ingredients} </small>
+                            <br></br>
+                            <small className="text-muted"> Quantity: {quantity} </small>
 
                             <br></br>
                             <button onClick = {edit}>Edit</button>
+                            
 
                         </Card.Footer> 
                     
