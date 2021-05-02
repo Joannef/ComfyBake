@@ -76,6 +76,7 @@ export default function Signup() {
                     Soy:Soy,
                     Egg:Egg
                 },
+                shoppingcart: 0
             }).then(()=>{
                 alert("Look out for an email confirming your account!")
             }).catch((err)=>{
@@ -134,7 +135,7 @@ export default function Signup() {
                     <br/>
                     <div className="transition">
                         <p className="customP">Press continue to go to the login page</p>
-                        <LinkContainer to="/login">   
+                        <LinkContainer to="/">   
                             <Nav.Link>
                                 <button className="customButton"> Continue</button><br/>
                             </Nav.Link>

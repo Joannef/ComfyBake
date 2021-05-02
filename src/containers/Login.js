@@ -22,23 +22,16 @@ const Login = () =>{
             setEmail("");
             setPassword("");
             //if email and password is currect, then jump to home page
-            setaccount(true);
-
-            /*
             setTimeout(() => {
-                //alert("AccountID: " + AccountID);
-                setSellerID(AccountID);
-                setEmail("");
-                setPassword("");
-                //if email and password is currect, then jump to home page
                 setaccount(true);
-            }, 1000);  */
+            }, 200);
+
         }).catch((err)=>{
             alert(err);
             setaccount(false);
         });
     }
-
+    
     const authListener = () =>{
         database.auth().onAuthStateChanged(account => {
             if (account) {

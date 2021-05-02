@@ -16,6 +16,7 @@ import Home from "./Home";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import Transfer from './Transfer';
+import './Cart.css';
 
 function Sellers(props) {
     const {AccountID, SellerID} = props;
@@ -29,6 +30,12 @@ function Sellers(props) {
     //const id = "user2@gmail.com";
     const id ="";
     
+    const [cartitem, setCartitem] = useState(0);
+    if (AccountID != ""){
+        db.collection("users").doc(AccountID).onSnapshot((doc) =>{
+            setCartitem(doc.data().shoppingcart)
+        })
+    }
     /*
     if (AccountMatch == true){
         id = AccountID;
@@ -102,6 +109,9 @@ function Sellers(props) {
                             </Nav.Link>
                         </LinkContainer>
                     <br></br>
+                    <div className="cart">
+                        <button className="cart-link" >View Cart 🛒({cartitem})</button>
+                    </div>
 
                     <Container>
 
@@ -115,6 +125,9 @@ function Sellers(props) {
                                 body= {each.Body}
                                 price= {each.Price}
                                 ingredients= {each.Ingredients}
+                                quantity =  {each.Quantity}
+                                sellerID = {each.SellerID}
+                                accountID = {AccountID}
 
                             />
 
@@ -135,6 +148,7 @@ function Sellers(props) {
                             body='Enter new menu item description here. After press save and refresh the page to see it appear on your menu.'
                             price="Enter new item price"
                             ingredients= "Enter new item ingredients"
+                            quantity =  "Enter Quantity"
 
                         />
 
@@ -158,6 +172,9 @@ function Sellers(props) {
                                 </Nav.Link>
                             </LinkContainer>
                         <br></br>
+                        <div className="cart">
+                        <button className="cart-link" >View Cart 🛒({cartitem})</button>
+                        </div>
 
                         <Container>
 
@@ -171,6 +188,9 @@ function Sellers(props) {
                                     body= {each.Body}
                                     price= {each.Price}
                                     ingredients= {each.Ingredients}
+                                    quantity =  {each.Quantity}
+                                    sellerID = {each.SellerID}
+                                    accountID = {AccountID}
 
                                 />
 

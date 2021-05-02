@@ -22,6 +22,9 @@ function CustomCards(props) {
     const [ingredients, setIngredients] = useState(props.ingredients)
     const [ingredientsValue, setIngredientsValue] = useState("Sample Ingredients")
 
+    const [quantity, setQuantity] = useState(props.quantity)
+    const [quantityValue, setQuantityValue] = useState("Sample Quantity")
+
     const [showInput, setInputState] = useState(false)
 
     const [ID, setID] = useState(props.ID)
@@ -61,8 +64,8 @@ function CustomCards(props) {
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
-                SellerID: id
-
+                SellerID: id,
+                Quantity: quantityValue
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
@@ -75,6 +78,7 @@ function CustomCards(props) {
             setBody(bodyValue)
             setPrice("$ "+priceValue)
             setIngredients(ingredientsValue)
+            setQuantity(quantityValue)
 
             setInputState(false)
         }, 2000);
@@ -113,10 +117,52 @@ function CustomCards(props) {
         setIngredientsValue(event.target.value)
     }
 
+    function updateQuantityValue (event) {
+        setQuantityValue(event.target.value)
+    }
+
     function deleteCard () {
         FoodCollection.doc(id).collection("food").doc(titles).delete();
         alert("Refresh to complete Delete")
     }
+
+    const [sellerID] = useState(props.sellerID)
+    const [accountID] = useState(props.accountID)
+
+    const handleClick =() =>{
+        const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
+        ref.set({
+            name: titles,
+            price: price,
+            image: imageURL,
+            quantity: quantity,
+            checkout: false,
+            seller: sellerID,
+            body: body,
+            id: accountID,
+            quantity: 1,
+            total: price,
+        })
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+
+        var num=0
+        database.firestore().collection("users").doc(accountID).onSnapshot((doc) =>{
+            num = doc.data().shoppingcart
+        })
+        setTimeout(() => {
+            //update 
+            num += 1
+            database.firestore().collection("users").doc(accountID).update({
+                "shoppingcart": num
+            })
+        }, 100);
+    }
+
 
     if(showInput) {
         return (
@@ -126,6 +172,7 @@ function CustomCards(props) {
                 <input onChange={updateBodyValue} placeholder="Edit Body"></input>
                 <input onChange={updatePriceValue} placeholder="Edit Price"></input>
                 <input onChange={updateIngredientsValue} placeholder="Edit Ingredients"></input>
+                <input onChange={updateQuantityValue} placeholder="Edit Quantity"></input>
                 <button onClick={save}>Save</button>
                 <button onClick={cancel}>Cancel</button>
                 <button onClick={deleteCard}>Delete</button>
@@ -148,9 +195,11 @@ function CustomCards(props) {
                         <Card.Footer>
 
                             <p>{price}</p>
-                            <button>Add to Cart</button>
+                            <button onClick={handleClick}>Add to cart</button>
                             <br></br>
                             <small className="text-muted"> Contains: {ingredients} </small>
+                            <br></br>
+                            <small className="text-muted"> Quantity: {quantity} </small>
 
                             <br></br>
                             <button onClick = {edit}>Edit</button>

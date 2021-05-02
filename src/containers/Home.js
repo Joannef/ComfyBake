@@ -9,20 +9,24 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import SellerPage from './SellersPage'; 
 import Transfer from './Transfer';
+import './Cart.css';
+import Cart from "./Cart";
+
 
 function Home(props) {
   const [firestoreArray, setFirestoreArray] = useState([]);
   
   const db = database.firestore();
-  const id = "user2@gmail.com";
 
   const {AccountID} = props
   const [SellerID, setSellerID] = useState('');
   const [jump, setjump] = useState(false);
   const [jumpreflash, setjumpreflash] = useState (false);
-  const [test, setTest] = useState('')
-  const [run, setRun] = useState(true)
+  const [test, setTest] = useState('');
+  const [run, setRun] = useState(true);
+  const [cart, setCart] = useState(false);
   
+  const [cartitem, setCartitem] = useState(0);
 
   if (AccountID != ""){
       if (run == true){
@@ -41,6 +45,10 @@ function Home(props) {
         }, 500);
       }else 
         setTest("data: false")
+      
+     
+      setCartitem(doc.data().shoppingcart)
+      
     })
   }
   
@@ -53,6 +61,7 @@ function Home(props) {
         console.log(data);
         setFirestoreArray(data);
     })
+
   }, [])
 
   // useEffect(() => {
@@ -88,70 +97,87 @@ function Home(props) {
     setjumpreflash(true);
   }
 
+  const handleJumpCart =()=>{
+    setCart(true);
+  }
+
   return (
     <div> 
-      {jump? (
+      {cart? (
         <>
-        <div>
-          {jumpreflash?(
-            <>
-            <Transfer
-              AccountID = {AccountID}
-              SellerID = {SellerID}
-              reflash = {false} 
-            />
-            </>
-          ):(
-            <>
-            <SellerPage
-            AccountID = {AccountID}
-            SellerID = {SellerID}
-            />
-            </>
-          )}
-          </div>
+          <Cart />
         </>
       ):(
         <>
-          <div className="Home">
+        {jump? (
+          <>
+          <div>
+            {jumpreflash?(
+              <>
+              <Transfer
+                AccountID = {AccountID}
+                SellerID = {SellerID}
+                reflash = {false} 
+              />
+              </>
+            ):(
+              <>
+              <SellerPage
+              AccountID = {AccountID}
+              SellerID = {SellerID}
+              />
+              </>
+            )}
+            </div>
+          </>
+        ):(
+          <>
+            <div className="Home">
 
-          {/* <Cart />*/ }
-          <div className="lander">
-            <h1>ComfyBake</h1>
-            <p>Test: {test}</p>
-            <p>accountID:{AccountID}</p>
-            <p>sellerID:{SellerID}</p>
-          </div>
-          
-          <div className="button">
-            <button onClick={handleJump}> MySeller Page</button>
-            <button onClick={handleReflash}> Reflash</button>
-            <LinkContainer to="/">  
-              <Nav.Link>
-                <button onClick={handleLogout}>Logout</button><br/>
-              </Nav.Link>
-            </LinkContainer>
-            <br/>
-          </div>
+            {/* <Cart />*/ }
+            <div className="lander">
+              <h1>ComfyBake</h1>
+              <p>Test: {test}</p>
+              <p>accountID:{AccountID}</p>
+              <p>sellerID:{SellerID}</p>
+            </div>
 
-          <div className="content">
-            <CardColumns>
-              {firestoreArray.map(each => <LoadCards key={each.Foodname}
-                                                
-                title= {each.Foodname}
-                imageURL= {each.ImageUrl}
-                body= {each.Body}
-                price= {each.Price}
-                ingredients= {each.Ingredients}
-                sellerID = {each.SellerID}
-                accountID = {AccountID}
-                />
-              )}
-            </CardColumns>
-          </div>
+            <div className="cart">
+              <button className="cart-link" onClick={handleJumpCart}>View Cart 🛒({cartitem})</button>
+            </div>
 
-          </div>
-        </>
+            <div className="button">
+              <button onClick={handleJump}> MySeller Page</button>
+              <button onClick={handleReflash}> Reflash</button>
+              <LinkContainer to="/">  
+                <Nav.Link>
+                  <button onClick={handleLogout}>Logout</button><br/>
+                </Nav.Link>
+              </LinkContainer>
+              <br/>
+            </div>
+
+            <div className="content">
+              <CardColumns>
+                {firestoreArray.map(each => <LoadCards key={each.Foodname}
+                                                  
+                  title= {each.Foodname}
+                  imageURL= {each.ImageUrl}
+                  body= {each.Body}
+                  price= {each.Price}
+                  ingredients= {each.Ingredients}
+                  sellerID = {each.SellerID}
+                  accountID = {AccountID}
+                  quantity =  {each.Quantity}
+                  />
+                )}
+              </CardColumns>
+            </div>
+
+            </div>
+          </>
+        )}
+      </>
       )}      
     </div>
   );

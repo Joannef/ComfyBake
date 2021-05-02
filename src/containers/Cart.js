@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import database from '../firebase';
 import './Cart.css';
-import Products from './Product';
+// import Products from './Product';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Display from './DisplayGrid';
-
-const PAGE_PRODUCTS = 'products';
+import Show_cart from './displayCart';
 
 const db = database.firestore();
-const storage = database.storage();
+const PAGE_PRODUCTS = 'products';
+
+//const db = database.firestore();
+//const storage = database.storage();
 
 const PAGE_CART = 'cart'
 const senderEmail = "cbakeTeam@gmail.com"
@@ -23,8 +25,7 @@ const LastName = "franciscor343@gmail.com"
 function Cart(){
     const [cart, setCart] = useState([]);
     const [page, setPage] = useState ('products');
-
-
+    const [cartitem, setCartitem] = useState([]);
 
     const addToCart = (product) => {
         setCart([...cart, {...product}]);
@@ -76,43 +77,33 @@ function Cart(){
           // Handle errors here however you like
           .catch(err => console.error("Failed to send feedback. Error: ", err))
       }
+      
 
+      useEffect(() => {
+        
+        db.collectionGroup("Cart").get().then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc=>doc.data())
+          setCartitem(data);
+        })
+      });
 
 // render everything that has been added to the cart
     const renderCart = () => (
         <div className='back_home_btn'>
             <button onClick={() => navigateTo(PAGE_PRODUCTS)}> Back to home </button>
             
-            <h2 className="cart-title">This is your cart</h2>
-            <div className="products">
-                {cart.map((product) => (
-                <div className="product" >
-                    
-                    <img src={product.ImageUrl}/>
-                    <h3>{product.Foodname}</h3>
-                    <h4>${product.Price}</h4>
-                    
-                    <button onClick={() => removeFromCart(product)}> Remove </button>
-                
-                </div>
-            ))}
-            </div>
-            <br/> <br/> <br/>
-            <button className="checkoutBtn" onclick={handleSumbit}>Checkout</button>
+            <h2 className="cart-title">Shopping cart</h2>
+            <Show_cart/>
         </div>
     );
 
     return(
         <div className="cart">
-        {/* <Link onClick={() => navigateTo(PAGE_CART)} className="cart-link" to="/orders/cart">View Cart 🛒 ({cart.length})</Link> */}
         <br/><br/><br/><br/>
         <header>
-            {/* <button onClick={() => navigateTo(PAGE_CART)}>Cart holder ({cart.length})</button> */}
-            <Link onClick={() => navigateTo(PAGE_CART)} className="cart-link" to="/orders/cart">View Cart 🛒 ({cart.length})</Link>
-            {/* <button onClick={() => navigateTo(PAGE_CART)}> Go to Cart ({cart.length})</button> */}
+            <Link onClick={() => navigateTo(PAGE_CART)} className="cart-link" to="/orders/cart">View Cart 🛒 ({cartitem.length})</Link>
             <br/><br/><br/><br/>
         </header>
-        {/* {page === PAGE_PRODUCTS && <Products addToCart={addToCart}/>} */}
         {page === PAGE_PRODUCTS && <Display addToCart={addToCart}/>}
         {page === PAGE_CART && renderCart()}
         
