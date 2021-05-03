@@ -9,7 +9,8 @@ function BrowsingCards(props) {
     const [title] = useState(props.title)
     const [imageURL] = useState(props.imageURL)
     const [body] = useState(props.body)
-    const [price] = useState(props.price)
+    const [price] = useState("$" + props.price)
+    const [price_] = useState(props.price)
     const [ingredients] = useState(props.ingredients)
     const [quantity] = useState(props.quantity)
     const [sellerID] = useState(props.sellerID)
@@ -19,7 +20,7 @@ function BrowsingCards(props) {
         const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
         ref.set({
             name: title,
-            price: price,
+            price: price_,
             image: imageURL,
             quantity: quantity,
             checkout: false,
@@ -27,7 +28,7 @@ function BrowsingCards(props) {
             body: body,
             id: accountID,
             quantity: 1,
-            total: price,
+            total: price_,
         })
         .then(() => {
             console.log("Document successfully written!");

@@ -16,7 +16,8 @@ function CustomCards(props) {
     const [body, setBody] = useState(props.body)
     const [bodyValue, setBodyValue] = useState("Sample Body")
     
-    const [price, setPrice] = useState('$' + props.price)
+    const [price, setPrice] = useState("$" + props.price)
+    const [price_] = useState(props.price)
     const [priceValue, setPriceValue] = useState("Sample Price")
     
     const [ingredients, setIngredients] = useState(props.ingredients)
@@ -133,7 +134,7 @@ function CustomCards(props) {
         const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
         ref.set({
             name: titles,
-            price: price,
+            price: price_,
             image: imageURL,
             quantity: quantity,
             checkout: false,
@@ -141,7 +142,7 @@ function CustomCards(props) {
             body: body,
             id: accountID,
             quantity: 1,
-            total: price,
+            total: price_,
         })
         .then(() => {
             console.log("Document successfully written!");

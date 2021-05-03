@@ -18,7 +18,8 @@ class Show_cart extends React.Component{
     
     //---------------- this function brings all the data from firestore -------------------//
     componentDidMount(){
-        db.collectionGroup('Cart').get().then( snapShot => {
+        //db.collectionGroup('Cart').get().then( snapShot => {
+        db.collection("users").doc(this.props.AccountID).collection('Cart').get().then(snapShot =>{
                 const arr = []
                 //takes a data and pushes it into the array
                 snapShot.forEach( doc => {
@@ -36,32 +37,46 @@ class Show_cart extends React.Component{
 
     handleRemove =(arr) => {
         
-        db.collection("users").doc(user).collection('Cart').doc(arr.id).delete().then(() => {
-
-            console.log("Document successfully deleted!");
+        db.collection("users").doc(this.props.AccountID).collection('Cart').doc(arr.id).delete().then(() => {
+            alert ("Document successfully deleted!"); 
+            //console.log("Document successfully deleted!");
         }).catch((error) => {
-            console.error("Error removing document: ", error);
+            //console.error("Error removing document: ", error);
+            alert("Error removing document: ", error);
         });
-        
+
+        /*
+        var num=0
+        database.firestore().collection("users").doc(this.props.AccountID).onSnapshot((doc) =>{
+            num = doc.data().shoppingcart
+        })
+        setTimeout(() => {
+            //update 
+            num -= 1
+            database.firestore().collection("users").doc(this.props.AccountID).update({
+                "shoppingcart": num
+            })
+        }, 100);
+        */
 
     }
     
     increment = (arr) => {
-        const ref = db.collection("users").doc(user).collection('Cart').doc(arr.id)
+        const ref = db.collection("users").doc(this.props.AccountID).collection('Cart').doc(arr.id)
         //ref.update({"quantity": arr.quantity + 1})
         arr.quantity = arr.quantity + 1;
         ref.update({"quantity": arr.quantity})
         ref.update({"total": (arr.price * arr.quantity)})
     }
     decrement = (arr) => {
-        const ref = db.collection("users").doc(user).collection('Cart').doc(arr.id)
+        const ref = db.collection("users").doc(this.props.AccountID).collection('Cart').doc(arr.id)
         
         arr.quantity = arr.quantity - 1;
         ref.update({"quantity": arr.quantity})
         ref.update({"total": (arr.price * arr.quantity)})
     }
     handleCheckout = (arr) => {
-        const ref = db.collection("users").doc(user).collection('orders').doc()
+        const ref = db.collection("users").doc(this.props.AccountID).collection('orders').doc()
         console.log("checkout!");
         ref.set({
             name: userName,
@@ -74,7 +89,7 @@ class Show_cart extends React.Component{
             qty: arr.quantity,
             total: arr.total,
         })
-        db.collection("users").doc(user).collection('Cart').doc(arr.id).delete().then(() => {
+        db.collection("users").doc(this.props.AccountID).collection('Cart').doc(arr.id).delete().then(() => {
 
             console.log("Document successfully checked out!");
         }).catch((error) => {

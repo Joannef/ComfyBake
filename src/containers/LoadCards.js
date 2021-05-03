@@ -8,7 +8,8 @@ function LoadCards(props) {
     const [titles] = useState(props.title)    
     const [imageURL] = useState(props.imageURL)
     const [body] = useState(props.body)
-    const [price] = useState('$' + props.price)
+    const [price] = useState("$" + props.price)
+    const [price_] = useState(props.price)
     const [ingredients] = useState(props.ingredients)
     const [sellerID] = useState(props.sellerID)
     const [accountID] = useState(props.accountID)
@@ -29,7 +30,7 @@ function LoadCards(props) {
         const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
         ref.set({
             name: titles,
-            price: price,
+            price: price_,
             image: imageURL,
             quantity: quantity,
             checkout: false,

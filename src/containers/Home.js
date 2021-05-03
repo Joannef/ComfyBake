@@ -10,7 +10,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import SellerPage from './SellersPage'; 
 import Transfer from './Transfer';
 import './Cart.css';
-import Cart from "./Cart";
+import Show_cart from './displayCart';
 
 
 function Home(props) {
@@ -105,7 +105,9 @@ function Home(props) {
     <div> 
       {cart? (
         <>
-          <Cart />
+          <Show_cart 
+            AccountID = {AccountID}
+          />
         </>
       ):(
         <>
@@ -123,8 +125,8 @@ function Home(props) {
             ):(
               <>
               <SellerPage
-              AccountID = {AccountID}
-              SellerID = {SellerID}
+                AccountID = {AccountID}
+                SellerID = {SellerID}
               />
               </>
             )}
