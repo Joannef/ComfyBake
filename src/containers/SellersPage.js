@@ -17,13 +17,14 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import Transfer from './Transfer';
 import './Cart.css';
+import Show_cart from './displayCart';
 
 function Sellers(props) {
     const {AccountID, SellerID} = props;
     const [jumpback, setjumpback] = useState(false);
     const [AccountMatch, setAccountMatch] = useState(AccountID == SellerID);
     const [jumpreflash, setjumpreflash] = useState (false);
-
+    const [jumpcart, setjumpcart] = useState(false);
 
     const [firestoreArray, setFirestoreArray] = useState([]);
     const db = database.firestore();
@@ -69,11 +70,26 @@ function Sellers(props) {
         database.auth().signOut();
     }
 
+    const handleJumpCart =()=>{
+        setjumpback(true);
+        setjumpcart(true);
+    }
+
     return (
         <div>
             {jumpback?(
                 <>
-                <div>
+                {jumpcart? (
+                    <>
+                    <Show_cart 
+                        AccountID = {AccountID}
+                        SellerID = {SellerID}
+                        state_ = {"seller"}
+                    />
+                    </>
+                ):(
+                    <>
+                    <div>
                     {jumpreflash?(
                         <>
                         <Transfer
@@ -89,7 +105,9 @@ function Sellers(props) {
                         />
                         </>
                     )}
-                </div>
+                    </div>
+                    </>
+                )}
                 </>
             ):(
                 <>
@@ -110,7 +128,7 @@ function Sellers(props) {
                         </LinkContainer>
                     <br></br>
                     <div className="cart">
-                        <button className="cart-link" >View Cart 🛒({cartitem})</button>
+                        <button className="cart-link" onClick={handleJumpCart}>View Cart 🛒({cartitem})</button>
                     </div>
 
                     <Container>
@@ -173,7 +191,7 @@ function Sellers(props) {
                             </LinkContainer>
                         <br></br>
                         <div className="cart">
-                        <button className="cart-link" >View Cart 🛒({cartitem})</button>
+                        <button className="cart-link" onClick={handleJumpCart}>View Cart 🛒({cartitem})</button>
                         </div>
 
                         <Container>

@@ -1,19 +1,23 @@
 import React, {useState, useEffect} from "react";
+import testUtils from "react-dom/test-utils";
 import database from '../firebase';
 import firebase from '../firebase'
 import './Cart.css';
+import Home from "./Home";
+import SellerPage from './SellersPage'; 
 
 const db = database.firestore();
 const storage = database.storage();
 const user = "mohammad@gmail";
 const userName = "Moh"
 
-
 class Show_cart extends React.Component{
     //state array
     state = {
         arr: null,
         count: 0,
+        home: false,
+        jump: false,
     }
     
     //---------------- this function brings all the data from firestore -------------------//
@@ -45,7 +49,7 @@ class Show_cart extends React.Component{
             alert("Error removing document: ", error);
         });
 
-        /*
+        
         var num=0
         database.firestore().collection("users").doc(this.props.AccountID).onSnapshot((doc) =>{
             num = doc.data().shoppingcart
@@ -57,7 +61,6 @@ class Show_cart extends React.Component{
                 "shoppingcart": num
             })
         }, 100);
-        */
 
     }
     
@@ -96,12 +99,97 @@ class Show_cart extends React.Component{
             console.error("Error checking out ", error);
         });
     }
- 
+    
+    handlejump = () =>{
+        if (this.props.state_ == "home"){
+            this.setState(state => ({
+                home: true
+            }))
+        }
+        this.setState(state => ({
+            jump: true
+        }))
+
+    } 
 
     render(){
     
         return(
-            <div className="displayCart">
+            <div>
+            {this.state.jump? (
+                <div>
+                {this.state.home? (
+                    <>
+                    <Home 
+                        AccountID = {this.props.AccountID}
+                    />
+                    </>
+                ):(
+                    <>
+                    <SellerPage
+                        AccountID = {this.props.AccountID}
+                        SellerID = {this.props.SellerID}
+                    />
+                    </>
+                )}
+                </div>
+                
+            ):(
+                <>
+                <br/>
+                <button onClick={()=>{this.handlejump()}}>Back</button><br/><br/><br/>
+
+                <div className="displayCart">
+                    {
+                        //if data exists then print each data from the array
+                        this.state.arr &&
+                        this.state.arr.map( arr => {
+                            return(
+                                <div>
+                                    <tbody id="tableProducts">
+                                        <table className="table">
+                                            <th><img src={arr.image}/></th>
+                                            <h3>{arr.name}</h3>
+                                            <p>{arr.body}</p>
+                                            <p>${arr.price}</p>
+                                            <p>
+                                                <p>Quantity: {arr.quantity}</p>
+                                            </p>
+                                            
+                                            <p>Seller: {arr.seller}</p>
+                                            <p>Total: ${arr.total}</p>
+                                            <button onClick={()=>{ this.handleRemove(arr)}}>Remove</button> 
+                                            <br/><br/>
+
+                                            <button onClick={()=>{ this.handleCheckout(arr)}}>Checkout</button>
+
+                                            <th>
+                                                <button onClick={()=>{ this.decrement(arr)}}> - </button>
+                                                <label>
+                                                    Quantity
+                                                </label>
+                                                <button onClick={()=>{ this.increment(arr)}}> + </button>
+                                            </th>
+                                            
+                                        </table>
+                                        
+                                    </tbody>
+                                </div>
+                            )
+                        })
+                    }
+                    <br/><br/> 
+                </div>
+                </>
+            )}
+            </div>
+        )
+    }
+}
+export default Show_cart;
+
+/*
+<div className="displayCart">
                 {
                     //if data exists then print each data from the array
                     this.state.arr &&
@@ -142,7 +230,4 @@ class Show_cart extends React.Component{
                 }
                 <br/><br/> 
             </div>
-        )
-    }
-}
-export default Show_cart;
+        */

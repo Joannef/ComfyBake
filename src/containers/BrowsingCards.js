@@ -18,6 +18,7 @@ function BrowsingCards(props) {
 
     const handleClick =() =>{
         const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
+        var myID = ref.id;
         ref.set({
             name: title,
             price: price_,
@@ -26,7 +27,7 @@ function BrowsingCards(props) {
             checkout: false,
             seller: sellerID,
             body: body,
-            id: accountID,
+            id: myID,
             quantity: 1,
             total: price_,
         })

@@ -132,6 +132,7 @@ function CustomCards(props) {
 
     const handleClick =() =>{
         const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
+        var myID = ref.id;
         ref.set({
             name: titles,
             price: price_,
@@ -140,7 +141,7 @@ function CustomCards(props) {
             checkout: false,
             seller: sellerID,
             body: body,
-            id: accountID,
+            id: myID,
             quantity: 1,
             total: price_,
         })

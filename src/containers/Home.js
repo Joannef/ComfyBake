@@ -107,6 +107,8 @@ function Home(props) {
         <>
           <Show_cart 
             AccountID = {AccountID}
+            SellerID = {SellerID}
+            state_ = {"home"}
           />
         </>
       ):(

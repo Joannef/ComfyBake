@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import database from '../firebase';
 import { addToCart } from './Cart'
+import SellerPage from './SellersPage'; 
 
 function LoadCards(props) {
     const [titles] = useState(props.title)    
@@ -14,7 +15,6 @@ function LoadCards(props) {
     const [sellerID] = useState(props.sellerID)
     const [accountID] = useState(props.accountID)
     const [quantity] = useState(props.quantity)
-
     //const [total] = useState (props.price * quantity)
 
     const jump=()=>{
@@ -28,6 +28,7 @@ function LoadCards(props) {
 
     const handleClick =() =>{
         const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
+        var myID = ref.id; 
         ref.set({
             name: titles,
             price: price_,
@@ -36,9 +37,9 @@ function LoadCards(props) {
             checkout: false,
             seller: sellerID,
             body: body,
-            id: accountID,
+            id: myID,
             quantity: 1,
-            total: price,
+            total: price_,
         })
         .then(() => {
             console.log("Document successfully written!");
