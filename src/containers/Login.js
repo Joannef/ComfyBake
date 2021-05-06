@@ -4,16 +4,13 @@ import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Login.css";
-import Display from "./Display";
 import Home from "./Home";
-// import BorderWrapper from 'react-border-wrapper'
 
 const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [account, setaccount] = useState(false);
     const [AccountID, setAccountID] = useState('');
-    //const [SellerID, setSellerID] = useState('');
 
     const handleLogin =() =>{
         database.auth().signInWithEmailAndPassword(email,password)
@@ -34,8 +31,8 @@ const Login = () =>{
     
     const authListener = () =>{
         database.auth().onAuthStateChanged(account => {
-            if (account) {
-                setaccount(account);
+            if (account==true) {
+                setaccount(true);
             }else{
                 setaccount(false);
             }

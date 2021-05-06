@@ -60,7 +60,7 @@ class Show_cart extends React.Component{
             database.firestore().collection("users").doc(this.props.AccountID).update({
                 "shoppingcart": num
             })
-        }, 100);
+        }, 10);
 
     }
     
@@ -80,7 +80,8 @@ class Show_cart extends React.Component{
     }
     handleCheckout = (arr) => {
         const ref = db.collection("users").doc(this.props.AccountID).collection('orders').doc()
-        console.log("checkout!");
+        //console.log("checkout!");
+        alert("checkout")
         ref.set({
             name: userName,
             order_Date: new Date(),
@@ -98,6 +99,18 @@ class Show_cart extends React.Component{
         }).catch((error) => {
             console.error("Error checking out ", error);
         });
+
+        var num=0
+        database.firestore().collection("users").doc(this.props.AccountID).onSnapshot((doc) =>{
+            num = doc.data().shoppingcart
+        })
+        setTimeout(() => {
+            //update 
+            num -= 1
+            database.firestore().collection("users").doc(this.props.AccountID).update({
+                "shoppingcart": num
+            })
+        }, 10);
     }
     
     handlejump = () =>{

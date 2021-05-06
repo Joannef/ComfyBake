@@ -127,44 +127,6 @@ function CustomCards(props) {
         alert("Refresh to complete Delete")
     }
 
-    const [sellerID] = useState(props.sellerID)
-    const [accountID] = useState(props.accountID)
-
-    const handleClick =() =>{
-        const ref = database.firestore().collection("users").doc(accountID).collection('Cart').doc()
-        var myID = ref.id;
-        ref.set({
-            name: titles,
-            price: price_,
-            image: imageURL,
-            quantity: quantity,
-            checkout: false,
-            seller: sellerID,
-            body: body,
-            id: myID,
-            quantity: 1,
-            total: price_,
-        })
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch((error) => {
-            console.error("Error writing document: ", error);
-        });
-
-        var num=0
-        database.firestore().collection("users").doc(accountID).onSnapshot((doc) =>{
-            num = doc.data().shoppingcart
-        })
-        setTimeout(() => {
-            //update 
-            num += 1
-            database.firestore().collection("users").doc(accountID).update({
-                "shoppingcart": num
-            })
-        }, 100);
-    }
-
 
     if(showInput) {
         return (
@@ -197,12 +159,9 @@ function CustomCards(props) {
                         <Card.Footer>
 
                             <p>{price}</p>
-                            <button onClick={handleClick}>Add to cart</button>
-                            <br></br>
                             <small className="text-muted"> Contains: {ingredients} </small>
                             <br></br>
                             <small className="text-muted"> Quantity: {quantity} </small>
-
                             <br></br>
                             <button onClick = {edit}>Edit</button>
                             

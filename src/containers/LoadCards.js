@@ -58,7 +58,7 @@ function LoadCards(props) {
             database.firestore().collection("users").doc(accountID).update({
                 "shoppingcart": num
             })
-        }, 100);
+        }, 10);
     }
 
     return (

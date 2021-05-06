@@ -229,7 +229,14 @@ export default function Signup() {
                                 onClick={()=> setEgg(!Egg)}
                             /> Egg<br/>
                         </div>
-                        <button classname="center customButton" type="sumbit">Sign Up</button>
+                        <button classname="center customButton" type="submit">Sign Up</button>
+                        
+                        
+                        <LinkContainer to="/">   
+                            <Nav.Link>
+                            <button2>Sign in instead</button2><br/>
+                            </Nav.Link>
+                        </LinkContainer>
                         {/* </BorderWrapper> */}
                         </form>
                         </div>
