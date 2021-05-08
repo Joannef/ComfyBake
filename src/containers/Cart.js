@@ -93,20 +93,16 @@ function Cart(){
             <button onClick={() => navigateTo(PAGE_PRODUCTS)}> Back to home </button>
             
             <h2 className="cart-title">Shopping cart</h2>
-            <Show_cart/>
         </div>
     );
 
     return(
         <div className="cart">
-        <br/><br/><br/><br/>
-        <header>
-            <Link onClick={() => navigateTo(PAGE_CART)} className="cart-link" to="/orders/cart">View Cart 🛒 ({cartitem.length})</Link>
-            <br/><br/><br/><br/>
-        </header>
-        {page === PAGE_PRODUCTS && <Display addToCart={addToCart}/>}
-        {page === PAGE_CART && renderCart()}
-        
+          <header>
+            <h1>Shopping Cart </h1><br/>
+          </header>
+          {/* <Display addToCart={addToCart}/> */}
+        <Show_cart/>
         </div>
     )
 };

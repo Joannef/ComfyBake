@@ -41,45 +41,54 @@ class Show_cart extends React.Component{
             console.log("Document successfully deleted!");
         }).catch((error) => {
             console.error("Error removing document: ", error);
-        });
-        
+        }); 
 
     }
     
     increment = (arr) => {
         const ref = db.collection("users").doc(user).collection('Cart').doc(arr.id)
-        //ref.update({"quantity": arr.quantity + 1})
-        arr.quantity = arr.quantity + 1;
-        ref.update({"quantity": arr.quantity})
-        ref.update({"total": (arr.price * arr.quantity)})
+        
+        if (arr.quantity == arr.max_Qty) {
+            alert("Maximum quantity")
+        } else {
+            arr.quantity = arr.quantity + 1;
+            ref.update({"quantity": arr.quantity})
+            ref.update({"total": (arr.price * arr.quantity)})
+        }
     }
     decrement = (arr) => {
         const ref = db.collection("users").doc(user).collection('Cart').doc(arr.id)
-        
-        arr.quantity = arr.quantity - 1;
-        ref.update({"quantity": arr.quantity})
-        ref.update({"total": (arr.price * arr.quantity)})
-    }
-    handleCheckout = (arr) => {
-        const ref = db.collection("users").doc(user).collection('orders').doc()
-        console.log("checkout!");
-        ref.set({
-            name: userName,
-            order_Date: new Date(),
-            complete: false,
-            order_number: ref.id,
-            image: arr.image,
-            descriptions: arr.body,
-            price: arr.price,
-            qty: arr.quantity,
-            total: arr.total,
-        })
-        db.collection("users").doc(user).collection('Cart').doc(arr.id).delete().then(() => {
+        if (arr.quantity <= 1) {
+            console.log("Stops when the quantity is 1")
+        } 
+        else {
+            arr.quantity = arr.quantity - 1;
+            ref.update({"quantity": arr.quantity})
+            ref.update({"total": (arr.price * arr.quantity)})
+        }
 
-            console.log("Document successfully checked out!");
-        }).catch((error) => {
-            console.error("Error checking out ", error);
-        });
+    }
+    handleCheckout = (e) => {
+        e.preventDefault();
+        //const ref = db.collection("users").doc(user).collection('Cart').doc(arr.id)
+        const ref = db.collection("users").doc(user).collection('Cart')
+        
+        ref.where("checkout", "==", false)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().checkout == false) {
+                        console.log(doc.id, "worked")
+                        const checoutRef = db.collection("users").doc(user).collection('Cart').doc(doc.id)
+                        checoutRef.update({"checkout": true})
+                        
+                    }
+                });
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+            alert("Checkout Complete")
     }
  
 
@@ -91,6 +100,7 @@ class Show_cart extends React.Component{
                     //if data exists then print each data from the array
                     this.state.arr &&
                     this.state.arr.map( arr => {
+                        if(arr.checkout == false){
                         return(
                             <div>
                                 <tbody id="tableProducts">
@@ -102,29 +112,32 @@ class Show_cart extends React.Component{
                                         <p>
                                             <p>Quantity: {arr.quantity}</p>
                                         </p>
-                                        
+                                        <button onClick={()=>{ this.decrement(arr)}}> - </button>
+                                            <label>
+                                                Quantity
+                                            </label>
+                                        <button onClick={()=>{ this.increment(arr)}}> + </button>
                                         <p>Seller: {arr.seller}</p>
                                         <p>Total: ${arr.total}</p>
                                         <button onClick={()=>{ this.handleRemove(arr)}}>Remove</button> 
                                         <br/><br/>
 
-                                        <button onClick={()=>{ this.handleCheckout(arr)}}>Checkout</button>
+                                        {/* <button onClick={()=>{ this.handleCheckout(arr)}}>Checkout</button> */}
 
-                                        <th>
-                                            <button onClick={()=>{ this.decrement(arr)}}> - </button>
-                                            <label>
-                                                Quantity
-                                            </label>
-                                            <button onClick={()=>{ this.increment(arr)}}> + </button>
-                                        </th>
                                         
                                     </table>
                                     
                                 </tbody>
                             </div>
                         )
+                        
+                        } // if state 
                     })
                 }
+                <button 
+                    className="checkout"
+                    onClick={this.handleCheckout}>Checkout
+                </button>
                 <br/><br/> 
             </div>
         )

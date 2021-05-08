@@ -10,7 +10,7 @@
 
 
 .cart-title {
-    color: rgba(32, 35, 36, 0.877);
+    color: rgba(205, 207, 55, 0.877);
     text-align: left;
 }
 
@@ -41,4 +41,10 @@
 .displayCart img {
     height: 400px;
     width: 400px;
+}
+
+.checkout {
+    width: 100px;
+    height: 30px;
+
 }

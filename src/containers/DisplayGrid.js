@@ -50,6 +50,7 @@ class Display extends React.Component{
             price: arr.Price,
             image: arr.ImageUrl,
             quantity: 1,
+            max_Qty: arr.Quantity,
             checkout: false,
             seller: arr.SellerID,
             body: arr.Body,
