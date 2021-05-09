@@ -70,25 +70,35 @@ class Show_cart extends React.Component{
     }
     handleCheckout = (e) => {
         e.preventDefault();
-        //const ref = db.collection("users").doc(user).collection('Cart').doc(arr.id)
         const ref = db.collection("users").doc(user).collection('Cart')
         
         ref.where("checkout", "==", false)
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    if (doc.data().checkout == false) {
-                        console.log(doc.id, "worked")
-                        const checoutRef = db.collection("users").doc(user).collection('Cart').doc(doc.id)
-                        checoutRef.update({"checkout": true})
-                        
-                    }
+                    const ref = db.collection("users").doc(user).collection('orders').doc()
+                    ref.set({
+                        name: userName,
+                        order_Date: new Date(),
+                        checkout: true,
+                        order_number: ref.id,
+                        image: doc.data().image,
+                        descriptions: doc.data().body,
+                        price: doc.data().price,
+                        qty: doc.data().quantity,
+                        total: doc.data().total,
+                    })
+                    db.collection("users").doc(user).collection('Cart').doc(doc.data().id).delete().then(() => {
+                        console.log("Document successfully checked out!");
+                    }).catch((error) => {
+                        console.error("Error checking out ", error);
+                    });
                 });
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
             });
-            alert("Checkout Complete")
+
     }
  
 
@@ -100,7 +110,6 @@ class Show_cart extends React.Component{
                     //if data exists then print each data from the array
                     this.state.arr &&
                     this.state.arr.map( arr => {
-                        if(arr.checkout == false){
                         return(
                             <div>
                                 <tbody id="tableProducts">
@@ -131,7 +140,7 @@ class Show_cart extends React.Component{
                             </div>
                         )
                         
-                        } // if state 
+
                     })
                 }
                 <button 
