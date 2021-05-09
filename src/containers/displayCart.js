@@ -68,42 +68,53 @@ class Show_cart extends React.Component{
         }
 
     }
+
+
     handleCheckout = (e) => {
         e.preventDefault();
-        const ref = db.collection("users").doc(user).collection('Cart')
         
-        ref.where("checkout", "==", false)
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const ref = db.collection("users").doc(user).collection('orders').doc()
-                    ref.set({
-                        name: userName,
-                        order_Date: new Date(),
-                        checkout: true,
-                        order_number: ref.id,
-                        image: doc.data().image,
-                        descriptions: doc.data().body,
-                        price: doc.data().price,
-                        qty: doc.data().quantity,
-                        total: doc.data().total,
-                    })
-                    db.collection("users").doc(user).collection('Cart').doc(doc.data().id).delete().then(() => {
-                        console.log("Document successfully checked out!");
-                    }).catch((error) => {
-                        console.error("Error checking out ", error);
-                    });
-                });
+        db.collection("users").doc(this.props.AccountID).collection("Cart").get().then(querySnapshot =>{
+            const data = querySnapshot.docs.map(doc=> doc.data());
+            //alert (data.length)
+    
+            for (var i=0; i< data.length; i++){
+                const ref = db.collection("users").doc(this.props.AccountID).collection('orders').doc()
+                //alert (data[i].body)
+                
+                            ref.set({
+                                name: this.props.AccountID,
+                                order_Date: new Date(),
+                                checkout: true,
+                                image: data[i].image,
+                                descriptions: data[i].body,
+                                price: data[i].price,
+                                qty: data[i].quantity,
+                                total: data[i].total,
+                            })
+                
+                db.collection("users").doc(this.props.AccountID).collection('Cart').doc(data[i].id).delete().then(() => {
+                                console.log("Document successfully checked out!");
+                            }).catch((error) => {
+                                console.error("Error checking out ", error);
+                            }); 
+            }    
+            
+            var num=0
+            database.firestore().collection("users").doc(this.props.AccountID).onSnapshot((doc) =>{
+                num = doc.data().shoppingcart
             })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-
+            setTimeout(() => {
+                //update 
+                num -= data.length
+                database.firestore().collection("users").doc(this.props.AccountID).update({
+                    "shoppingcart": num
+                })
+            }, 3000);
+        })
     }
  
 
     render(){
-    
         return(
             <div className="displayCart">
                 {
@@ -131,16 +142,10 @@ class Show_cart extends React.Component{
                                         <button onClick={()=>{ this.handleRemove(arr)}}>Remove</button> 
                                         <br/><br/>
 
-                                        {/* <button onClick={()=>{ this.handleCheckout(arr)}}>Checkout</button> */}
-
-                                        
                                     </table>
-                                    
                                 </tbody>
                             </div>
                         )
-                        
-
                     })
                 }
                 <button 
