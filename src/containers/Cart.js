@@ -98,6 +98,20 @@ function Cart(){
     );
 
     return(
+      <div className="cart">
+        <header>
+          <h1>Shopping Cart </h1><br/>
+        </header>
+        {/* <Display addToCart={addToCart}/> */}
+      <Show_cart/>
+      </div>
+  )
+};
+
+export default Cart;
+
+/*
+return(
         <div className="cart">
         <br/><br/><br/><br/>
         <header>
@@ -109,6 +123,4 @@ function Cart(){
         
         </div>
     )
-};
-
-export default Cart;
+*/

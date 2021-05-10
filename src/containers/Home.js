@@ -64,18 +64,6 @@ function Home(props) {
 
   }, [])
 
-  // useEffect(() => {
-        
-  //   db.collection("FoodCollection").get().then((querySnapshot) => {
-  //       querySnapshot.forEach((doc) => {
-  //         console.log(doc);
-  //       });
-  //       // console.log(data);
-  //       // setFirestoreArray(data);
-  //   });
-  // }, [])
-
-
   //jump even 
   const handleJump =() =>{
       setSellerID(AccountID);
