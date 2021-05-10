@@ -99,7 +99,11 @@ class Show_cart extends React.Component{
         db.collection("users").doc(this.props.AccountID).collection("Cart").get().then(querySnapshot =>{
             const data = querySnapshot.docs.map(doc=> doc.data());
             //alert (data.length)
-    
+            var maxquantity = new Array();
+            var quantity =  new Array();
+            var seller =  new Array();
+            var name =  new Array();
+
             for (var i=0; i< data.length; i++){
                 //new collection for successful  orders 
                 const ref = db.collection("users").doc(this.props.AccountID).collection('orders').doc()
@@ -121,21 +125,27 @@ class Show_cart extends React.Component{
                                 console.error("Error checking out ", error);
                             }); 
                 
-                //update the quantity to the seller store
-                var maxquantity =0
+                //save data for  update the quantity to the seller store
+                quantity.push(data[i].quantity)
+                seller.push(data[i].seller)
+                name.push(data[i].name)
+                
                 db.collection("FoodCollection").doc(data[i].seller).collection('food').doc(data[i].name).onSnapshot((doc) =>{
-                    maxquantity = doc.data().Quantity
+                    var maxquantity_ = doc.data().Quantity
+                    maxquantity.push(maxquantity_)
                 })
-                var quantity = data[i].quantity
-                var seller = data[i].seller
-                var name = data[i].name
-                setTimeout(() => { 
-                    quantity = maxquantity - quantity
-                    db.collection("FoodCollection").doc(seller).collection('food').doc(name).update({
-                        "Quantity": quantity
+            }
+            //update the quantity to the seller store
+            setTimeout(() => {
+                //update 
+                for (var j=0; j<seller.length; j++){
+                    quantity[j] = maxquantity[j] - quantity[j]
+                    db.collection("FoodCollection").doc(seller[j]).collection('food').doc(name[j]).update({
+                        "Quantity": quantity[j]
                     })
-                }, 10);
-            }    
+                }
+            }, 1000);
+
             
             var num=0
             database.firestore().collection("users").doc(this.props.AccountID).onSnapshot((doc) =>{
@@ -147,7 +157,7 @@ class Show_cart extends React.Component{
                 database.firestore().collection("users").doc(this.props.AccountID).update({
                     "shoppingcart": num
                 })
-            }, 3000);
+            }, 2000);
         })
     }
     
