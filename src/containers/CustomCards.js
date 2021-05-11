@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import database from '../firebase';
+import { getDefaultNormalizer } from '@testing-library/dom';
 
 function CustomCards(props) {
     //{title, imageURL, body, price, ingredients}
@@ -11,7 +12,6 @@ function CustomCards(props) {
     const [titleValue, setTitleValue] = useState("Sample Title")
     
     const [imageURL, setImageURL] = useState(props.imageURL)
-    const [imageURLValue, setimageURLValue] = useState("http://localhost:3000/static/media/portuguese-egg-custard-tarts.1c7f0846.jpg")
     
     const [body, setBody] = useState(props.body)
     const [bodyValue, setBodyValue] = useState("Sample Body")
@@ -24,10 +24,12 @@ function CustomCards(props) {
 
     const [showInput, setInputState] = useState(false)
 
+    const [ID, setID] = useState(props.ID)
+
     const [image, setImage] = useState(null);
     const storage = database.storage();
-    const id = "user2@gmail.com";
-    const FoodCollection = database.firestore().collection("FoodCollection");
+    const id = ID;
+    const FoodCollection = database.firestore().collection("FoodCollection")
 
 
     function save(event) {
@@ -45,11 +47,7 @@ function CustomCards(props) {
             ()=>{
                 storage.ref(id).child(image.name).getDownloadURL()
                 .then(url=>{
-                    //setImageURL(url);
                     imageURL_ = url;
-                    //alert(url);
-                    //alert(imageURL);
-                    //alert(imageURL_);
                 })
             }
         )
@@ -63,6 +61,8 @@ function CustomCards(props) {
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
+                SellerID: id
+
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
@@ -71,8 +71,6 @@ function CustomCards(props) {
             });   
 
             setTitles(titleValue)
-            //setImage(imageURLValue)
-            //alert(imageURL_);
             setImageURL(imageURL_)
             setBody(bodyValue)
             setPrice("$ "+priceValue)
@@ -95,11 +93,7 @@ function CustomCards(props) {
         setTitleValue(event.target.value)
         console.log(titleValue)
     }
-    /*
-    function updateImageURLValue (event) {
-        setimageURLValue(event.target.value)
-        console.log(imageURLValue)
-    }*/
+
     function updateImageURLValue (event){
         event.preventDefault();
         if (event.target.files[0]){
@@ -120,14 +114,9 @@ function CustomCards(props) {
     }
 
     function deleteCard () {
-        //create a function that can delete card chosen card from {cards}
-        return
+        FoodCollection.doc(id).collection("food").doc(titles).delete();
+        alert("Refresh to complete Delete")
     }
-
-    useEffect(() => {
-        
-    })
-
 
     if(showInput) {
         return (
@@ -161,10 +150,11 @@ function CustomCards(props) {
                             <p>{price}</p>
                             <button>Add to Cart</button>
                             <br></br>
-                            <small className="text-muted"> Contains: {ingredients}</small>
+                            <small className="text-muted"> Contains: {ingredients} </small>
 
                             <br></br>
                             <button onClick = {edit}>Edit</button>
+                            
 
                         </Card.Footer> 
                     

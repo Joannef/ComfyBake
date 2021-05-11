@@ -12,11 +12,11 @@ import OrderDetail from "./containers/OrderDetails";
 export default function Routes() {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/home">
         <Home />
     </Route>
       
-      <Route exact path="/login">
+      <Route exact path="/">
         <Login />
       </Route>
 
