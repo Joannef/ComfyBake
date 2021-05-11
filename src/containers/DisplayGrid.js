@@ -73,6 +73,7 @@ class Display extends React.Component{
     
         return(
             <div className='item'>
+                <h1> home </h1>
                 {
                     //if data exists then print each data from the array
                     this.state.arr &&
