@@ -20,10 +20,10 @@
 
   background-color: lightgray;
   border-radius: 25px;
-  width: 1000px;
-  height: 1000px;
-  padding-top: 600px;
-  margin-left: 225px;
+  width: 1300px;
+
+  top: 600px;
+  margin-left: 75px;
 }
 .order {
   position:absolute;
@@ -35,17 +35,36 @@
   padding-left: -50px;*/
 }
 
-/*individual order set up*/
-.text {
-  position: relative;
-  /*margin-right: 200px;*/
-  text-align: center;
+/*items in a block set up*/
+.item-tower {
+  /* slightly diff grey background
+  black border
+  */
   
+  position: relative;
+  border-color: green;
+  border-style: solid;
+  border-radius: 25px;
 }
-.bold {
+.item  {
+  /* dashed grey line at the end of each item */
+}
+.left {
+  position: relative;
+  margin-left: 2.5%;
+  text-align: left;
+}
+.right {
+  position: relative;
+  top: 10px;
+  text-align: right;
+  margin-right: 5%;
+}
+.left-bold {
   font-weight: bold;
   position: relative;
-  text-align: center;
+  text-align: left;
+  margin-left: 2.5%;
 }
 
 /* empty cart style */

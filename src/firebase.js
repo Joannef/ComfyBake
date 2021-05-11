@@ -4,14 +4,13 @@ import 'firebase/firestore';
 //This is my firebase authentication
 //you can change it to your firebase authentication
 var firebaseApp = {
-    apiKey: "AIzaSyCUU8fZTwRDsheZKGUwNDKlbMChILuW6Uc",
-    authDomain: "comfybake-d5d50.firebaseapp.com",
-    databaseURL: "https://comfybake-d5d50-default-rtdb.firebaseio.com",
-    projectId: "comfybake-d5d50",
-    storageBucket: "comfybake-d5d50.appspot.com",
-    messagingSenderId: "800786672334",
-    appId: "1:800786672334:web:b801c84acda8ed04ae7e9f",
-    measurementId: "G-RSYPKYWVRE"
+  apiKey: "AIzaSyCBDaRuSre3hjHZR136J_zp6RMwHOkFeUs",
+  authDomain: "comfybake-78d36.firebaseapp.com",
+  projectId: "comfybake-78d36",
+  storageBucket: "comfybake-78d36.appspot.com",
+  messagingSenderId: "947011318778",
+  appId: "1:947011318778:web:0692a26d4c971c54042a43",
+  measurementId: "G-9BFRZ3Z5KL"
 };
 
 const database = firebase.initializeApp(firebaseApp);
