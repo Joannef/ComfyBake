@@ -119,11 +119,7 @@ function Sellers(props) {
                         <h5>Full Menu</h5>
                         <button onClick={handleJumpback}> Home</button>
                         <button onClick={handleReflash}> Reflash</button>
-                        <LinkContainer to="/">  
-                            <Nav.Link>
-                                <button onClick={handleLogout}>Logout</button><br/>
-                            </Nav.Link>
-                        </LinkContainer>
+                        <button onClick={handleLogout}>Logout</button><br/>
                     <br></br>
                     <div className="cart">
                         <button className="cart-link" onClick={handleJumpCart}>View Cart 🛒({cartitem})</button>
@@ -180,11 +176,7 @@ function Sellers(props) {
                             <h5>Full Menu</h5>
                             <button onClick={handleJumpback}> Home</button>
                             <button onClick={handleReflash}> Reflash</button>
-                            <LinkContainer to="/">  
-                                <Nav.Link>
-                                    <button onClick={handleLogout}>Logout</button><br/>
-                                </Nav.Link>
-                            </LinkContainer>
+                            <button onClick={handleLogout}>Logout</button><br/>
                         <br></br>
                         <div className="cart">
                         <button className="cart-link" onClick={handleJumpCart}>View Cart 🛒({cartitem})</button>

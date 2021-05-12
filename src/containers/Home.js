@@ -156,11 +156,7 @@ function Home(props) {
               <button onClick={handleJump}> MySeller Page</button>
               <button onClick={handleReflash}> Reflash</button>
               <button onClick={handleOrder}> Orders </button>
-              <LinkContainer to="/">  
-                <Nav.Link>
-                  <button onClick={handleLogout}>Logout</button><br/>
-                </Nav.Link>
-              </LinkContainer>
+              <button onClick={handleLogout}>Logout</button><br/>
               <br/>
             </div>
 
