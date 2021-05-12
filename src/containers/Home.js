@@ -11,7 +11,7 @@ import SellerPage from './SellersPage';
 import Transfer from './Transfer';
 import './Cart.css';
 import Show_cart from './displayCart';
-
+import OrderCon from './OrderCon';
 
 function Home(props) {
   const [firestoreArray, setFirestoreArray] = useState([]);
@@ -24,8 +24,9 @@ function Home(props) {
   const [jumpreflash, setjumpreflash] = useState (false);
   const [test, setTest] = useState('');
   const [run, setRun] = useState(true);
-  const [cart, setCart] = useState(false);
-  
+  const [CartOrOrder, setCartOrOrder] = useState(false);
+  const [order, setorder] = useState(false); 
+
   const [cartitem, setCartitem] = useState(0);
 
   if (AccountID != ""){
@@ -86,18 +87,34 @@ function Home(props) {
   }
 
   const handleJumpCart =()=>{
-    setCart(true);
+    setCartOrOrder(true);
+  }
+
+  //Order page
+  const handleOrder = ()=>{
+    setCartOrOrder(true);
+    setorder(true);
   }
 
   return (
     <div> 
-      {cart? (
+      {CartOrOrder? (
         <>
+        {order? (
+          <>
+          <OrderCon 
+            AccountID = {AccountID}
+          />
+          </>
+        ):(
+          <>
           <Show_cart 
             AccountID = {AccountID}
             SellerID = {SellerID}
             state_ = {"home"}
           />
+          </>
+        )}
         </>
       ):(
         <>
@@ -129,9 +146,6 @@ function Home(props) {
             {/* <Cart />*/ }
             <div className="lander">
               <h1>ComfyBake</h1>
-              <p>Test: {test}</p>
-              <p>accountID:{AccountID}</p>
-              <p>sellerID:{SellerID}</p>
             </div>
 
             <div className="cart">
@@ -141,6 +155,7 @@ function Home(props) {
             <div className="button">
               <button onClick={handleJump}> MySeller Page</button>
               <button onClick={handleReflash}> Reflash</button>
+              <button onClick={handleOrder}> Orders </button>
               <LinkContainer to="/">  
                 <Nav.Link>
                   <button onClick={handleLogout}>Logout</button><br/>
