@@ -5,8 +5,6 @@ import database from '../firebase';
 import "./OrderCon.css";
 import Home from './Home';
 
-const Email = "cisco@gmail.com";
-
 export default function OrderCon(props) {
     const {AccountID} = props;
     const [orderID, setOrderID] = useState([]);
@@ -18,9 +16,9 @@ export default function OrderCon(props) {
     const [orderT, setTotal] = useState([]);
     const [jumpback, setjumpback] = useState(false);
     React.useEffect(() => {
-    const orders = database.firestore().collection(`/users/${Email}/Cart`).where('checkout', '==', true).get().then(
+    const orders = database.firestore().collection(`/users/${AccountID}/orders`).get().then(
     (querySnapshot => {
-        setOrderID(querySnapshot.docs.map(doc=> doc.id))
+        setOrderID(querySnapshot.docs.map(doc=> doc.get("order_number")))
         setImgList(querySnapshot.docs.map(doc=>doc.get("image")))
         setOrderQty(querySnapshot.docs.map(doc=>doc.get("qty")))
         setDateList(querySnapshot.docs.map(doc=> doc.get("order_Date").toDate().toString().slice(0,15)))
@@ -28,12 +26,12 @@ export default function OrderCon(props) {
         setPriceList(querySnapshot.docs.map(doc=>doc.get("price")))
         setTotal(querySnapshot.docs.map(doc=>doc.get("total")))
     }));
-}, [])
+    }, [])
 
     function OrderBlock(props) {
         return (
             <div class="item-tower">
-                <p class="right">Total: {props.xT}</p>
+                <p class="right">Total: ${props.xT}</p>
                 <p class="left-bold"> Order #: {props.xID}</p>
                 <div class="item">
                     <img class="left" src= {props.ximg}/>
