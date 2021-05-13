@@ -76,7 +76,8 @@ export default function Signup() {
                     Soy:Soy,
                     Egg:Egg
                 },
-                shoppingcart: 0
+                shoppingcart: 0,
+                jump: false
             }).then(()=>{
                 alert("Look out for an email confirming your account!")
             }).catch((err)=>{
