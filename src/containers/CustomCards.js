@@ -28,12 +28,13 @@ function CustomCards(props) {
 
     const [showInput, setInputState] = useState(false)
 
-    const [ID, setID] = useState(props.ID)
+    const [ID, setID] = useState(props.accountID)
 
     const [image, setImage] = useState(null);
     const storage = database.storage();
     const id = ID;
     const FoodCollection = database.firestore().collection("FoodCollection")
+    const db = database.firestore();
 
 
     function save(event) {
@@ -123,7 +124,10 @@ function CustomCards(props) {
     }
 
     function deleteCard () {
-        FoodCollection.doc(id).collection("food").doc(titles).delete();
+        console.log(titles)
+        console.log(ID)
+        //FoodCollection.doc(id).collection("food").doc(titles).delete().then();
+        db.collection("FoodCollection").doc(ID).collection("food").doc(titles).delete();
         alert("Refresh to complete Delete")
     }
 

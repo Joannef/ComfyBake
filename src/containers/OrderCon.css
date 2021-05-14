@@ -21,8 +21,7 @@
   background-color: lightgray;
   border-radius: 25px;
   width: 1000px;
-  height: 1000px;
-  padding-top: 600px;
+  height: auto;
   margin-left: 225px;
 }
 .order {
@@ -63,7 +62,7 @@
 .left-bold {
   font-weight: bold;
   position: relative;
-  text-align: center;
+  text-align: left;
 
   margin-left: 2.5%;
 }
