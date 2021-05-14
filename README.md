@@ -1,4 +1,4 @@
-# ComfyBake
+# ComfyBake: A Capstone Vision by Steven, Cisco, Zhenying, Joanne, and Mohammad
 Deployed on Netlify: **https://agitated-khorana-63ac45.netlify.app/**
 A Capstone Project by Steven, Cisco, Zhenying, Joanne, and Mohammad
 
