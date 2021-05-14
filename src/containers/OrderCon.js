@@ -5,10 +5,10 @@ import database from '../firebase';
 import "./OrderCon.css";
 import Home from './Home';
 
-//const Email = "user3@gmail.com"; //should be authenticated by logged-in user dummy user fir now
+const Email = "user2@gmail.com"; //should be authenticated by logged-in user dummy user fir now
 
 export default function OrderCon(props) {
-    const {AccountID} = props;
+    //const {AccountID} = props;
     const [orderID, setOrderID] = useState([]);
     const [orderImg, setImgList] = useState([]);
     const [orderQty, setOrderQty] = useState([]);
@@ -17,7 +17,8 @@ export default function OrderCon(props) {
     const [orderPrice, setPriceList] = useState([]);
     const [jumpback, setjumpback] = useState(false);
     React.useEffect(() => {
-    const orders = database.firestore().collection(`/users/${AccountID}/orders`).get().then(
+    //const orders = database.firestore().collection(`/users/${AccountID}/orders`).get().then(
+        const orders = database.firestore().collection(`/users/${Email}/orders`).get().then(
     (querySnapshot => {
         setOrderID(querySnapshot.docs.map(doc=> doc.get("order_number")))
         setImgList(querySnapshot.docs.map(doc=>doc.get("image")))
@@ -54,7 +55,7 @@ export default function OrderCon(props) {
         {jumpback? (
             <>
             <Home 
-                AccountID = {AccountID}
+                AccountID = {Email}
             />
             </>
         ):(
