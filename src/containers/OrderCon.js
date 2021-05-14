@@ -23,7 +23,7 @@ export default function OrderCon(props) {
         setOrderID(querySnapshot.docs.map(doc=> doc.get("order_number")))
         setImgList(querySnapshot.docs.map(doc=>doc.get("image")))
         setOrderQty(querySnapshot.docs.map(doc=>doc.get("qty")))
-        //setDateList(querySnapshot.docs.map(doc=> doc.get("order_Date")))
+        setDateList(querySnapshot.docs.map(doc=> doc.get("order_Date").toString().slice(0,15)))
         setDList(querySnapshot.docs.map(doc=>doc.get("descriptions")))
         setPriceList(querySnapshot.docs.map(doc=>doc.get("price")))
     }));
