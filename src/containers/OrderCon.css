@@ -35,17 +35,37 @@
   padding-left: -50px;*/
 }
 
-/*individual order set up*/
-.text {
+/*items in a block set up*/
+.item-tower {
+  /* slightly diff grey background
+  black border
+  */
+  
+  position: relative;
+  border-color: green;
+  border-style: solid;
+  border-radius: 25px;
+}
+
+.left {
   position: relative;
   /*margin-right: 200px;*/
   text-align: center;
-  
+  margin-left: 2.5%;
+  text-align: left;
 }
-.bold {
+.right {
+  position: relative;
+  top: 10px;
+  text-align: right;
+  margin-right: 5%;
+}
+.left-bold {
   font-weight: bold;
   position: relative;
   text-align: center;
+
+  margin-left: 2.5%;
 }
 
 /* empty cart style */

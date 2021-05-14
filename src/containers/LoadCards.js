@@ -77,8 +77,6 @@ function LoadCards(props) {
             <Card.Footer>
 
                 <p>{price}</p>
-                <p>accountID:{accountID}</p>
-                <p>sellerID:{sellerID}</p>
                 <button onClick={handleClick}>Add to cart</button>
                 <button onClick={jump}>Store</button>
                 <br></br>

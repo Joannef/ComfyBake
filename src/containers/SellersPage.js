@@ -117,8 +117,6 @@ function Sellers(props) {
                         <div class = "center">
                         <h1>Welcome To Your Home Kitchen</h1>
                         <h5>Full Menu</h5>
-                        <p>AccountID:{AccountID}</p>
-                        <p>SellerID:{SellerID}</p>
                         <button onClick={handleJumpback}> Home</button>
                         <button onClick={handleReflash}> Reflash</button>
                         <LinkContainer to="/">  
@@ -180,8 +178,6 @@ function Sellers(props) {
                         <div class = "center">
                             <h1>Seller's Home Kitchen</h1>
                             <h5>Full Menu</h5>
-                            <p>AccountID:{AccountID}</p>
-                            <p>SellerID:{SellerID}</p>
                             <button onClick={handleJumpback}> Home</button>
                             <button onClick={handleReflash}> Reflash</button>
                             <LinkContainer to="/">  
