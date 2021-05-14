@@ -16,11 +16,15 @@ function CustomCards(props) {
     const [body, setBody] = useState(props.body)
     const [bodyValue, setBodyValue] = useState("Sample Body")
     
-    const [price, setPrice] = useState('$' + props.price)
+    const [price, setPrice] = useState("$" + props.price)
+    const [price_] = useState(props.price)
     const [priceValue, setPriceValue] = useState("Sample Price")
     
     const [ingredients, setIngredients] = useState(props.ingredients)
     const [ingredientsValue, setIngredientsValue] = useState("Sample Ingredients")
+
+    const [quantity, setQuantity] = useState(props.quantity)
+    const [quantityValue, setQuantityValue] = useState("Sample Quantity")
 
     const [showInput, setInputState] = useState(false)
 
@@ -61,8 +65,8 @@ function CustomCards(props) {
                 Body: bodyValue,
                 Price: priceValue,
                 Ingredients: ingredientsValue,
-                SellerID: id
-
+                SellerID: id,
+                Quantity: quantityValue
             }).then(()=>{
                 console.log("Information have been sent");
                 //alert("Information have been sent");
@@ -75,6 +79,7 @@ function CustomCards(props) {
             setBody(bodyValue)
             setPrice("$ "+priceValue)
             setIngredients(ingredientsValue)
+            setQuantity(quantityValue)
 
             setInputState(false)
         }, 2000);
@@ -113,10 +118,15 @@ function CustomCards(props) {
         setIngredientsValue(event.target.value)
     }
 
+    function updateQuantityValue (event) {
+        setQuantityValue(event.target.value)
+    }
+
     function deleteCard () {
         FoodCollection.doc(id).collection("food").doc(titles).delete();
         alert("Refresh to complete Delete")
     }
+
 
     if(showInput) {
         return (
@@ -126,6 +136,7 @@ function CustomCards(props) {
                 <input onChange={updateBodyValue} placeholder="Edit Body"></input>
                 <input onChange={updatePriceValue} placeholder="Edit Price"></input>
                 <input onChange={updateIngredientsValue} placeholder="Edit Ingredients"></input>
+                <input onChange={updateQuantityValue} placeholder="Edit Quantity"></input>
                 <button onClick={save}>Save</button>
                 <button onClick={cancel}>Cancel</button>
                 <button onClick={deleteCard}>Delete</button>
@@ -148,10 +159,9 @@ function CustomCards(props) {
                         <Card.Footer>
 
                             <p>{price}</p>
-                            <button>Add to Cart</button>
-                            <br></br>
                             <small className="text-muted"> Contains: {ingredients} </small>
-
+                            <br></br>
+                            <small className="text-muted"> Quantity: {quantity} </small>
                             <br></br>
                             <button onClick = {edit}>Edit</button>
                             
