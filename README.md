@@ -1,6 +1,14 @@
-# ComfyBake: A Capstone Vision by Steven, Cisco, Zhenying, Joanne, and Mohammad
+# ComfyBake: A marketplace platform for selling and buying home baked goodies
 Deployed on Netlify: **https://agitated-khorana-63ac45.netlify.app/**
-A Capstone Project by Steven, Cisco, Zhenying, Joanne, and Mohammad
+
+# About US: 
+A Capstone Project by CS seniors Steven, Cisco, Zhenying, Joanne, and Mohammad
+
+**Francisco**: "Second Website I have ever worked on", enjoys Photography
+**Mohammad**: "First time working on a website", Second coding project of the semester
+**Steven**: In a product development class, "First large group project"
+**Joanne**: Enjoys long walks, "First time learning React"
+**Zhenying**: Enjoys baking, "First time working with Firebase"
 
 # Getting Started with Create React App
 
