@@ -23,6 +23,7 @@ Deployed on Netlify: **https://agitated-khorana-63ac45.netlify.app/**
 You can now purchase items or create menu items to sell
 
 For buying:
+
 5) Select an item of interest and press add to cart
 6) Once all items you want are selected you can press the cart button anywhere in the site to view items added
 7) You can delete the items, update the quantity, or just checkout
