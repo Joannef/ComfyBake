@@ -18,9 +18,9 @@ export default function OrderCon(props) {
     const [jumpback, setjumpback] = useState(false);
     React.useEffect(() => {
     //const orders = database.firestore().collection(`/users/${AccountID}/orders`).get().then(
-        const orders = database.firestore().collection(`/users/${Email}/orders`).get().then(
+    const orders = database.firestore().collection(`/users/${Email}/orders`).get().then(
     (querySnapshot => {
-        setOrderID(querySnapshot.docs.map(doc=> doc.get("order_number")))
+        setOrderID(querySnapshot.docs.map(doc=> doc.id))
         setImgList(querySnapshot.docs.map(doc=>doc.get("image")))
         setOrderQty(querySnapshot.docs.map(doc=>doc.get("qty")))
         setDateList(querySnapshot.docs.map(doc=> doc.get("order_Date").toString().slice(0,15)))
