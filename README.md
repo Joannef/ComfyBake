@@ -1,5 +1,5 @@
 # ComfyBake: A marketplace platform for selling and buying home baked goodies
-Deployed on Netlify: **https://agitated-khorana-63ac45.netlify.app/**
+Deployed on Netlify: **https://comfybake.netlify.app/**
 
 ![comfybake github read me pic](https://user-images.githubusercontent.com/33507449/118323713-06c90780-b4cf-11eb-951e-486f54c39923.png)
 
